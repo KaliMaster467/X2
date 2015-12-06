@@ -19,7 +19,7 @@ public class Plano extends JPanel{
     int alto = 0;
     double X1, Y1, Ent;
     double X2, Y2;
-    double YR1, YR2, YE1, YE2, XE1, XE2;
+    double YR1, YR2, YP1, YP2, XP1, XP2, YE1, YE2, XE1, XE2;
 
     public double getX1() {
         return X1;
@@ -153,10 +153,10 @@ public class Plano extends JPanel{
                         double Elevada =X2*x1;
                         double Elevada1 =X2*x2;
                         
-                        XE1 = (Ent+(Y2*x1)+(Elevada * Elevada))/-Y1;
-                        XE2 = (Ent+(Y2*x2)+(Elevada1 * Elevada1))/-Y1;
-                        int x1graf = (int)Math.floor((this.getWidth()/2)+(XE1*(getWidth()*0.025)));
-                        int x2graf = (int)Math.floor((this.getWidth()/2)+(XE2*(getWidth()*0.025)));
+                        XP1 = (Ent+(Y2*x1)+(Elevada * Elevada))/-Y1;
+                        XP2 = (Ent+(Y2*x2)+(Elevada1 * Elevada1))/-Y1;
+                        int x1graf = (int)Math.floor((this.getWidth()/2)+(XP1*(getWidth()*0.025)));
+                        int x2graf = (int)Math.floor((this.getWidth()/2)+(XP2*(getWidth()*0.025)));
                         int y1graf = (int)Math.floor((this.getHeight()/2)-(x1*(getHeight()*0.025)));
                         int y2graf = (int)Math.floor((this.getHeight()/2)-(x2*(getHeight()*0.025)));
                         x1=x2;
@@ -166,17 +166,21 @@ public class Plano extends JPanel{
                         double Elevada =X1*x1;
                         double Elevada1 =X1*x2;
                         
-                        YE1 = (Ent+(Y1*x1)+(Elevada * Elevada))/-Y2;
-                        YE2 = (Ent+(Y1*x2)+(Elevada1 * Elevada1))/-Y2;
+                        YP1 = (Ent+(Y1*x1)+(Elevada * Elevada))/-Y2;
+                        YP2 = (Ent+(Y1*x2)+(Elevada1 * Elevada1))/-Y2;
                         int x1graf = (int)Math.floor((this.getWidth()/2)+(x1*(getWidth()*0.025)));
                         int x2graf = (int)Math.floor((this.getWidth()/2)+(x2*(getWidth()*0.025)));
-                        int y1graf = (int)Math.floor((this.getHeight()/2)-(YE1*(getHeight()*0.025)));
-                        int y2graf = (int)Math.floor((this.getHeight()/2)-(YE2*(getHeight()*0.025)));
+                        int y1graf = (int)Math.floor((this.getHeight()/2)-(YP1*(getHeight()*0.025)));
+                        int y2graf = (int)Math.floor((this.getHeight()/2)-(YP2*(getHeight()*0.025)));
                         x1=x2;
                         x2--;
                         g.drawLine(x1graf, y1graf, x2graf, y2graf);
                     }
                 }
+            }
+            //Elipse
+            else if(this.tipo==3) {
+                
             }
             //AQUI HAZ LAS OTRAS PINSHES TIPOS DE GRAFICAS
                 
@@ -200,10 +204,5 @@ public class Plano extends JPanel{
     }
     public void paintSQRFunc(Graphics g, double x2mult, double x1mult, double cons,
             double x1, double x2){
-        
-        
-        
     }
 }
-
-
