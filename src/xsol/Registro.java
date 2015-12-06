@@ -9,10 +9,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -32,14 +35,16 @@ public class Registro extends Ventana{
         add(reg);
         
     }
-    public class PanelRegistro extends JPanel{
+    public class PanelRegistro extends JPanel implements ActionListener{
         
         private Font font;
         private ImageIcon imagelap;
         private JLabel nombre, grupo, contra, confir;
-        private JTextField nom, gru;
-        private JPasswordField con, conf;
         private JButton registrarse;
+        private JTextField grupoTx, nombreTx;
+        private JPasswordField contra2PW, contra1PW;
+        private Usuario user;
+        Archivo archivos;
         
         public PanelRegistro(int ancho, int alto){
             
@@ -49,6 +54,37 @@ public class Registro extends Ventana{
             setLayout(null);
             setLocation(0,0);
             setSize(ancho, alto);
+            setResizable(false);
+            
+            grupoTx = new JTextField();
+            grupoTx.setBounds(370, 107, 150, 20);
+            grupoTx.setVisible(true);
+            grupoTx.addActionListener(this);
+            add(grupoTx);
+            
+            nombreTx = new JTextField();
+            nombreTx.setBounds(370, 57, 150, 20);
+            nombreTx.setVisible(true);
+            nombreTx.addActionListener(this);
+            add(nombreTx);
+            
+            contra2PW = new JPasswordField();
+            contra2PW.setBounds(370, 207, 150, 20);
+            contra2PW.setEnabled(true);
+            contra2PW.addActionListener(this);
+            add(contra2PW);
+            
+            contra1PW = new JPasswordField();
+            contra1PW.setBounds(370, 157, 150, 20);
+            contra1PW.setEnabled(true);
+            contra1PW.addActionListener(this);
+            add(contra1PW);
+            
+            registrarse = new JButton("Registrarse!");
+            registrarse.setBounds(240, 250, 120, 30);
+            registrarse.addActionListener(this);
+            registrarse.setVisible(true);
+            add(registrarse);
             
             nombre = new JLabel();
             nombre.setText("Nombre:");
@@ -82,40 +118,6 @@ public class Registro extends Ventana{
             confir.setFont(font);
             add(confir);
             
-            Font fo = new Font("Verdana", Font.PLAIN, 16);
-            
-            nom = new JTextField();
-            nom.setEditable(true);
-            nom.setVisible(true);
-            nom.setLocation(250, 50);
-            nom.setSize(150, 20);
-            nom.setForeground(Color.black);
-            nom.setFont(fo);
-            add(nom);
-            
-            gru = new JTextField();
-            gru.setVisible(true);
-            gru.setForeground(Color.black);
-            gru.setFont(fo);
-            gru.setLocation(250,100);
-            gru.setSize(150, 20);
-            add(gru);
-            
-            con = new JPasswordField();
-            con.setVisible(true);
-            con.setLayout(null);
-            con.setEditable(true);
-            con.setLocation(250, 150);
-            con.setSize(150, 20);
-            add(con);
-            
-            conf = new JPasswordField();
-            conf.setVisible(true);
-            conf.setLayout(null);
-            conf.setEditable(true);
-            conf.setLocation(365, 210);
-            conf.setSize(150, 20);
-            add(conf);
         }
         
         public void paint(Graphics g){
@@ -129,6 +131,23 @@ public class Registro extends Ventana{
             super.paint(g);
             
         }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equals("Registrarse!")) {
+                if(contra1PW.getText().equals(contra2PW.getText())) {
+                    user = new Usuario(nombreTx.getText(), contra1PW.getText(), grupo.getText());
+                    Control.Usuarios.add(user);
+                    archivos = new Archivo();
+                    archivos.Serializar(Control.Usuarios);
+                    dispose();
+                    
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Contraseñas diferentes");
+            }
+        }
     }
     
 }
+
