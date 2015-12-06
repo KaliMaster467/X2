@@ -262,7 +262,7 @@ public class VentanaGraficadora extends Ventana{
                         
                         
                         
-                    } else {
+                    } else 
                         if (cual == 2) {
                          char verticalXOY = 'z';
                          while(verticalXOY!='x'&&verticalXOY!='X'&&verticalXOY!='y'&&verticalXOY!='Y') {
@@ -308,18 +308,44 @@ public class VentanaGraficadora extends Ventana{
                           }
                          }
                          verticalXOY ='z';
-                        } else {
+                        } else 
                             if (cual == 3) {
+                                JOptionPane.showMessageDialog(null, "Llena todos los espacios");
                                 plano.setTipo(cual);
                                 tipograf = 3;
-                            } else {
+                                valorY.setEnabled(true);
+                            valorEnt.setEnabled(true);
+                            valorX.setVisible(true);
+                            valorY.setText("");
+                            valorY.setVisible(true);
+                            valorEnt.setText("");
+                            valorEnt.setVisible(true);
+                            valorX2.setText("");
+                            valorX2.setVisible(true);
+                            xValor.setVisible(true);
+                            xValor.setText("X²: ");
+                            yValor.setVisible(true);
+                            yValor.setText("X: ");
+                            enteros.setVisible(true);
+                            enteros.setText("Entero: ");
+                            x2Valor.setVisible(true);
+                            x2Valor.setText("Y²");
+                            y2Valor.setVisible(true);
+                            y2Valor.setText("Y: ");
+                            valorY2.setVisible(true);
+                            valorY2.setText("");
+                            valorX.setText("");
+                            valorY2.setEnabled(true);
+                            valorX.setEnabled(true);
+                            valorX2.setEnabled(true);
+                            } else 
                                 if (cual == 4) {
                                     plano.setTipo(cual);
                                     tipograf = 4;
                                 }
-                            }
-                        }
-                    }
+                            
+                        
+                    
                 }
             }
         }
@@ -346,7 +372,7 @@ public class VentanaGraficadora extends Ventana{
                     plano.setX1(Double.parseDouble(valorX.getText()));
                     plano.setY1(Double.parseDouble(valorY.getText()));
                     plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                    String formula = String.format("| Y= (-%sX-%s)/%s  |", valorX.getText(), valorEnt.getText(), valorY.getText());
+                    String formula = String.format("| Y= (+(%sX)+(%s))/%s  |", (-(Integer.parseInt(valorX.getText()))), (-(Integer.parseInt(valorEnt.getText()))), valorY.getText());
                     Y.setText(formula);
                 }else if(plano.getTipo()>20){
                     if(plano.getTipo()==21) {
@@ -355,15 +381,27 @@ public class VentanaGraficadora extends Ventana{
                         //valorX2 equivale a Y al cuadrado y valor Y2 equivale a Y normal X1 equivale a X2 y X2 a X
                         plano.setX2(Double.parseDouble(valorX2.getText()));
                         plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                        String formula = String.format("| Y= (-%sX-%s)/%s  |", valorX.getText(), valorEnt.getText(), valorY.getText());
+                        String formula = String.format("| X= ((%sY²)+(%sY)+(%s)/%s  |", valorX2.getText(), valorY2.getText(), valorEnt.getText(), valorY.getText());
+                        X.setText(formula);
                     }
                     else {
                         plano.setX1(Double.parseDouble(valorX.getText()));
                         plano.setY1(Double.parseDouble(valorY.getText()));
                         plano.setEnt(Double.parseDouble(valorEnt.getText()));   
                         plano.setY2(Double.parseDouble(valorY2.getText()));
-                        String formula = String.format("| √Y= (-%sX-%s)/%s  |", valorX.getText(), valorEnt.getText(), valorY.getText());
+                        String formula = String.format("| Y= ((%sX²)+(%sX)+(%s))/%s  |", valorX.getText(), valorY.getText(), valorEnt.getText(), valorY2.getText());
+                        Y.setText(formula);
                     }
+                }else if(plano.getTipo()==3) {
+                    //X1 = X cuadrada, X2 = Y cuadrada, Y1 = X, Y2 = Y, Ent = entero; ecuacion es AX²+CY²+DX+EY+F=0  
+                    plano.setX1(Double.parseDouble(valorX.getText()));
+                    plano.setY1(Double.parseDouble(valorY.getText()));
+                    plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                    plano.setY2(Double.parseDouble(valorY2.getText()));
+                    plano.setX2(Double.parseDouble(valorX2.getText()));
+                    String formula = String.format("| ");
+                    Y.setText(formula);
+                
                 }
                 
                 
