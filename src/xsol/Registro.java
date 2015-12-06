@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -35,6 +37,8 @@ public class Registro extends Ventana{
         private Font font;
         private ImageIcon imagelap;
         private JLabel nombre, grupo, contra, confir;
+        private JTextField nom, gru;
+        private JPasswordField con, conf;
         private JButton registrarse;
         
         public PanelRegistro(int ancho, int alto){
@@ -78,6 +82,40 @@ public class Registro extends Ventana{
             confir.setFont(font);
             add(confir);
             
+            Font fo = new Font("Verdana", Font.PLAIN, 16);
+            
+            nom = new JTextField();
+            nom.setEditable(true);
+            nom.setVisible(true);
+            nom.setLocation(250, 50);
+            nom.setSize(150, 20);
+            nom.setForeground(Color.black);
+            nom.setFont(fo);
+            add(nom);
+            
+            gru = new JTextField();
+            gru.setVisible(true);
+            gru.setForeground(Color.black);
+            gru.setFont(fo);
+            gru.setLocation(250,100);
+            gru.setSize(150, 20);
+            add(gru);
+            
+            con = new JPasswordField();
+            con.setVisible(true);
+            con.setLayout(null);
+            con.setEditable(true);
+            con.setLocation(250, 150);
+            con.setSize(150, 20);
+            add(con);
+            
+            conf = new JPasswordField();
+            conf.setVisible(true);
+            conf.setLayout(null);
+            conf.setEditable(true);
+            conf.setLocation(365, 210);
+            conf.setSize(150, 20);
+            add(conf);
         }
         
         public void paint(Graphics g){
