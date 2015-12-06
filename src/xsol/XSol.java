@@ -19,7 +19,9 @@ public class XSol {
         // TODO code application logic here
         
             Control cont = new Control();
+            cont.Controls();
         
     }
     
 }
+
