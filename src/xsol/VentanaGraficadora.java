@@ -1,0 +1,124 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package xsol;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author Bugatti
+ */
+public class VentanaGraficadora extends Ventana{
+    TablaRes tab;
+    protected double width;
+    protected double height;
+    public static Plano plano;
+    
+    public VentanaGraficadora(){
+        
+        width = dim.getWidth();
+        height = dim.getHeight();
+        int anchoPlano = (int)Math.floor(width*.7);
+        int altoPlano = (int)Math.floor(height*.7);
+        plano = new Plano(anchoPlano, altoPlano);
+        this.setResizable(true);
+        add(plano);
+        int anchoTabla = (int)Math.floor(width*.3);
+        tab = new TablaRes(anchoTabla, altoPlano, anchoPlano);
+        
+        add(tab);
+        
+        setVisible(true);
+    }
+    public class TablaRes extends JPanel implements ItemListener{
+    JLabel X, Y, tabla;
+    JComboBox tipoTabla;
+    private Font fuente;
+    private ImageIcon imagelap;
+    public TablaRes(int anchos, int altos, int ancho) {
+        fuente = new Font("Verdana", Font.BOLD, 15);
+        
+        setBackground(Color.GRAY);
+        setVisible(true);
+        setLayout(null);
+        setLocation((ancho+1), 0);
+        setSize(anchos, altos);
+        
+        tipoTabla = new JComboBox();
+        tipoTabla.addItem("Seleccione un tipo de Grafica.");
+        tipoTabla.addItem("Recta");
+        tipoTabla.addItem("Parabola");
+        tipoTabla.addItem("Elipse");
+        tipoTabla.addItem("Hiperbole");
+        tipoTabla.addItemListener(this);
+        //tipoTabla.setBounds(100, 10, 200, 30);
+        
+        
+        add(this.tipoTabla);
+        
+        tabla = new JLabel();
+        tabla.setText("|                        TABLA                     |");
+        tabla.setVisible(true);
+        tabla.setLayout(null);
+        tabla.setFont(fuente);
+        tabla.setLocation(50, 50);
+        tabla.setSize(500, 30);
+        tabla.setForeground(Color.WHITE);
+        
+        add(tabla);
+        
+        X = new JLabel();
+        X.setText("|            X            |");
+        X.setVisible(true);
+        X.setLayout(null);
+        X.setFont(fuente);
+        X.setLocation(50, 80);
+        X.setSize(200, 30);
+        X.setForeground(Color.WHITE);
+        
+        add(X);
+        Y = new JLabel();
+        Y.setText("|            Y           |");
+        Y.setVisible(true);
+        Y.setLayout(null);
+        Y.setFont(fuente);
+        Y.setLocation(200, 80);
+        Y.setSize(200, 30);
+        Y.setForeground(Color.WHITE);
+        
+        add(Y);
+        
+        setVisible(true);
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public void paint(Graphics g){
+            
+            Dimension tam = getSize();
+            imagelap = new ImageIcon(getClass().getResource("bgtab.jpg"));           
+            
+            g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
+            setOpaque(false);
+            super.paint(g);
+            
+        } 
+}
+    
+}
