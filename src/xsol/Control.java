@@ -5,12 +5,34 @@
  */
 package xsol;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Bugatti
  */
-public interface Control {
+public class Control implements ActionListener{
     
-    public void removeVentana(Ventana vetana);
+    protected static VentanaInicion ini;
+    protected VentanaGraficadora graf;
+    protected Registro reg;
+    protected ListaUsuario users;
+    
+    public void removeVentana(Ventana ventana){
+        
+        ventana.dispose();
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(ini.accion.equals("Registro")){
+            
+            
+            
+        }
+    }
     
 }

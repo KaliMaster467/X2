@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -25,8 +27,9 @@ import javax.swing.JTextField;
  */
 public class VentanaInicion extends Ventana{
     
-    private BarraArriba alt;
+    private static BarraArriba alt;
     private BarraAbajo baj;
+    protected String accion;
     
     public VentanaInicion() throws IOException{
         
@@ -36,8 +39,11 @@ public class VentanaInicion extends Ventana{
         
         add(baj);   
         
+        this.accion = alt.accion;
+        
     }
-    public class BarraArriba extends JPanel{
+    
+    public class BarraArriba extends JPanel implements ActionListener{
         
     private JTextField userReturned;
     private JPasswordField passReturned;
@@ -49,6 +55,7 @@ public class VentanaInicion extends Ventana{
     private Font fuente;
     private JButton iniciar;
     private JButton registrarse;
+    protected String accion;
         
     public BarraArriba(int width, int height) throws IOException {
         
@@ -117,7 +124,7 @@ public class VentanaInicion extends Ventana{
         iniciar = new JButton("Iniciar");
         iniciar.setVisible(true);
         iniciar.setLayout(null);
-        //iniciar.addActionListener();
+        iniciar.addActionListener(this);
         iniciar.setText("Iniciar");
         iniciar.setLocation(100, 280);
         iniciar.setSize(100, 30);
@@ -129,7 +136,7 @@ public class VentanaInicion extends Ventana{
         registrarse = new JButton("Registro");
         registrarse.setVisible(true);
         registrarse.setLayout(null);
-        //registrarse.addActionListener();
+        registrarse.addActionListener(this);
         registrarse.setLocation(300, 280);
         registrarse.setSize(100, 30);
         
@@ -175,6 +182,16 @@ public class VentanaInicion extends Ventana{
         return contraseña.getText();
         
     }
+    public String getAction(String accion){
+        
+        return accion;
+        
+    }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            accion = e.getActionCommand();
+        }
         
     }
     public class BarraAbajo extends JPanel{

@@ -65,7 +65,7 @@ public class VentanaGraficadora extends Ventana{
         tipoTabla.addItem("Elipse");
         tipoTabla.addItem("Hiperbole");
         tipoTabla.addItemListener(this);
-        //tipoTabla.setBounds(100, 10, 200, 30);
+        tipoTabla.setBounds(100, 10, 200, 30);
         
         
         add(this.tipoTabla);
