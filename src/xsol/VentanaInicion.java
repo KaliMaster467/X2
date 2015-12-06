@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -25,13 +26,13 @@ import javax.swing.JTextField;
  *
  * @author Bugatti
  */
-public class VentanaInicion extends Ventana{
+public class VentanaInicion extends Ventana implements ActionListener{
     
     private static BarraArriba alt;
     private BarraAbajo baj;
     protected Object accion;
     
-    public VentanaInicion() throws IOException{
+    public void VentanaInicions() throws IOException{
         
         add(alt = new BarraArriba(this.getWidth(), this.getHeight() / 2));
         
@@ -43,10 +44,24 @@ public class VentanaInicion extends Ventana{
         
     }
     
-    public class BarraArriba extends JPanel implements ActionListener{
+    public String getUserReturn() {
+        return alt.getUserText();
         
-    private JTextField userReturned;
-    private JPasswordField passReturned;
+    }
+    
+    public String getPassReturn() {
+        return alt.getUserPass();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+    
+    public class BarraArriba extends JPanel implements ActionListener{
+    public Control control = new Control();
+    public  JTextField userReturned;
+    public JPasswordField passReturned;
     private JLabel usuario;
     private JLabel contraseña;
     private JLabel imag;
@@ -127,7 +142,7 @@ public class VentanaInicion extends Ventana{
         iniciar = new JButton("Iniciar");
         iniciar.setVisible(true);
         iniciar.setLayout(null);
-        iniciar.addActionListener(mane);
+        iniciar.addActionListener(control);
         iniciar.setText("Iniciar");
         iniciar.setLocation(100, 280);
         iniciar.setSize(100, 30);
@@ -139,7 +154,7 @@ public class VentanaInicion extends Ventana{
         registrarse = new JButton("Registro");
         registrarse.setVisible(true);
         registrarse.setLayout(null);
-        registrarse.addActionListener(mane);
+        registrarse.addActionListener(control);
         registrarse.setLocation(300, 280);
         registrarse.setSize(100, 30);
         
@@ -182,7 +197,7 @@ public class VentanaInicion extends Ventana{
     }
     public String getUserPass(){
         
-        return contraseña.getText();
+        return passReturned.getText();
         
     }
     public Object getAction(){
@@ -239,3 +254,4 @@ public class VentanaInicion extends Ventana{
     }
     
 }
+
