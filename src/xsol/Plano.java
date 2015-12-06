@@ -18,6 +18,8 @@ public class Plano extends JPanel{
     int ancho = 0;
     int alto = 0;
     double X1, Y1, Ent;
+    double X2, Y2;
+    double YR1, YR2, YE1, YE2, XE1, XE2;
 
     public double getX1() {
         return X1;
@@ -51,6 +53,22 @@ public class Plano extends JPanel{
         this.tipo = tipo;
     }
     int tipo;
+
+    public double getX2() {
+        return X2;
+    }
+
+    public void setX2(double X2) {
+        this.X2 = X2;
+    }
+
+    public double getY2() {
+        return Y2;
+    }
+
+    public void setY2(double Y2) {
+        this.Y2 = Y2;
+    }
     /*public Plano(int ancho, int alto){
         
         setBackground(Color.WHITE);
@@ -103,34 +121,67 @@ public class Plano extends JPanel{
         }
         //PINTAR GRAFICA INGRESADA
         if(tipo!=0) {
-            
+                
             //Recta
             //ME PARTI EL ORTO CON ESTA :v
             if(this.tipo==1) {
-                g.setColor(new Color(115, 255, 147));
-                g.setColor(Color.BLACK);
-                int x1=80;
-                int x2=79;
-                double las160divisiones = .00000;
-                los40divisiones = .000;
+                g.setColor(new Color(0, 24, 125));
+                double x1=80;//Tambien sirven como ys
+                double x2=79;
                 for(int z = 0; z<160;z++) {
-                        double Y5 = ((-((this.X1)*x1)) -(this.Ent))/this.Y1;
-                        double Y2 = ((-((this.X1)*x2)) -(this.Ent))/this.Y1;
-                        int y1graf = (int)Math.floor((this.getHeight()/2)-(Y5*(getHeight()*0.025)));
-                        int y2graf = (int)Math.floor((this.getHeight()/2)-(Y2*(getHeight()*0.025)));
+                        YR1 = ((-((this.X1)*x1)) -(this.Ent))/this.Y1;
+                        YR2 = ((-((this.X1)*x2)) -(this.Ent))/this.Y1;
+                        int y1graf = (int)Math.floor((this.getHeight()/2)-(YR1*(getHeight()*0.025)));
+                        int y2graf = (int)Math.floor((this.getHeight()/2)-(YR2*(getHeight()*0.025)));
                         int x1graf = (int)Math.floor((this.getWidth()/2)+(x1*(getWidth()*0.025)));
-                        los40divisiones += .025;
+
                         int x2graf = (int)Math.floor((this.getWidth()/2)+(x2*(getWidth()*0.025)));
                         x1=x2;
                         x2--;
                         g.drawLine(x1graf, y1graf, x2graf, y2graf);
                 
                     }
+                
                 }
+            //ELIPSE
+            else if(this.tipo>20) {
+                double x1=80;//Tambien sirven como ys
+                double x2=79;
+                g.setColor(new Color(186,24,74));
+                for(int z = 0; z<320;z++) {
+                    if(this.tipo==21) {
+                        double Elevada =X2*x1;
+                        double Elevada1 =X2*x2;
+                        
+                        XE1 = (Ent+(Y2*x1)+(Elevada * Elevada))/-Y1;
+                        XE2 = (Ent+(Y2*x2)+(Elevada1 * Elevada1))/-Y1;
+                        int x1graf = (int)Math.floor((this.getWidth()/2)+(XE1*(getWidth()*0.025)));
+                        int x2graf = (int)Math.floor((this.getWidth()/2)+(XE2*(getWidth()*0.025)));
+                        int y1graf = (int)Math.floor((this.getHeight()/2)-(x1*(getHeight()*0.025)));
+                        int y2graf = (int)Math.floor((this.getHeight()/2)-(x2*(getHeight()*0.025)));
+                        x1=x2;
+                        x2--;
+                        g.drawLine(x1graf, y1graf, x2graf, y2graf);
+                    }else {
+                        double Elevada =X1*x1;
+                        double Elevada1 =X1*x2;
+                        
+                        YE1 = (Ent+(Y1*x1)+(Elevada * Elevada))/-Y2;
+                        YE2 = (Ent+(Y1*x2)+(Elevada1 * Elevada1))/-Y2;
+                        int x1graf = (int)Math.floor((this.getWidth()/2)+(x1*(getWidth()*0.025)));
+                        int x2graf = (int)Math.floor((this.getWidth()/2)+(x2*(getWidth()*0.025)));
+                        int y1graf = (int)Math.floor((this.getHeight()/2)-(YE1*(getHeight()*0.025)));
+                        int y2graf = (int)Math.floor((this.getHeight()/2)-(YE2*(getHeight()*0.025)));
+                        x1=x2;
+                        x2--;
+                        g.drawLine(x1graf, y1graf, x2graf, y2graf);
+                    }
+                }
+            }
             //AQUI HAZ LAS OTRAS PINSHES TIPOS DE GRAFICAS
                 
                 
-            }
+        }
             
             
             
@@ -154,4 +205,5 @@ public class Plano extends JPanel{
         
     }
 }
+
 
