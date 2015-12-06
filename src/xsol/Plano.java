@@ -16,6 +16,8 @@ import javax.swing.JPanel;
  */
 public class Plano extends JPanel{
     
+    private int ancho;
+    private int alto;
     /*public Plano(int ancho, int alto){
         
         setBackground(Color.WHITE);
@@ -45,6 +47,8 @@ public class Plano extends JPanel{
         init();
         setSize(ancho, alto);
         setLocation(0,0);
+        this.ancho  = ancho;
+        this.alto = alto;
         
     }
     public void init(){
