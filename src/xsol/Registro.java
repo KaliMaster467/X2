@@ -5,7 +5,9 @@
  */
 package xsol;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -30,11 +32,14 @@ public class Registro extends Ventana{
     }
     public class PanelRegistro extends JPanel{
         
+        private Font font;
         private ImageIcon imagelap;
         private JLabel nombre, grupo, contra, confir;
         private JButton registrarse;
         
         public PanelRegistro(int ancho, int alto){
+            
+            font = new Font("Verdana", Font.BOLD, 16);
             
             setVisible(true);
             setLayout(null);
@@ -42,17 +47,43 @@ public class Registro extends Ventana{
             setSize(ancho, alto);
             
             nombre = new JLabel();
-            nombre.setText("Nombre");
+            nombre.setText("Nombre:");
+            nombre.setLocation(100, 50);
+            nombre.setSize(100,20);
+            nombre.setForeground(Color.black);
+            nombre.setFont(font);
+            add(nombre);
             
+            grupo = new JLabel();
+            grupo.setText("Grupo:");
+            grupo.setLocation(100, 100);
+            grupo.setSize(100, 20);
+            grupo.setForeground(Color.black);
+            grupo.setFont(font);
+            add(grupo);
+            
+            contra = new JLabel();
+            contra.setText("Contraseña:");
+            contra.setLocation(100, 150);
+            contra.setSize(176, 20);
+            contra.setForeground(Color.black);
+            contra.setFont(font);
+            add(contra);
+            
+            confir = new JLabel();
+            confir.setText("Confirmacion de \nContraseña:");
+            confir.setLocation(100, 200);
+            confir.setSize(432, 32);
+            confir.setForeground(Color.black);
+            confir.setFont(font);
+            add(confir);
             
         }
         
         public void paint(Graphics g){
            
             Dimension tam = getSize();
-            imagelap = new ImageIcon(getClass().getResource("libros.png"));           
-            
-            
+            imagelap = new ImageIcon(getClass().getResource("escuela.jpg"));           
             
             g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
             setOpaque(false);

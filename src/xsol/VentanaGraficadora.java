@@ -35,7 +35,7 @@ public class VentanaGraficadora extends Ventana{
         int anchoPlano = (int)Math.floor(width*.7);
         int altoPlano = (int)Math.floor(height*.7);
         plano = new Plano(anchoPlano, altoPlano);
-        this.setResizable(true);
+        setResizable(true);
         add(plano);
         int anchoTabla = (int)Math.floor(width*.3);
         tab = new TablaRes(anchoTabla, altoPlano, anchoPlano);
