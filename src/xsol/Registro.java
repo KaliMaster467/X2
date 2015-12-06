@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 public class Registro extends Ventana{
     
     private PanelRegistro reg;
+    private Control cont;
     
     public Registro(){
         
@@ -45,8 +46,12 @@ public class Registro extends Ventana{
         private JPasswordField contra2PW, contra1PW;
         private Usuario user;
         Archivo archivos;
+        protected Control cont;
+        protected ListaUsuario lista;
         
         public PanelRegistro(int ancho, int alto){
+            
+            //ListaUsuario lista  =new ListaUsuario();
             
             font = new Font("Verdana", Font.BOLD, 16);
             
@@ -59,14 +64,17 @@ public class Registro extends Ventana{
             grupoTx = new JTextField();
             grupoTx.setBounds(370, 107, 150, 20);
             grupoTx.setVisible(true);
-            grupoTx.addActionListener(this);
             add(grupoTx);
+            
+            //lista.setClave(grupoTx.getText());
             
             nombreTx = new JTextField();
             nombreTx.setBounds(370, 57, 150, 20);
             nombreTx.setVisible(true);
             nombreTx.addActionListener(this);
             add(nombreTx);
+            
+            //lista.setNombre(nombreTx.getText());
             
             contra2PW = new JPasswordField();
             contra2PW.setBounds(370, 207, 150, 20);
@@ -119,7 +127,18 @@ public class Registro extends Ventana{
             add(confir);
             
         }
-        
+        /*public void Validar(){
+            
+            if(contra2PW.getText().equals(contra1PW.getText())){
+                
+                lista.setGrupo(grupoTx.getText());
+                lista.setNombre(nombreTx.getText());
+                lista.setClave(contra2PW.getText());
+                dispose();
+                
+            }else
+                JOptionPane.showMessageDialog(null, "Las contraseñas deben coincidir");
+        }*/
         public void paint(Graphics g){
            
             Dimension tam = getSize();
@@ -141,12 +160,12 @@ public class Registro extends Ventana{
                     archivos = new Archivo();
                     archivos.Serializar(Control.Usuarios);
                     dispose();
-                    
-                }
+                
+            }
                 else
                     JOptionPane.showMessageDialog(null, "Contraseñas diferentes");
-            }
         }
+    }
     }
     
 }

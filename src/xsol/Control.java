@@ -77,9 +77,12 @@ public class Control implements ActionListener{
             Registro reg = new Registro();
         }
     }
-
+    public void accionRegis(ActionEvent e){
         
-        }
+        
+        
+    }
+}
     
     
 
