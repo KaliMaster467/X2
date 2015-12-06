@@ -29,7 +29,7 @@ public class VentanaInicion extends Ventana{
     
     private static BarraArriba alt;
     private BarraAbajo baj;
-    protected String accion;
+    protected Object accion;
     
     public VentanaInicion() throws IOException{
         
@@ -39,7 +39,7 @@ public class VentanaInicion extends Ventana{
         
         add(baj);   
         
-        this.accion = alt.accion;
+        accion = alt.getAction();
         
     }
     
@@ -55,9 +55,12 @@ public class VentanaInicion extends Ventana{
     private Font fuente;
     private JButton iniciar;
     private JButton registrarse;
-    protected String accion;
+    protected Object accion;
+    protected Manejador mane;
         
     public BarraArriba(int width, int height) throws IOException {
+        
+        mane = new Manejador();
         
         fuente = new Font("Verdana", Font.PLAIN, 15);
         
@@ -124,7 +127,7 @@ public class VentanaInicion extends Ventana{
         iniciar = new JButton("Iniciar");
         iniciar.setVisible(true);
         iniciar.setLayout(null);
-        iniciar.addActionListener(this);
+        iniciar.addActionListener(mane);
         iniciar.setText("Iniciar");
         iniciar.setLocation(100, 280);
         iniciar.setSize(100, 30);
@@ -136,7 +139,7 @@ public class VentanaInicion extends Ventana{
         registrarse = new JButton("Registro");
         registrarse.setVisible(true);
         registrarse.setLayout(null);
-        registrarse.addActionListener(this);
+        registrarse.addActionListener(mane);
         registrarse.setLocation(300, 280);
         registrarse.setSize(100, 30);
         
@@ -182,7 +185,7 @@ public class VentanaInicion extends Ventana{
         return contraseña.getText();
         
     }
-    public String getAction(String accion){
+    public Object getAction(){
         
         return accion;
         
@@ -190,7 +193,7 @@ public class VentanaInicion extends Ventana{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            accion = e.getActionCommand();
+            accion = e.getSource();
         }
         
     }

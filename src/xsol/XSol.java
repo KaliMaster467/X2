@@ -18,7 +18,7 @@ public class XSol {
     public static void main(String[] args) {
         // TODO code application logic here
         
-            
+            Control cont = new Control();
         
     }
     

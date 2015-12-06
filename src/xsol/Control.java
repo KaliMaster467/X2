@@ -7,7 +7,9 @@ package xsol;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +21,28 @@ public class Control implements ActionListener{
     protected VentanaGraficadora graf;
     protected Registro reg;
     protected ListaUsuario users;
+    private Manejador man;
     
+    public Control(){
+        
+        try{
+            ini = new VentanaInicion();
+        }catch(IOException e){
+            
+            JOptionPane.showMessageDialog(null, "Error");
+            
+        }
+        
+    }
+    /*public void addRegistro(){
+        
+        if(man.getAccion().equals("Registro")){
+            
+            reg = new Registro();
+            
+        }
+        
+    }*/
     public void removeVentana(Ventana ventana){
         
         ventana.dispose();
@@ -28,9 +51,9 @@ public class Control implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(ini.accion.equals("Registro")){
+        if(e.getSource() == ini.accion){
             
-            
+           reg = new Registro(); 
             
         }
     }

@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +31,8 @@ public class Registro extends Ventana{
     public class PanelRegistro extends JPanel{
         
         private ImageIcon imagelap;
+        private JLabel nombre, grupo, contra, confir;
+        private JButton registrarse;
         
         public PanelRegistro(int ancho, int alto){
             
@@ -36,6 +40,10 @@ public class Registro extends Ventana{
             setLayout(null);
             setLocation(0,0);
             setSize(ancho, alto);
+            
+            nombre = new JLabel();
+            nombre.setText("Nombre");
+            
             
         }
         
