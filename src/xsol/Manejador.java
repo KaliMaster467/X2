@@ -42,18 +42,10 @@ public class Manejador implements ActionListener{
         return accion;
         
     }*/
-        
-        if(e.getActionCommand().equals("Registro")){
+     if(e.getActionCommand().equals("Iniciar")) {
+         
+     }   
             
-            reg = new Registro();
-            
-            
-        }else
-            if(e.getActionCommand().equals("Iniciar")){
-                
-                graf = new VentanaGraficadora();
-                
-            }
-    }    
     
+}
 }
