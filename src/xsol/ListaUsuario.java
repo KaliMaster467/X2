@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Bugatti
  */
 public class ListaUsuario {
-    private ArrayList<Usuario> user;
+    public static ArrayList<Usuario> user = new ArrayList<>();
     private Archivo ar;
     
     public ListaUsuario(){
