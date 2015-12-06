@@ -56,8 +56,16 @@ public class Plano extends JPanel{
     public void paintComponent(Graphics g){
         
         super.paintComponent(g);
+        g.setColor(new Color(177,228,255));
+        double ss = .025;
+        for(int i= 0;i<40;i++) {
+            
+            g.drawLine(0, (int)Math.floor(this.getHeight()*ss) , ancho, (int)Math.floor(this.getHeight()*ss));
+            g.drawLine((int)Math.floor(this.getWidth()*ss),0 , (int)Math.floor(this.getWidth()*ss), alto);
+            ss += .025;
+            
+        }
         g.setColor(Color.red);
-        
         g.drawLine(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
         g.drawLine(this.getWidth() / 2, 0, this.getWidth()/2, this.getHeight());
         
