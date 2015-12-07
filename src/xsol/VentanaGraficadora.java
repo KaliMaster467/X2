@@ -481,6 +481,8 @@ public class VentanaGraficadora extends Ventana{
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "A debe ser mayor que C");
                     }    
                     
                 }else if(plano.getTipo()==4) {
