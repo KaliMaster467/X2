@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
 
 /**
  *
@@ -32,6 +31,7 @@ public class VentanaGraficadora extends Ventana{
     protected double width;
     protected double height;
     public static Plano plano;
+    
     public VentanaGraficadora(){
         
         width = dim.getWidth();
@@ -65,11 +65,12 @@ public class VentanaGraficadora extends Ventana{
     JTextField valorX, valorY, valorEnt, valorX2, valorY2;
     JButton Grafica;
     private int tipograf;
-    
-    
+    JButton siguienteTabla, antT;
     
     public TablaRes(int anchos, int altos, int ancho) {
         fuente = new Font("Verdana", Font.BOLD, 15);
+        
+       
         
         setBackground(Color.GRAY);
         setVisible(true);
@@ -195,12 +196,28 @@ public class VentanaGraficadora extends Ventana{
                 
         add(this.tipoTabla);
         
+        siguienteTabla = new JButton("►");
+        siguienteTabla.setVisible(true);
+        siguienteTabla.setLayout(null);
+        siguienteTabla.setEnabled(false);
+        siguienteTabla.setBounds(240, 180, 60, 30);
+        
+        add(siguienteTabla);
+        
+        antT = new JButton("◄");
+        antT.setVisible(true);
+        antT.setEnabled(false);
+        antT.setLayout(null);
+        antT.setBounds(60, 180, 60, 30);
+        
+        add(antT);
+        
         tabla = new JLabel();
         tabla.setText("|                        TABLA                     |");
         tabla.setVisible(true);
         tabla.setLayout(null);
         tabla.setFont(fuente);
-        tabla.setLocation(50, 180);
+        tabla.setLocation(30, 180);
         tabla.setSize(500, 30);
         tabla.setForeground(Color.WHITE);
         
@@ -211,7 +228,7 @@ public class VentanaGraficadora extends Ventana{
         X.setVisible(true);
         X.setLayout(null);
         X.setFont(fuente);
-        X.setLocation(50, 210);
+        X.setLocation(30, 210);
         X.setSize(200, 30);
         X.setForeground(Color.WHITE);
         
@@ -221,7 +238,7 @@ public class VentanaGraficadora extends Ventana{
         Y.setVisible(true);
         Y.setLayout(null);
         Y.setFont(fuente);
-        Y.setLocation(200, 210);
+        Y.setLocation(180, 210);
         Y.setSize(200, 30);
         Y.setForeground(Color.WHITE);
         
@@ -321,7 +338,60 @@ public class VentanaGraficadora extends Ventana{
                          verticalXOY ='z';
                         } else 
                             if (cual == 3) {
-                                JOptionPane.showMessageDialog(null, "Llena todos los espacios");
+                                char verticalXOY = 'z';
+                                while(verticalXOY!='x'&&verticalXOY!='X'&&verticalXOY!='y'&&verticalXOY!='Y'){
+                                    verticalXOY = JOptionPane.showInputDialog(null, "La elipse es paralela en X o Y").charAt(0);
+                                    if(verticalXOY=='x'||verticalXOY=='y'||verticalXOY=='X'||verticalXOY=='Y'){
+                                    JOptionPane.showMessageDialog(null, "Ingrese los valores de B (Long del eje menor) y C (Distancia del los focos al centro)");
+                                    plano.setTipo(cual);
+                                    tipograf = 3;
+                                    valorY.setEnabled(true);
+ 
+                                valorEnt.setEnabled(false);
+                                valorX.setVisible(true);
+                                valorY.setText("");
+                                valorY.setVisible(true);
+                                valorEnt.setText(" ");
+                                valorEnt.setVisible(false);
+                                valorX2.setText("");
+                                valorX2.setVisible(false);
+                                xValor.setVisible(true);
+                                xValor.setText("X: ");
+                                
+                                
+                            
+                                enteros.setVisible(false);
+                                enteros.setText("");
+                                x2Valor.setVisible(false);
+                                x2Valor.setText("");
+                                
+                                y2Valor.setVisible(false);
+                                y2Valor.setText("");
+                                valorY2.setVisible(false);
+                                valorY2.setText("");
+                                valorX.setText("");
+                                valorY2.setEnabled(true);
+                                valorX.setEnabled(true);
+                                valorX2.setEnabled(true);
+                                yValor.setVisible(true);
+                                xValor.setText("b: ");
+                                    yValor.setText("c: ");
+                                                                    y2Valor.setVisible(true);
+                            
+                                if(verticalXOY=='x'||verticalXOY=='X') {
+                                    plano.setTipoElipse(31);
+                                    
+                                } else {
+                                    plano.setTipoElipse(32);
+                                    
+                            }
+                                    
+                            
+                                    }
+                                }
+                            } else 
+                                if (cual == 4) {
+                                    JOptionPane.showMessageDialog(null, "Llena todos los espacios (X² y Y² deben tener signos diferentes)");
                                 plano.setTipo(cual);
                                 tipograf = 3;
                                 valorY.setEnabled(true);
@@ -329,7 +399,8 @@ public class VentanaGraficadora extends Ventana{
                             valorX.setVisible(true);
                             valorY.setText("");
                             valorY.setVisible(true);
-                            valorEnt.setText("");
+                            valorEnt.setText("  1");
+                            valorEnt.setEnabled(false);
                             valorEnt.setVisible(true);
                             valorX2.setText("");
                             valorX2.setVisible(true);
@@ -349,14 +420,10 @@ public class VentanaGraficadora extends Ventana{
                             valorY2.setEnabled(true);
                             valorX.setEnabled(true);
                             valorX2.setEnabled(true);
-                            } else 
-                                if (cual == 4) {
-                                    plano.setTipo(cual);
-                                    tipograf = 4;
                                 }
                             
                         
-                    
+                
                 }
             }
         }
@@ -383,36 +450,52 @@ public class VentanaGraficadora extends Ventana{
                     plano.setX1(Double.parseDouble(valorX.getText()));
                     plano.setY1(Double.parseDouble(valorY.getText()));
                     plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                    String formula = String.format("| Y= (+(%sX)+(%s))/%s  |", (-(Integer.parseInt(valorX.getText()))), (-(Integer.parseInt(valorEnt.getText()))), valorY.getText());
-                    Y.setText(formula);
-                }else if(plano.getTipo()>20){
+                    siguienteTabla.setEnabled(true);
+                    String formula = String.format("| Y= (+(%sX)+(%s))/%s |", (-(Integer.parseInt(valorX.getText()))), (-(Integer.parseInt(valorEnt.getText()))), valorY.getText());
+                    JOptionPane.showMessageDialog(null, formula);
+                }else if(plano.getTipo()>20&&plano.getTipo()<25){
                     if(plano.getTipo()==21) {
                         plano.setY1(Double.parseDouble(valorY.getText()));
                         plano.setY2(Double.parseDouble(valorY2.getText()));
                         //valorX2 equivale a Y al cuadrado y valor Y2 equivale a Y normal X1 equivale a X2 y X2 a X
                         plano.setX2(Double.parseDouble(valorX2.getText()));
                         plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                        siguienteTabla.setEnabled(true);
                         String formula = String.format("| X= ((%sY²)+(%sY)+(%s)/%s  |", valorX2.getText(), valorY2.getText(), valorEnt.getText(), valorY.getText());
-                        X.setText(formula);
+                        JOptionPane.showMessageDialog(null, formula);
                     }
                     else {
                         plano.setX1(Double.parseDouble(valorX.getText()));
                         plano.setY1(Double.parseDouble(valorY.getText()));
                         plano.setEnt(Double.parseDouble(valorEnt.getText()));   
                         plano.setY2(Double.parseDouble(valorY2.getText()));
+                        siguienteTabla.setEnabled(true);
                         String formula = String.format("| Y= ((%sX²)+(%sX)+(%s))/%s  |", valorX.getText(), valorY.getText(), valorEnt.getText(), valorY2.getText());
-                        Y.setText(formula);
+                        JOptionPane.showMessageDialog(null, formula);
                     }
                 }else if(plano.getTipo()==3) {
                     //X1 = X cuadrada, X2 = Y cuadrada, Y1 = X, Y2 = Y, Ent = entero; ecuacion es AX²+CY²+DX+EY+F=0  
-                    plano.setX1(Double.parseDouble(valorX.getText()));
-                    plano.setY1(Double.parseDouble(valorY.getText()));
-                    plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                    plano.setY2(Double.parseDouble(valorY2.getText()));
-                    plano.setX2(Double.parseDouble(valorX2.getText()));
-                    String formula = String.format("| ");
-                    Y.setText(formula);
-                
+                    
+                        plano.setBX(Double.parseDouble(valorX.getText()));//A
+                        plano.setCX(Double.parseDouble(valorY.getText()));//C
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| ");
+                        Y.setText(formula);
+                        
+                    
+                }else if(plano.getTipo()==4) {
+                    if(Integer.parseInt(valorX.getText())<0&&Integer.parseInt(valorX2.getText())>0||Integer.parseInt(valorX.getText())>0&&Integer.parseInt(valorX2.getText())<0
+                            ) {
+                        plano.setX1(Double.parseDouble(valorX.getText()));
+                        plano.setY1(Double.parseDouble(valorY.getText()));
+                        plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                        plano.setY2(Double.parseDouble(valorY2.getText()));
+                        plano.setX2(Double.parseDouble(valorX2.getText()));
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| ");
+                        Y.setText(formula);
+                    }else
+                        JOptionPane.showMessageDialog(null, "X² y Y² deben ser de signos diferentes!!");
                 }
                 
                 
@@ -425,8 +508,6 @@ public class VentanaGraficadora extends Ventana{
     public class Ayuda extends JPanel{
         
         private ImageIcon imagelap;
-        private JButton vectores;
-        private JToolBar toot;
         
         public Ayuda(int x, int y, int width, int height){
             
@@ -434,13 +515,6 @@ public class VentanaGraficadora extends Ventana{
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
-            
-            vectores = new JButton("Vectores");
-            vectores.setVisible(true);
-            vectores.setLocation(0, 50);
-            vectores.setSize(100, 30);
-            add(vectores);
-            
             
         }
         public void paint(Graphics g){
@@ -458,4 +532,5 @@ public class VentanaGraficadora extends Ventana{
         
     }
 }
+
 
