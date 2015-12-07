@@ -510,6 +510,7 @@ public class VentanaGraficadora extends Ventana{
     public class Ayuda extends JPanel{
         
         private ImageIcon imagelap;
+        private JButton apuntes;
         
         public Ayuda(int x, int y, int width, int height){
             
@@ -517,6 +518,14 @@ public class VentanaGraficadora extends Ventana{
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
+            
+            apuntes = new JButton("Apuntes");
+            apuntes.setVisible(true);
+            apuntes.setLocation(0,0);
+            apuntes.setSize(100, this.getHeight());
+            apuntes.setBackground(Color.white);
+            apuntes.setForeground(Color.black);
+            add(apuntes);
             
         }
         public void paint(Graphics g){
