@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import 
 
 /**
  *
@@ -63,6 +64,8 @@ public class Control implements ActionListener{
                     if(Usuarios.get(i).getClave().equals(ini.getPassReturn())) {
                         JOptionPane.showMessageDialog(null, "Bienvenido "+Usuarios.get(i).getNombre());
                         VentanaGraficadora graficadora = new VentanaGraficadora();
+                        userreturned.setText("");
+                        passreturned.setText("");
                         ini.dispose();
                         encontrado = 1;
                         break;
@@ -72,6 +75,8 @@ public class Control implements ActionListener{
             }
             if(encontrado ==0)
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+                    userreturned.setText("");
+                    passreturned.setText("");
         }
         else if(e.getActionCommand().equals("Registro")) {
             Registro reg = new Registro();
