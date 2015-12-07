@@ -14,5 +14,4 @@ public class Profesor extends Usuario{
     public Profesor(String nombre, String clave, String grupo) {
         super(nombre, clave, grupo);
     }
-    
 }

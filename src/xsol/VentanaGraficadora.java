@@ -27,6 +27,7 @@ import javax.swing.JTextField;
  */
 public class VentanaGraficadora extends Ventana{
     TablaRes tab;
+    protected Ayuda ayuda;
     protected double width;
     protected double height;
     public static Plano plano;
@@ -44,6 +45,14 @@ public class VentanaGraficadora extends Ventana{
         tab = new TablaRes(anchoTabla, altoPlano, anchoPlano);
         
         add(tab);
+        
+        int xa = 0;
+        int hei = (int) (height - plano.getHeight());
+        int ya = plano.getHeight();
+        int wi = (int) width;
+        ayuda = new Ayuda(xa, ya, wi, hei);
+        
+        add(ayuda);
         
         setVisible(true);
     }
@@ -69,8 +78,10 @@ public class VentanaGraficadora extends Ventana{
         setSize(anchos, altos);
         //PUSE EL JBUTTON PARA GRAFICAR
         Grafica = new JButton("Grafica!");
-        Grafica.setBounds(140, 150, 110, 30);
+        //Grafica.setBounds(140, 150, 110, 30);
         Grafica.setVisible(true);
+        Grafica.setLocation(0, (this.getHeight()- 30));
+        Grafica.setSize(this.getWidth(), 30);
         Grafica.addActionListener(this);
         
         add(Grafica);
@@ -411,6 +422,31 @@ public class VentanaGraficadora extends Ventana{
             
         }
     }
-    
+    public class Ayuda extends JPanel{
+        
+        private ImageIcon imagelap;
+        
+        public Ayuda(int x, int y, int width, int height){
+            
+            setVisible(true);
+            setLocation(x, y);
+            setSize(width, height);
+            setLayout(null);
+            
+        }
+        public void paint(Graphics g){
+            
+            Dimension tam = getSize();
+            imagelap = new ImageIcon(getClass().getResource("default.jpg"));           
+            
+            g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
+            setOpaque(false);
+            super.paint(g);
+            
+            
+            
+        } 
+        
+    }
 }
 
