@@ -143,7 +143,7 @@ public class Plano extends JPanel{
                     }
                 
                 }
-            //ELIPSE
+            //PARABOLA
             else if(this.tipo>20) {
                 double x1=80;//Tambien sirven como ys
                 double x2=79;
