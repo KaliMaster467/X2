@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 /**
  *
@@ -31,7 +32,6 @@ public class VentanaGraficadora extends Ventana{
     protected double width;
     protected double height;
     public static Plano plano;
-    
     public VentanaGraficadora(){
         
         width = dim.getWidth();
@@ -425,6 +425,8 @@ public class VentanaGraficadora extends Ventana{
     public class Ayuda extends JPanel{
         
         private ImageIcon imagelap;
+        private JButton vectores;
+        private JToolBar toot;
         
         public Ayuda(int x, int y, int width, int height){
             
@@ -432,6 +434,13 @@ public class VentanaGraficadora extends Ventana{
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
+            
+            vectores = new JButton("Vectores");
+            vectores.setVisible(true);
+            vectores.setLocation(0, 50);
+            vectores.setSize(100, 30);
+            add(vectores);
+            
             
         }
         public void paint(Graphics g){
