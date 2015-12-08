@@ -436,9 +436,7 @@ public class VentanaGraficadora extends Ventana{
             g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
             setOpaque(false);
             super.paint(g);
-            
-            
-            
+                  
         } 
 
         @Override
@@ -511,6 +509,7 @@ public class VentanaGraficadora extends Ventana{
         
         private ImageIcon imagelap;
         private JButton apuntes;
+        private JButton vectores;
         
         public Ayuda(int x, int y, int width, int height){
             
@@ -523,9 +522,21 @@ public class VentanaGraficadora extends Ventana{
             apuntes.setVisible(true);
             apuntes.setLocation(0,0);
             apuntes.setSize(100, this.getHeight());
-            apuntes.setBackground(Color.white);
-            apuntes.setForeground(Color.black);
+            apuntes.setBackground(Color.black);
+            apuntes.setOpaque(true);
+            apuntes.setForeground(Color.white);
+            apuntes.setBorderPainted(false);
             add(apuntes);
+            
+            vectores = new JButton("Vectores");
+            vectores.setVisible(true);
+            vectores.setOpaque(true);
+            vectores.setForeground(Color.white);
+            vectores.setBackground(Color.orange);
+            vectores.setLocation(apuntes.getWidth(), 0);
+            vectores.setSize(100, this.getHeight());
+            vectores.setBorderPainted(false);
+            add(vectores);
             
         }
         public void paint(Graphics g){
@@ -539,8 +550,7 @@ public class VentanaGraficadora extends Ventana{
             
             
             
-        } 
-        
+        }   
     }
 }
 

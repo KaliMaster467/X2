@@ -76,6 +76,11 @@ public class Control implements ActionListener{
         else if(e.getActionCommand().equals("Registro")) {
             Registro reg = new Registro();
         }
+        else if(e.getActionCommand().equals("Profesor")){
+           
+            
+            
+        }
     }
     public void accionRegis(ActionEvent e){
         

@@ -21,6 +21,8 @@ public class XSol {
             Control cont = new Control();
             cont.Controls();
         
+        //VentanaProfesor vent = new VentanaProfesor();
+        
     }
     
 }

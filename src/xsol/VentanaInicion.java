@@ -72,6 +72,7 @@ public class VentanaInicion extends Ventana implements ActionListener{
     private JButton registrarse;
     protected Object accion;
     protected Manejador mane;
+    private JButton profe;
         
     public BarraArriba(int width, int height) throws IOException {
         
@@ -172,6 +173,14 @@ public class VentanaInicion extends Ventana implements ActionListener{
         wIcon.setToolTipText("La mejor graficadora papu");
         
         add(wIcon);
+        
+        profe = new JButton("Profesor");
+        profe.setVisible(true);
+        profe.setText("¿Eres Profesor?");
+        profe.setLocation(420, 160);
+        profe.setSize(180, 60);
+        profe.addActionListener(control);
+        add(profe);
   
     }
     
