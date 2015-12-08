@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -81,8 +82,14 @@ public class VentanaGraficadora extends Ventana{
         Grafica = new JButton("Grafica!");
         //Grafica.setBounds(140, 150, 110, 30);
         Grafica.setVisible(true);
-        Grafica.setLocation(0, (this.getHeight()- 30));
-        Grafica.setSize(this.getWidth(), 30);
+        Grafica.setOpaque(true);
+        Grafica.setFont(new Font("Verdana", Font.PLAIN, 20));
+        Grafica.setBorderPainted(false);
+        Grafica.setForeground(Color.white);
+        Grafica.setBackground(Color.orange);
+        Grafica.setBorder(BorderFactory.createLineBorder(Color.red));
+        Grafica.setLocation(0, (this.getHeight()- 60));
+        Grafica.setSize(this.getWidth(), 60);
         Grafica.addActionListener(this);
         
         add(Grafica);
@@ -248,7 +255,7 @@ public class VentanaGraficadora extends Ventana{
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
+    /*public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             if (e.getSource() instanceof JComboBox) {
                 
@@ -427,7 +434,234 @@ public class VentanaGraficadora extends Ventana{
                 }
             }
         }
-    }
+    }*/
+            public void itemStateChanged(ItemEvent e) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (e.getSource() instanceof JComboBox) {
+
+                    int cual = tipoTabla.getSelectedIndex();
+
+                    //AQUI SE LE PASA EL TIPO DE GRAFICA A EL PLANO
+                    //TEXT FIELD VALOR AL FINAL
+                    if (cual != 0) {
+                        if (cual == 1) {
+                            tipoTabla.setSelectedIndex(0);
+                            JOptionPane.showMessageDialog(null, "Llena todos los espacios");
+                            valorX.setEnabled(true);
+                            valorY.setEnabled(true);
+                            valorEnt.setEnabled(true);
+                            plano.setTipo(cual);
+                            tipograf = 1;
+                            valorX.setText("");
+                            valorX.setVisible(true);
+                            valorY.setText("");
+                            valorY.setVisible(true);
+                            valorEnt.setText("");
+                            valorEnt.setVisible(true);
+                            xValor.setVisible(true);
+                            xValor.setText("x: ");
+                            yValor.setVisible(true);
+                            yValor.setText("y: ");
+                            enteros.setVisible(true);
+                            enteros.setText("Entero: ");
+                            x2Valor.setVisible(false);
+                            x2Valor.setText("");
+                            enteros.setEnabled(true);
+
+                            valorX2.setVisible(false);
+                            valorX2.setText("");
+
+                            y2Valor.setVisible(false);
+                            y2Valor.setText("");
+                            valorY2.setVisible(false);
+                            valorY2.setText("");
+
+                        } else if (cual == 2) {
+                            tipoTabla.setSelectedIndex(0);
+                            char verticalXOY = 'z';
+                            while (verticalXOY != 'x' && verticalXOY != 'X' && verticalXOY != 'y' && verticalXOY != 'Y') {
+                                verticalXOY = (JOptionPane.showInputDialog(null, "La elipse es paralela en X o en Y? (Teclea X o Y)").charAt(0));
+                                if (verticalXOY == 'x' || verticalXOY == 'y' || verticalXOY == 'X' || verticalXOY == 'Y') {
+
+                                    tipograf = 2;
+                                    enteros.setEnabled(true);
+                                    enteros.setVisible(true);
+                                    enteros.setText("Entero");
+                                    valorY.setEnabled(true);
+                                    valorEnt.setEnabled(true);
+                                    valorX.setVisible(true);
+                                    valorY.setText("");
+                                    valorY.setVisible(true);
+                                    valorEnt.setText("");
+                                    valorEnt.setVisible(true);
+                                    valorX2.setText("");
+                                    valorX2.setVisible(true);
+                                    xValor.setVisible(true);
+                                    xValor.setText("X²: ");
+                                    yValor.setVisible(true);
+                                    yValor.setText("X: ");
+                                    enteros.setVisible(true);
+                                    enteros.setText("Entero: ");
+                                    x2Valor.setVisible(true);
+                                    x2Valor.setText("Y²");
+                                    y2Valor.setVisible(true);
+                                    y2Valor.setEnabled(true);
+                                    y2Valor.setText("Y: ");
+                                    valorY2.setVisible(true);
+                                    valorY2.setText("");
+                                    valorX.setText("");
+                                    valorY2.setEnabled(true);
+                                    if (verticalXOY == 'x' || verticalXOY == 'X') {
+                                        plano.setTipo(21);
+                                        x2Valor.setEnabled(true);
+                                        valorX2.setEnabled(true);
+                                        xValor.setEnabled(false);
+                                        valorX.setEnabled(false);
+                                    } else {
+                                        plano.setTipo(22);
+                                        xValor.setEnabled(true);
+                                        valorX.setEnabled(true);
+                                        valorX2.setEnabled(false);
+                                        x2Valor.setEnabled(false);
+                                    }
+
+                                }
+                            }
+                            verticalXOY = 'z';
+                        } else if (cual == 3) {
+                            tipoTabla.setSelectedIndex(0);
+                            char verticalXOY = 'z';
+                            while (verticalXOY != 'x' && verticalXOY != 'X' && verticalXOY != 'y' && verticalXOY != 'Y') {
+                                verticalXOY = JOptionPane.showInputDialog(null, "La elipse es paralela en X o Y").charAt(0);
+                                if (verticalXOY == 'x' || verticalXOY == 'y' || verticalXOY == 'X' || verticalXOY == 'Y') {
+                                    JOptionPane.showMessageDialog(null, "Ingrese los valores de A (Long mayor|Debe ser mayor a C) y C (Distancia del los focos al centro)");
+                                    plano.setTipo(cual);
+                                    tipograf = 3;
+                                    valorY.setEnabled(true);
+
+                                    valorEnt.setEnabled(false);
+                                    valorX.setVisible(true);
+                                    valorY.setText("");
+                                    valorY.setVisible(true);
+                                    valorEnt.setText(" ");
+                                    valorEnt.setVisible(false);
+                                    valorX2.setText("");
+                                    valorX2.setVisible(false);
+                                    xValor.setVisible(true);
+                                    xValor.setEnabled(true);
+                                    enteros.setVisible(false);
+                                    enteros.setText("");
+                                    x2Valor.setVisible(false);
+                                    x2Valor.setText("");
+
+                                    y2Valor.setVisible(false);
+                                    y2Valor.setText("");
+                                    valorY2.setVisible(false);
+                                    valorY2.setText("");
+                                    valorX.setText("");
+                                    valorY2.setEnabled(true);
+                                    valorX.setEnabled(true);
+                                    valorX2.setEnabled(true);
+                                    yValor.setVisible(true);
+                                    xValor.setText("a: ");
+                                    yValor.setText("c: ");
+                                    y2Valor.setVisible(true);
+
+                                    if (verticalXOY == 'x' || verticalXOY == 'X') {
+                                        plano.setTipoElipse(31);
+
+                                    } else {
+                                        plano.setTipoElipse(32);
+
+                                    }
+
+                                }
+                            }
+                        } else if (cual == 4) {
+                            tipoTabla.setSelectedIndex(0);
+                            char verticalXOY = 'z';
+                            while (verticalXOY != 'x' && verticalXOY != 'X' && verticalXOY != 'y' && verticalXOY != 'Y') {
+                                verticalXOY = JOptionPane.showInputDialog(null, "Desea que sea paralela a X o Y?").charAt(0);
+                                if (verticalXOY == 'x' || verticalXOY == 'y' || verticalXOY == 'X' || verticalXOY == 'Y') {
+                                    plano.setTipo(cual);
+                                    tipograf = 4;
+                                    if (verticalXOY == 'x' || verticalXOY == 'X') {
+                                       plano.setTipoHiper(41);
+                                       JOptionPane.showMessageDialog(null, "Formula general siendo paralela a X\n(X²/A²)-(Y²/B²)=1");
+                                       JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B (El valor por defecto del entero es 1)");
+                                       xValor.setEnabled(true);
+                                       x2Valor.setEnabled(false);
+                                       yValor.setEnabled(true);
+                                       y2Valor.setEnabled(false);
+                                       xValor.setVisible(true);
+                                       x2Valor.setVisible(false);
+                                       yValor.setVisible(true);
+                                       y2Valor.setVisible(false);
+                                       enteros.setText("");
+                                       enteros.setVisible(false);
+                                       enteros.setEnabled(false);
+                                       xValor.setText("A: ");
+                                       x2Valor.setText("");
+                                       yValor.setText("B: ");
+                                       y2Valor.setText("");
+                                       valorX.setText("");
+                                       valorX2.setText("");
+                                       valorY.setText("");
+                                       valorY2.setText("");
+                                       valorX.setEnabled(true);
+                                       valorX2.setEnabled(false);
+                                       valorY.setEnabled(true);
+                                       valorY2.setEnabled(false);
+                                       valorEnt.setText("");
+                                       valorX.setVisible(true);
+                                       valorX2.setVisible(false);
+                                       valorY.setVisible(true);
+                                       valorY2.setVisible(false);
+                                       valorEnt.setVisible(false);
+                                       valorEnt.setEnabled(false);
+                                        
+                                    } else {
+                                        plano.setTipoHiper(42);
+                                       JOptionPane.showMessageDialog(null, "Formula general siendo paralela a Y\n(Y²/A²)-(X²/B²)=1");
+                                       JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B  (El valor por defecto del entero es 1)");
+                                       xValor.setEnabled(true);
+                                       x2Valor.setEnabled(false);
+                                       yValor.setEnabled(true);
+                                       y2Valor.setEnabled(false);
+                                       xValor.setVisible(true);
+                                       x2Valor.setVisible(false);
+                                       yValor.setVisible(true);
+                                       y2Valor.setVisible(false);
+                                       enteros.setText("");
+                                       enteros.setVisible(false);
+                                       enteros.setEnabled(false);
+                                       xValor.setText("A: ");
+                                       x2Valor.setText("");
+                                       yValor.setText("B: ");
+                                       y2Valor.setText("");
+                                       valorX.setText("");
+                                       valorX2.setText("");
+                                       valorY.setText("");
+                                       valorY2.setText("");
+                                       valorX.setEnabled(true);
+                                       valorX.setVisible(true);
+                                       valorX2.setEnabled(false);
+                                       valorY.setVisible(true);
+                                       valorY.setEnabled(true);
+                                       valorY2.setEnabled(false);
+                                       valorEnt.setText("");
+                                       valorEnt.setVisible(false);
+                                       valorEnt.setEnabled(false);
+                                    }
+                                    
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
     public void paint(Graphics g){
             
             Dimension tam = getSize();
@@ -439,7 +673,7 @@ public class VentanaGraficadora extends Ventana{
                   
         } 
 
-        @Override
+        /*@Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Grafica!")) {
                 //AQUI SE PASA EL VALOR DE X Y EL ENTERO Y SE HACE EL REPAINT
@@ -503,6 +737,71 @@ public class VentanaGraficadora extends Ventana{
                 
             }
             
+        }*/
+            @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Grafica!")) {
+                //AQUI SE PASA EL VALOR DE X Y EL ENTERO Y SE HACE EL REPAINT
+
+                if (tipograf == 1) {
+                    plano.setX1(Double.parseDouble(valorX.getText()));
+                    plano.setY1(Double.parseDouble(valorY.getText()));
+                    plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                    siguienteTabla.setEnabled(true);
+                    String formula = String.format("| Y= (+(%sX)+(%s))/%s |", (-(Integer.parseInt(valorX.getText()))), (-(Integer.parseInt(valorEnt.getText()))), valorY.getText());
+                    JOptionPane.showMessageDialog(null, formula);
+                } else if (plano.getTipo() > 20 && plano.getTipo() < 25) {
+                    if (plano.getTipo() == 21) {
+                        plano.setY1(Double.parseDouble(valorY.getText()));
+                        plano.setY2(Double.parseDouble(valorY2.getText()));
+                        //valorX2 equivale a Y al cuadrado y valor Y2 equivale a Y normal X1 equivale a X2 y X2 a X
+                        plano.setX2(Double.parseDouble(valorX2.getText()));
+                        plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| X= ((%sY²)+(%sY)+(%s)/%s  |", valorX2.getText(), valorY2.getText(), valorEnt.getText(), valorY.getText());
+                        JOptionPane.showMessageDialog(null, formula);
+                    } else {
+                        plano.setX1(Double.parseDouble(valorX.getText()));
+                        plano.setY1(Double.parseDouble(valorY.getText()));
+                        plano.setEnt(Double.parseDouble(valorEnt.getText()));
+                        plano.setY2(Double.parseDouble(valorY2.getText()));
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| Y= ((%sX²)+(%sX)+(%s))/%s  |", valorX.getText(), valorY.getText(), valorEnt.getText(), valorY2.getText());
+                        JOptionPane.showMessageDialog(null, formula);
+                    }
+                } else if (plano.getTipo() == 3) {
+                    //X1 = X cuadrada, X2 = Y cuadrada, Y1 = X, Y2 = Y, Ent = entero; ecuacion es AX²+CY²+DX+EY+F=0  
+                    if (Double.parseDouble(valorX.getText()) > Double.parseDouble(valorY.getText())) {
+                        plano.setAX(Double.parseDouble(valorX.getText()));//A
+                        plano.setCX(Double.parseDouble(valorY.getText()));//C
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| ");
+                        Y.setText(formula);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "A debe ser mayor que C");
+
+                    }
+
+                } else if (plano.getTipo() == 4) {
+                    if(plano.getTipoHiper()==41) {
+                        plano.setAH(Double.parseDouble(valorX.getText()));
+                        plano.setBH(Double.parseDouble(valorY.getText()));
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| ");
+                        Y.setText(formula);
+                    } else {
+                        plano.setBH(Double.parseDouble(valorY.getText()));
+                        plano.setAH(Double.parseDouble(valorX.getText()));
+                        siguienteTabla.setEnabled(true);
+                        String formula = String.format("| ");
+                        Y.setText(formula);
+                    }
+                }
+                
+                plano.repaint();
+
+            }
+
         }
     }
     public class Ayuda extends JPanel{
@@ -533,7 +832,7 @@ public class VentanaGraficadora extends Ventana{
             vectores.setVisible(true);
             vectores.setOpaque(true);
             vectores.setForeground(Color.white);
-            vectores.setBackground(Color.orange);
+            vectores.setBackground(new Color(255, 61, 61));
             vectores.setLocation(apuntes.getWidth(), 0);
             vectores.setSize(100, this.getHeight());
             vectores.setBorderPainted(false);

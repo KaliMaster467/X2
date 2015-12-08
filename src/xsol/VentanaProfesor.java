@@ -28,7 +28,7 @@ public class VentanaProfesor extends Ventana{
     public VentanaProfesor(){
         
         setSize(600, 500);
-        setLocation(300, 300);
+        setLocation(310, 200);
         setResizable(false);
         setVisible(true);
         
@@ -176,7 +176,7 @@ public class VentanaProfesor extends Ventana{
             bot = new JButton("Entrar");
             bot.setVisible(true);
             bot.setLayout(null);
-            bot.setSize(this.getWidth(), 100);
+            bot.setSize(this.getWidth(), 80);
             bot.setLocation(0, this.getHeight() - bot.getHeight());
             bot.setOpaque(true);
             bot.setFont(fu);

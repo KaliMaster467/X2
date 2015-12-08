@@ -76,7 +76,8 @@ public class VentanaInicion extends Ventana implements ActionListener{
     protected Object accion;
     protected Manejador mane;
     private JButton profe;
-        
+    private JButton cred;
+    
     public BarraArriba(int width, int height) throws IOException {
         
         mane = new Manejador();
@@ -202,6 +203,19 @@ public class VentanaInicion extends Ventana implements ActionListener{
         profe.setSize(180, 50);
         profe.addActionListener(control);
         add(profe);
+        
+        Color cre = new Color(166, 0, 138);
+        
+        cred = new JButton("Creditos");
+        cred.setVisible(true);
+        cred.setLayout(null);
+        cred.setOpaque(true);
+        cred.setBorderPainted(false);
+        cred.setBackground(cre);
+        cred.setLocation(500,210);
+        cred.setSize(180, 50);
+        cred.setForeground(Color.white);
+        add(cred);
   
     }
     
