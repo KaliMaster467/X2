@@ -78,7 +78,7 @@ public class Control implements ActionListener{
         }
         else if(e.getActionCommand().equals("Profesor")){
            
-            
+            VentanaProfesor pro = new VentanaProfesor();
             
         }
     }

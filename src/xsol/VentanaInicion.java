@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -33,6 +34,8 @@ public class VentanaInicion extends Ventana implements ActionListener{
     protected Object accion;
     
     public void VentanaInicions() throws IOException{
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         add(alt = new BarraArriba(this.getWidth(), this.getHeight() / 2));
         
@@ -138,6 +141,8 @@ public class VentanaInicion extends Ventana implements ActionListener{
         
         add(contraseña);
         
+        Font fu = new Font("Verdana", Font.PLAIN, 12);
+        
         //Crea el boton de inicio
         
         iniciar = new JButton("Iniciar");
@@ -145,6 +150,11 @@ public class VentanaInicion extends Ventana implements ActionListener{
         iniciar.setLayout(null);
         iniciar.addActionListener(control);
         iniciar.setText("Iniciar");
+        iniciar.setOpaque(true);
+        iniciar.setFont(fu);
+        iniciar.setForeground(Color.white);
+        iniciar.setBorderPainted(false);
+        iniciar.setBackground(new Color(75, 157, 68));
         iniciar.setLocation(100, 280);
         iniciar.setSize(100, 30);
         
@@ -155,6 +165,11 @@ public class VentanaInicion extends Ventana implements ActionListener{
         registrarse = new JButton("Registro");
         registrarse.setVisible(true);
         registrarse.setLayout(null);
+        registrarse.setOpaque(true);
+        registrarse.setBorderPainted(false);
+        registrarse.setForeground(Color.white);
+        registrarse.setFont(fu);
+        registrarse.setBackground(Color.gray);
         registrarse.addActionListener(control);
         registrarse.setLocation(300, 280);
         registrarse.setSize(100, 30);
@@ -176,9 +191,15 @@ public class VentanaInicion extends Ventana implements ActionListener{
         
         profe = new JButton("Profesor");
         profe.setVisible(true);
-        profe.setText("¿Eres Profesor?");
-        profe.setLocation(420, 160);
-        profe.setSize(180, 60);
+        profe.setLayout(null);
+        profe.setText("Profesor");
+        profe.setLocation(500, 160);
+        profe.setOpaque(true);
+        profe.setBorderPainted(false);
+        profe.setFont(fu);
+        profe.setForeground(Color.white);
+        profe.setBackground(Color.orange);
+        profe.setSize(180, 50);
         profe.addActionListener(control);
         add(profe);
   

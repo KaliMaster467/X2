@@ -24,8 +24,8 @@ public class Ventana extends JFrame{
         setSize((int)dim.getWidth(), (int)dim.getHeight());
         setVisible(true);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("X-SolutYons");
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("X-Solutions");
         
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("showimage.png"));
         
