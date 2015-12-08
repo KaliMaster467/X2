@@ -510,6 +510,7 @@ public class VentanaGraficadora extends Ventana{
         private ImageIcon imagelap;
         private JButton apuntes;
         private JButton vectores;
+        private BarraUsuario us;
         
         public Ayuda(int x, int y, int width, int height){
             
@@ -538,6 +539,10 @@ public class VentanaGraficadora extends Ventana{
             vectores.setBorderPainted(false);
             add(vectores);
             
+            us = new BarraUsuario(this.getWidth()-300, 0, 300, this.getHeight());
+            
+            add(us);
+            
         }
         public void paint(Graphics g){
             
@@ -551,6 +556,19 @@ public class VentanaGraficadora extends Ventana{
             
             
         }   
+    }
+    public class BarraUsuario extends JPanel{
+        
+        public BarraUsuario(int x, int y, int width, int height){
+            
+            setBackground(Color.white);
+            setVisible(true);
+            setLayout(null);
+            setSize(width, height);
+            setLocation(x, y);
+            
+        }
+        
     }
 }
 
