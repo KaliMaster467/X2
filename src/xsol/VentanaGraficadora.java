@@ -886,13 +886,45 @@ public class VentanaGraficadora extends Ventana{
     }
     public class BarraUsuario extends JPanel{
         
-        public BarraUsuario(int x, int y, int width, int height){
+        private JButton ce;
+        private JButton con;
+        private JButton ay;
+        
+        public BarraUsuario(int x, int y, double width, double height){
             
-            setBackground(Color.white);
+            double w = width;
+            double h = height;
+            
+            setBackground(new Color(166, 0, 138));
             setVisible(true);
             setLayout(null);
-            setSize(width, height);
+            setSize((int)width, (int)height);
             setLocation(x, y);
+            
+            ce = new JButton("Cerrar Sésion");
+            ce.setVisible(true);
+            ce.setLayout(null);
+            ce.setOpaque(true);
+            ce.setBorderPainted(false);
+            ce.setBackground(new Color(75, 157, 68));
+            ce.setForeground(Color.white);
+            ce.setFont(new Font("Verdana", Font.PLAIN, 18));
+            ce.setLocation(this.getWidth()/2, 0);
+            ce.setSize(this.getWidth()/2,this.getHeight() / 3);
+            add(ce);
+            
+            con = new JButton("Configuración");
+            con.setVisible(true);
+            con.setLayout(null);
+            con.setOpaque(true);
+            con.setBorderPainted(false);
+            con.setBackground(Color.gray);
+            con.setForeground(Color.white);
+            con.setFont(new Font("Verdana", Font.PLAIN, 18));
+            con.setLocation(this.getWidth()/2, ce.getHeight());
+            con.setSize(this.getWidth()/2, this.getHeight() / 3);
+            add(con);
+            
             
         }
         
