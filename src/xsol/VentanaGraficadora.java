@@ -34,7 +34,7 @@ public class VentanaGraficadora extends Ventana{
     protected double height;
     public static Plano plano;
     
-    public VentanaGraficadora(){
+    public void VentanaGraficadoras(){
         
         width = dim.getWidth();
         height = dim.getHeight();
@@ -818,20 +818,24 @@ public class VentanaGraficadora extends Ventana{
         private JButton vectores;
         private JButton tab;
         private BarraUsuario us;
+        private Control cont;
         
         public Ayuda(int x, int y, int width, int height){
+            
+            cont = new Control();
             
             setVisible(true);
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
             
-            apuntes = new JButton("Apuntes");
+            apuntes = new JButton("Aula");
             apuntes.setVisible(true);
             apuntes.setLocation(0,0);
             apuntes.setSize(100, this.getHeight());
             apuntes.setBackground(Color.black);
             apuntes.setOpaque(true);
+            apuntes.addActionListener(cont);
             apuntes.setForeground(Color.white);
             apuntes.setBorderPainted(false);
             add(apuntes);
@@ -889,25 +893,29 @@ public class VentanaGraficadora extends Ventana{
         private JButton ce;
         private JButton con;
         private JButton ay;
+        private Control cont;
         
         public BarraUsuario(int x, int y, double width, double height){
             
             double w = width;
             double h = height;
             
-            setBackground(new Color(166, 0, 138));
+            cont = new Control();
+            
+            setBackground(new Color(75, 148, 242));
             setVisible(true);
             setLayout(null);
             setSize((int)width, (int)height);
             setLocation(x, y);
             
-            ce = new JButton("Cerrar Sésion");
+            ce = new JButton("Cerrar");
             ce.setVisible(true);
             ce.setLayout(null);
             ce.setOpaque(true);
             ce.setBorderPainted(false);
-            ce.setBackground(new Color(75, 157, 68));
+            ce.setBackground(new Color(255, 91, 91));
             ce.setForeground(Color.white);
+            ce.addActionListener(cont);
             ce.setFont(new Font("Verdana", Font.PLAIN, 18));
             ce.setLocation(this.getWidth()/2, 0);
             ce.setSize(this.getWidth()/2,this.getHeight() / 3);
@@ -923,11 +931,8 @@ public class VentanaGraficadora extends Ventana{
             con.setFont(new Font("Verdana", Font.PLAIN, 18));
             con.setLocation(this.getWidth()/2, ce.getHeight());
             con.setSize(this.getWidth()/2, this.getHeight() / 3);
-            add(con);
-            
-            
+            add(con);     
         }
-        
     }
 }
 

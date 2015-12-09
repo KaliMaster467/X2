@@ -92,9 +92,9 @@ public class Registro extends Ventana{
             registrarse.setBounds(0, this.getHeight() - 75, this.getWidth(), 60);
             registrarse.addActionListener(this);
             registrarse.setOpaque(true);
-            registrarse.setFont(new Font("Verdana", Font.PLAIN, 25));
+            registrarse.setFont(new Font("Verdana", Font.PLAIN, 20));
             registrarse.setBorderPainted(false);
-            registrarse.setBackground(new Color(0, 242, 109));
+            registrarse.setBackground(Color.orange);
             registrarse.setVisible(true);
             add(registrarse);
             

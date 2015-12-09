@@ -1083,7 +1083,7 @@ public class TablaPeriodica extends JFrame implements ActionListener {
        }
        
        if(evento.getSource()== salir){
-           System.exit(0);
+           this.dispose();
        }
        if(evento.getSource()==creditos){
          JOptionPane.showMessageDialog(null, " Desarrollado por: \n"

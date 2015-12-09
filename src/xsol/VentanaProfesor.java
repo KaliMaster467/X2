@@ -112,6 +112,7 @@ public class VentanaProfesor extends Ventana{
         private JPasswordField clave;
         private JTextField unica; 
         private JButton bot;
+        private Control cont;
         
         public PanelLog(int x, int y, int width, int height){
             
@@ -120,6 +121,8 @@ public class VentanaProfesor extends Ventana{
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
+            
+            cont = new Control();
             
             Font fu = new Font("Verdana", Font.PLAIN, 16);
             
@@ -181,6 +184,7 @@ public class VentanaProfesor extends Ventana{
             bot.setOpaque(true);
             bot.setFont(fu);
             bot.setBorderPainted(false);
+            bot.addActionListener(cont);
             bot.setBackground(Color.black);
             bot.setForeground(Color.white);
             add(bot);

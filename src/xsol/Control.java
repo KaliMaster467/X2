@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,12 +21,15 @@ import javax.swing.JOptionPane;
 public class Control implements ActionListener{
     
     protected static VentanaInicion ini;
-    protected VentanaGraficadora graf;
+    protected static VentanaGraficadora graf;
     protected Registro reg;
     protected ListaUsuario users;
     private Archivo archivo = new Archivo();
     private Manejador man;
+    private ApuntesAlumno al;
+    
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
+    
     
     public void Controls(){
         Usuarios = archivo.leer();
@@ -33,10 +38,8 @@ public class Control implements ActionListener{
             ini.VentanaInicions();
         }catch(IOException e){
             
-            JOptionPane.showMessageDialog(null, "Error");
-            
+            JOptionPane.showMessageDialog(null, "Error");   
         }
-        
     }
     /*public void addRegistro(){
         
@@ -62,7 +65,8 @@ public class Control implements ActionListener{
                     
                     if(Usuarios.get(i).getClave().equals(ini.getPassReturn())) {
                         JOptionPane.showMessageDialog(null, "Bienvenido "+Usuarios.get(i).getNombre());
-                        VentanaGraficadora graficadora = new VentanaGraficadora();
+                        graf = new VentanaGraficadora();
+                        graf.VentanaGraficadoras();
                         ini.dispose();
                         encontrado = 1;
                         break;
@@ -80,12 +84,23 @@ public class Control implements ActionListener{
            
             VentanaProfesor pro = new VentanaProfesor();
             
-        }
-    }
-    public void accionRegis(ActionEvent e){
-        
-        
-        
+        }else
+            if(e.getActionCommand().equals("Cerrar")){
+                
+                graf.dispose();
+                ini = new VentanaInicion();
+            try {
+                ini.VentanaInicions();
+            } catch (IOException ex) {
+                Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+            }else
+                if(e.getActionCommand().equals("Aula")){
+                    
+                    al = new ApuntesAlumno();
+                    
+                }
     }
 }
     

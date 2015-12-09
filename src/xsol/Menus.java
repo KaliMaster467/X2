@@ -12,5 +12,4 @@ package xsol;
 public class Menus {
     
     
-    
 }
