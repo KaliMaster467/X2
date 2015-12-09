@@ -89,8 +89,11 @@ public class Registro extends Ventana{
             add(contra1PW);
             
             registrarse = new JButton("Registrarse!");
-            registrarse.setBounds(240, 250, 120, 30);
+            registrarse.setBounds(0, this.getHeight() - 60, this.getWidth(), 60);
             registrarse.addActionListener(this);
+            registrarse.setOpaque(true);
+            registrarse.setBorderPainted(false);
+            registrarse.setBackground(Color.red);
             registrarse.setVisible(true);
             add(registrarse);
             
