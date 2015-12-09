@@ -255,6 +255,11 @@ public class VentanaGraficadora extends Ventana{
         
         setVisible(true);
     }
+    public int getWidthTabla(){
+        
+        return this.getWidth();
+        
+    }
 
     @Override
     /*public void itemStateChanged(ItemEvent e) {
@@ -806,11 +811,12 @@ public class VentanaGraficadora extends Ventana{
 
         }
     }
-    public class Ayuda extends JPanel{
+    public class Ayuda extends JPanel implements ActionListener{
         
         private ImageIcon imagelap;
         private JButton apuntes;
         private JButton vectores;
+        private JButton tab;
         private BarraUsuario us;
         
         public Ayuda(int x, int y, int width, int height){
@@ -840,7 +846,19 @@ public class VentanaGraficadora extends Ventana{
             vectores.setBorderPainted(false);
             add(vectores);
             
-            us = new BarraUsuario(this.getWidth()-300, 0, 300, this.getHeight());
+            tab = new JButton("Elementos");
+            tab.setVisible(true);
+            tab.setLayout(null);
+            tab.setOpaque(true);
+            tab.setBorderPainted(false);
+            tab.setBackground(new Color(166, 0, 138));
+            tab.setLocation(apuntes.getWidth()+vectores.getWidth(),0);
+            tab.setSize(100, this.getHeight());
+            tab.addActionListener(this);
+            tab.setForeground(Color.white);
+            add(tab);
+            
+            us = new BarraUsuario((int)Math.floor(width*.7)+1, 0, (int)Math.floor(width*.3), this.getHeight());
             
             add(us);
             
@@ -853,10 +871,18 @@ public class VentanaGraficadora extends Ventana{
             g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
             setOpaque(false);
             super.paint(g);
-            
-            
-            
+                 
         }   
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getActionCommand().equals("Elementos")){
+                
+                TablaPeriodica ped = new TablaPeriodica();
+                
+            }
+            
+        }
     }
     public class BarraUsuario extends JPanel{
         
