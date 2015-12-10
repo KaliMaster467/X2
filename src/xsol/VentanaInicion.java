@@ -215,6 +215,7 @@ public class VentanaInicion extends Ventana implements ActionListener{
         cred.setLocation(500,210);
         cred.setSize(180, 50);
         cred.setForeground(Color.white);
+        cred.addActionListener(control);
         add(cred);
   
     }

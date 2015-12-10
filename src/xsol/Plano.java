@@ -42,6 +42,23 @@ public class Plano extends JPanel {
     public void setPP1(double PP1) {
         this.PP1 = PP1;
     }
+
+    public double getB2() {
+        return b2;
+    }
+
+    public void setB2(double b2) {
+        this.b2 = b2;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+    double b2, b;
     double X1, Y1, Ent;
     double X2, Y2;
     double HP1, KP1, PP1;
@@ -222,7 +239,6 @@ public class Plano extends JPanel {
         if (tipo != 0) {
 
             //Recta
-            //ME PARTI EL ORTO CON ESTA :v
             if (this.tipo == 1) {
                 g.setColor(new Color(0, 24, 125));
                 double x1 = 80;//Tambien sirven como ys
@@ -375,8 +391,8 @@ public class Plano extends JPanel {
                     }
                 }*/ else if (this.tipo
                     == 3) {
-                double b2 = (AX * AX) - (CX * CX);
-                double b = Math.sqrt(b2);
+                b2 = (AX * AX) - (CX * CX);
+                b = Math.sqrt(b2);
                 g.setColor(new Color(170, 140, 7));
                 if (this.tipoElipse == 31) {//PARALELA X
 
@@ -522,8 +538,6 @@ public class Plano extends JPanel {
                     }
 
                 }
-
-                //AQUI HAZ LAS OTRAS PINSHES TIPOS DE GRAFICAS
             }
         }
 

@@ -117,6 +117,9 @@ public class Control implements ActionListener{
                             JOptionPane.showMessageDialog(null, "Acceso Denegado");
                         
                     }
+                    else if(e.getActionCommand().equals("Creditos")) {
+                        JOptionPane.showMessageDialog(null, "X-SolutYons\n\n-Ochoa Rodriguez Daniel Salvador\n-Reyes Briseño Alberto\n-Martinez Heredia Liam\n-El shavito");
+                    }
     }
 }
     

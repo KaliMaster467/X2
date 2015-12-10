@@ -756,7 +756,7 @@ public class VentanaGraficadora extends Ventana {
                                 x1 = x1 - 10;
                                 if (cuantosLabels > 19) {
                                     cuantos = 10;
-                                    
+
                                 }
                             } else if (paginaTabulador == 2) {
                                 cuantos = cuantosLabels - 19;
@@ -778,10 +778,10 @@ public class VentanaGraficadora extends Ventana {
                             if (paginaTabulador == 1) {
                                 cuantos = cuantosLabels - 9;
                                 x1 = x1 + 10;
-                                if(cuantosLabels>19) {
+                                if (cuantosLabels > 19) {
                                     cuantos = 10;
                                 }
-                                
+
                             } else if (paginaTabulador == 2) {
                                 cuantos = cuantosLabels - 19;
                                 x1 = x1 + 20;
@@ -824,9 +824,9 @@ public class VentanaGraficadora extends Ventana {
                             TY[i].setVisible(false);
                         }
 
-                    }else {
+                    } else {
                         //EN Y
-                       if (plano.getPP1() > 0) {
+                        if (plano.getPP1() > 0) {
                             //se abre arriba
                             cuantosLabels = 20 - (int) plano.getKP1();
                             x1 = 20;
@@ -835,7 +835,7 @@ public class VentanaGraficadora extends Ventana {
                                 x1 = x1 - 10;
                                 if (cuantosLabels > 19) {
                                     cuantos = 10;
-                                    
+
                                 }
                             } else if (paginaTabulador == 2) {
                                 cuantos = cuantosLabels - 19;
@@ -846,7 +846,7 @@ public class VentanaGraficadora extends Ventana {
                             } else {
                                 cuantos = cuantosLabels - 29;
                                 x1 = x1 - 30;
-                                if(cuantosLabels >39) {
+                                if (cuantosLabels > 39) {
                                     cuantos = 10;
                                 }
                             }
@@ -857,10 +857,10 @@ public class VentanaGraficadora extends Ventana {
                             if (paginaTabulador == 1) {
                                 cuantos = cuantosLabels - 9;
                                 x1 = x1 + 10;
-                                if(cuantosLabels>19) {
+                                if (cuantosLabels > 19) {
                                     cuantos = 10;
                                 }
-                                
+
                             } else if (paginaTabulador == 2) {
                                 cuantos = cuantosLabels - 19;
                                 x1 = x1 + 20;
@@ -870,7 +870,7 @@ public class VentanaGraficadora extends Ventana {
                             } else {
                                 cuantos = cuantosLabels - 29;
                                 x1 = x1 + 30;
-                                if(cuantosLabels >39) {
+                                if (cuantosLabels > 39) {
                                     cuantos = 10;
                                 }
                             }
@@ -890,7 +890,7 @@ public class VentanaGraficadora extends Ventana {
                             String Ys = String.format(" X=%.2f, %.2f", Xss, (-Xss + (plano.getHP1() * 2)));
                             TX[i].setText(Ys);
                             TY[i].setVisible(true);
-                            
+
                             TY[i].setText(Xs);
                             if (plano.getPP1() > 0) {
                                 x1--;
@@ -902,15 +902,102 @@ public class VentanaGraficadora extends Ventana {
                         for (int i = 9; i > cuantosBorrar; i--) {
                             TX[i].setVisible(false);
                             TY[i].setVisible(false);
-                        } 
-                        
-                        
-                        
+                        }
+
                     }
 
-                }else if(plano.getTipo() == 3) {
-                    
+                } else if (plano.getTipo() == 3) {
+                    int cuantosBorrar;
+                    int cuantosLabel = (int) (2 * plano.getAX() + 1);
+                    int cuantos = (int) (2 * plano.getAX() + 1);
+                    int x1;
+                    int cuantasPags = (int) Math.floor(cuantos / 10);
+                    x1 = (int) plano.getAX();
+                    if (paginaTabulador == cuantasPags || paginaTabulador == 3) {
+                        siguienteTabla.setEnabled(false);
+                    }
+                    if (paginaTabulador != 0) {
+                        antT.setEnabled(true);
+                    }
+                    if (plano.getTipoElipse() == 31) {
+                        if (paginaTabulador == 1) {
+                            cuantos = cuantos - 10;
+                            x1 = x1 - 10;
+                            if (cuantosLabel > 19) {
+                                cuantos = 10;
+                            }
+
+                        } else if (paginaTabulador == 2) {
+                            cuantos = cuantos - 20;
+                            x1 = x1 - 20;
+                            if (cuantosLabel > 29) {
+                                cuantos = 10;
+                            }
+                        } else if (paginaTabulador == 3) {
+                            cuantos = cuantos - 30;
+                            x1 = x1 - 30;
+                            if (cuantosLabel > 39) {
+                                cuantos = 10;
+                            }
+
+                        }
+
+                        for (int i = 0; i < cuantos; i++) {
+                            TX[i].setVisible(true);
+                            TY[i].setVisible(true);
+                            double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                            String Xs = String.format(" X=%d", x1);
+                            String Ys = String.format(" Y=%.2f, %.2f", Xss, (-Xss));
+                            TX[i].setText(Xs);
+                            TY[i].setText(Ys);
+                            x1--;
+
+                        }
+                        cuantosBorrar = cuantos - 1;
+                        for (int i = 9; i > cuantosBorrar; i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
+                    } else if (plano.getTipoElipse() == 32) {
+                        if (paginaTabulador == 1) {
+                            cuantos = cuantos - 10;
+                            x1 = x1 - 10;
+                            if (cuantosLabel > 19) {
+                                cuantos = 10;
+                            }
+
+                        } else if (paginaTabulador == 2) {
+                            cuantos = cuantos - 20;
+                            x1 = x1 - 20;
+                            if (cuantosLabel > 29) {
+                                cuantos = 10;
+                            }
+                        } else if (paginaTabulador == 3) {
+                            cuantos = cuantos - 30;
+                            x1 = x1 - 30;
+                            if (cuantosLabel > 39) {
+                                cuantos = 10;
+                            }
+                        }
+                        for (int i = 0; i < cuantos; i++) {
+                            TX[i].setVisible(true);
+                            TY[i].setVisible(true);
+                            double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                            String Xs = String.format(" Y=%d", x1);
+                            String Ys = String.format(" X=%.2f, %.2f", Xss, (-Xss));
+                            TX[i].setText(Ys);
+                            TY[i].setText(Xs);
+                            x1--;
+
+                        }
+                        cuantosBorrar = cuantos - 1;
+                        for (int i = 9; i > cuantosBorrar; i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
+                    }
                 }
+
             }
             if (e.getActionCommand().equals("◄")) {
                 paginaTabulador--;
@@ -949,21 +1036,21 @@ public class VentanaGraficadora extends Ventana {
                                 case 1:
                                     cuantos = cuantosLabels - 9;
                                     x1 = x1 - 10;
-                                    if(cuantosLabels>19) {
+                                    if (cuantosLabels > 19) {
                                         cuantos = 10;
                                     }
                                     break;
                                 case 2:
                                     cuantos = cuantosLabels - 19;
                                     x1 = x1 - 20;
-                                    if(cuantosLabels>29) {
+                                    if (cuantosLabels > 29) {
                                         cuantos = 10;
                                     }
                                     break;
                                 default:
                                     cuantos = cuantosLabels - 29;
                                     x1 = x1 - 30;
-                                    if(cuantosLabels>39) {
+                                    if (cuantosLabels > 39) {
                                         cuantos = 10;
                                     }
                                     break;
@@ -979,21 +1066,21 @@ public class VentanaGraficadora extends Ventana {
                                 case 1:
                                     cuantos = cuantosLabels - 9;
                                     x1 = x1 + 10;
-                                    if(cuantosLabels>19) {
+                                    if (cuantosLabels > 19) {
                                         cuantos = 10;
                                     }
                                     break;
                                 case 2:
                                     cuantos = cuantosLabels - 19;
                                     x1 = x1 + 20;
-                                    if(cuantosLabels>29) {
+                                    if (cuantosLabels > 29) {
                                         cuantos = 10;
                                     }
                                     break;
                                 default:
                                     cuantos = cuantosLabels - 29;
                                     x1 = x1 + 30;
-                                    if(cuantosLabels>39) {
+                                    if (cuantosLabels > 39) {
                                         cuantos = 10;
                                     }
                                     break;
@@ -1027,10 +1114,8 @@ public class VentanaGraficadora extends Ventana {
                             TY[i].setVisible(false);
                         }
 
-                    }else {
-                        
-                        
-                        
+                    } else {
+
                         if (plano.getPP1() > 0) {
                             //se abre arriba
                             cuantosLabels = 20 - (int) plano.getKP1();
@@ -1044,20 +1129,23 @@ public class VentanaGraficadora extends Ventana {
                                     x1 = x1 - 10;
                                     if (cuantosLabels > 19) {
                                         cuantos = 10;
-                                        
-                                    }   break;
+
+                                    }
+                                    break;
                                 case 2:
                                     cuantos = cuantosLabels - 19;
                                     x1 = x1 - 20;
                                     if (cuantosLabels > 29) {
                                         cuantos = 10;
-                                    }   break;
+                                    }
+                                    break;
                                 default:
                                     cuantos = cuantosLabels - 29;
                                     x1 = x1 - 30;
-                                    if(cuantosLabels >39) {
+                                    if (cuantosLabels > 39) {
                                         cuantos = 10;
-                                    }   break;
+                                    }
+                                    break;
                             }
                         } else {
                             //se abre abajo
@@ -1065,30 +1153,33 @@ public class VentanaGraficadora extends Ventana {
                             x1 = -20;
                             switch (paginaTabulador) {
                                 case 0:
-                                    cuantos =10;
+                                    cuantos = 10;
                                     break;
                                 case 1:
                                     cuantos = cuantosLabels - 9;
                                     x1 = x1 + 10;
-                                    if(cuantosLabels>19) {
+                                    if (cuantosLabels > 19) {
                                         cuantos = 10;
-                                    }   break;
+                                    }
+                                    break;
                                 case 2:
                                     cuantos = cuantosLabels - 19;
                                     x1 = x1 + 20;
                                     if (cuantosLabels > 29) {
                                         cuantos = 10;
-                                    }   break;
+                                    }
+                                    break;
                                 default:
                                     cuantos = cuantosLabels - 29;
                                     x1 = x1 + 30;
-                                    if(cuantosLabels >39) {
+                                    if (cuantosLabels > 39) {
                                         cuantos = 10;
-                                    }   break;
+                                    }
+                                    break;
                             }
                         }
                         maximoPaginas = (int) cuantosLabels / 10;
-                        if (paginaTabulador !=3) {
+                        if (paginaTabulador != 3) {
                             siguienteTabla.setEnabled(true);
                         }
                         if (paginaTabulador == 0) {
@@ -1102,7 +1193,7 @@ public class VentanaGraficadora extends Ventana {
                             String Ys = String.format(" X=%.2f, %.2f", Xss, (-Xss + (plano.getHP1() * 2)));
                             TX[i].setText(Ys);
                             TY[i].setVisible(true);
-                            
+
                             TY[i].setText(Xs);
                             if (plano.getPP1() > 0) {
                                 x1--;
@@ -1114,18 +1205,103 @@ public class VentanaGraficadora extends Ventana {
                         for (int i = 9; i > cuantosBorrar; i--) {
                             TX[i].setVisible(false);
                             TY[i].setVisible(false);
-                        } 
-                        
-                        
-                        
-                    
-                        
+                        }
+
+                    }
+
+                } else if (plano.getTipo() == 3) {
+                    int cuantosLabel = (int) (2 * plano.getAX() + 1);
+                    int cuantos = (int) (2 * plano.getAX() + 1);
+                    int x1;
+                    int cuantosBorrar;
+                    x1 = (int) plano.getAX();
+                    if (paginaTabulador != 3) {
+                        siguienteTabla.setEnabled(true);
+                    }
+                    if (paginaTabulador == 0) {
+                        antT.setEnabled(false);
+                    }
+
+                    if (plano.getTipoElipse() == 31) {
+                        if (paginaTabulador == 0) {
+                            antT.setEnabled(false);
+                            if (cuantosLabel > 9) {
+                                cuantos = 10;
+                            }
+                        }
+                        if (paginaTabulador == 1) {
+                            cuantos = cuantos - 10;
+                            x1 = x1 - 10;
+                            if (cuantosLabel > 19) {
+                                cuantos = 10;
+                            }
+
+                        } else if (paginaTabulador == 2) {
+                            cuantos = cuantos - 20;
+                            x1 = x1 - 20;
+                            if (cuantosLabel > 29) {
+                                cuantos = 10;
+                            }
+                        }
+
+                        for (int i = 0; i < cuantos; i++) {
+                            TX[i].setVisible(true);
+                            TY[i].setVisible(true);
+                            double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                            String Xs = String.format(" X=%d", x1);
+                            String Ys = String.format(" Y=%.2f, %.2f", Xss, (-Xss));
+                            TX[i].setText(Xs);
+                            TY[i].setText(Ys);
+                            x1--;
+
+                        }
+                        cuantosBorrar = cuantos - 1;
+                        for (int i = 9; i > cuantosBorrar; i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
+                    } else if (plano.getTipoElipse() == 32) {
+                        if (paginaTabulador == 0) {
+                            cuantos = cuantos;
+                            if (cuantosLabel > 9) {
+                                cuantos = 10;
+                            }
+                        } else if (paginaTabulador == 1) {
+                            cuantos = cuantos - 10;
+                            x1 = x1 - 10;
+                            if (cuantosLabel > 19) {
+                                cuantos = 10;
+                            }
+
+                        } else if (paginaTabulador == 2) {
+                            cuantos = cuantos - 20;
+                            x1 = x1 - 20;
+                            if (cuantosLabel > 29) {
+                                cuantos = 10;
+                            }
+
+                        }
+                        for (int i = 0; i < cuantos; i++) {
+                            TX[i].setVisible(true);
+                            TY[i].setVisible(true);
+                            double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                            String Xs = String.format(" Y=%d", x1);
+                            String Ys = String.format(" X=%.2f, %.2f", Xss, (-Xss));
+                            TX[i].setText(Ys);
+                            TY[i].setText(Xs);
+                            x1--;
+
+                        }
+                        cuantosBorrar = cuantos - 1;
+                        for (int i = 9; i > cuantosBorrar; i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
                     }
 
                 }
             } else if (e.getActionCommand().equals("Grafica!")) {
                 //AQUI SE PASA EL VALOR DE X Y EL ENTERO Y SE HACE EL REPAINT
-
                 if (plano.getTipo() == 1) {
 
                     plano.setX1(Double.parseDouble(valorX.getText()));
@@ -1259,14 +1435,52 @@ public class VentanaGraficadora extends Ventana {
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
-                        //TABULAR
+                        //VARIABLES
+                        int cuantos;
+                        int x1;
+                        cuantos = 2 * (int) plano.getAX() + 1;
+                        x1 = (int) plano.getAX();
+                        if (cuantos > 10) {
+                            cuantos = 10;
+                            siguienteTabla.setEnabled(true);
+                        } else {
+                            siguienteTabla.setEnabled(false);
+                        }
+                        //FIN VAR
+                        //TABULAR EN X
+                        if (plano.getTipoElipse() == 31) {
+                            for (int i = 0; i < cuantos; i++) {
+                                TX[i].setVisible(true);
+                                TY[i].setVisible(true);
+                                double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                                String Xs = String.format(" X=%d", x1);
+                                String Ys = String.format(" Y=%.2f, %.2f", Xss, (-Xss));
+                                TX[i].setText(Xs);
+                                TY[i].setText(Ys);
+                                x1--;
+                            }
 
-                        //FIN TABULAR
+                            //FIN TABULAR    
+                            //TABULAR EN Y
+                        } else {
+                            for (int i = 0; i < cuantos; i++) {
+                                TX[i].setVisible(true);
+                                TY[i].setVisible(true);
+                                double Xss = Math.sqrt((1 - ((x1 * x1) / (plano.getAX() * plano.getAX()))) * ((plano.getAX() * plano.getAX()) - (plano.getCX() * plano.getCX())));
+                                String Xs = String.format(" Y=%d", x1);
+                                String Ys = String.format(" X=%.2f, %.2f", Xss, (-Xss));
+                                TX[i].setText(Ys);
+                                TY[i].setText(Xs);
+                                x1--;
+                            }
+                        }
+                        //FIN TABULAR   
+
                     } else {
                         JOptionPane.showMessageDialog(null, "A debe ser mayor que C");
 
                     }
-
+                    paginaTabulador = 0;
                 } else if (plano.getTipo() == 4) {
                     if (plano.getTipoHiper() == 41) {
                         plano.setAH(Double.parseDouble(valorX.getText()));
@@ -1274,7 +1488,39 @@ public class VentanaGraficadora extends Ventana {
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
-                        //TABULAR
+                        //VAR
+                        int cuantos = (int) ((20-plano.getAH())*2);
+                        int x1 = 20-(int) plano.getAH();
+                        if (cuantos > 10) {
+                            cuantos = 10;
+                            siguienteTabla.setEnabled(true);
+                        } else {
+                            cuantos = cuantos;
+                            siguienteTabla.setEnabled(false);
+                        }
+                        //FIN VAR
+                        //TAB
+                        for (int j = 0; j < 2; j++) {
+                            for (int i = 0; i < cuantos; i++) {
+                                TX[i].setVisible(true);
+                                TY[i].setVisible(true);
+                                int S;
+                                if(j==0) {
+                                    S = x1;
+                                }else
+                                    S = -x1;
+                                double Xss = /**/Math.sqrt((plano.getBH()*plano.getBH())*(((S*S)/(plano.getAH()*plano.getAH()))-1));
+                                String Xs = String.format(" X=%d", S);
+                                String Ys = String.format(" Y=%.2f, %.2f", Xss, (-Xss));
+                                TX[i].setText(Xs);
+                                TY[i].setText(Ys);
+                                if(j==0) {
+                                  x1++;  
+                                } else
+                                    x1--;
+                                
+                            }
+                        }
 
                         //FIN TABULAR
                     } else {
