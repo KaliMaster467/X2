@@ -918,7 +918,7 @@ public class VentanaGraficadora extends Ventana{
             ce.addActionListener(cont);
             ce.setFont(new Font("Verdana", Font.PLAIN, 18));
             ce.setLocation(this.getWidth()/2, 0);
-            ce.setSize(this.getWidth()/2,this.getHeight() / 3);
+            ce.setSize(this.getWidth()/2,this.getHeight() / 2);
             add(ce);
             
             con = new JButton("Configuración");
@@ -930,7 +930,7 @@ public class VentanaGraficadora extends Ventana{
             con.setForeground(Color.white);
             con.setFont(new Font("Verdana", Font.PLAIN, 18));
             con.setLocation(this.getWidth()/2, ce.getHeight());
-            con.setSize(this.getWidth()/2, this.getHeight() / 3);
+            con.setSize(this.getWidth()/2, this.getHeight() / 2);
             add(con);     
         }
     }

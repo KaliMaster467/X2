@@ -27,6 +27,7 @@ public class Control implements ActionListener{
     private Archivo archivo = new Archivo();
     private Manejador man;
     private ApuntesAlumno al;
+    protected VentanaProfesor pro;
     
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
     
@@ -82,7 +83,7 @@ public class Control implements ActionListener{
         }
         else if(e.getActionCommand().equals("Profesor")){
            
-            VentanaProfesor pro = new VentanaProfesor();
+            pro = new VentanaProfesor();
             
         }else
             if(e.getActionCommand().equals("Cerrar")){
@@ -100,7 +101,19 @@ public class Control implements ActionListener{
                     
                     al = new ApuntesAlumno();
                     
-                }
+                }else
+                    if(e.getActionCommand().equals("Entrar")){
+                        
+                        if(pro.getUsuario().equals("Hermenegildo") && 
+                                pro.getContraseña().equals("PI") &&
+                                pro.getUnica().equals("hola")){
+                            
+                            JOptionPane.showMessageDialog(null, "Bienvenido Profesor");
+                            pro.dispose();  
+                        }else
+                            JOptionPane.showMessageDialog(null, "Acceso Denegado");
+                        
+                    }
     }
 }
     

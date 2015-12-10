@@ -56,6 +56,9 @@ public class ApuntesAlumno extends Ventana{
     public class Apu extends JPanel{
         
         private JButton prim;
+        private JButton seg;
+        private JButton ter;
+        private JButton vid;
         
         public Apu(int x, int y, int width, int height){
             
@@ -63,7 +66,10 @@ public class ApuntesAlumno extends Ventana{
             setVisible(true);
             setLayout(null);
             setLocation(x, y);
-            setSize(width, height);     
+            setSize(width, height);
+            
+            int botonesw= this.getWidth();
+            int botonesh= this.getHeight()/10;
             
             prim = new JButton("Primer Parcial");
             prim.setVisible(true);
@@ -71,9 +77,46 @@ public class ApuntesAlumno extends Ventana{
             prim.setBorderPainted(false);
             prim.setBackground(Color.lightGray);
             prim.setForeground(Color.white);
+            prim.setLocation(0,0);
+            prim.setSize(botonesw, botonesh);
             prim.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(prim);
             
+            seg = new JButton("Segundo Parcial");
+            seg.setVisible(true);
+            seg.setLayout(null);
+            seg.setLocation(0, prim.getHeight());
+            seg.setSize(botonesw, botonesh);
+            seg.setOpaque(true);
+            seg.setBorderPainted(false);
+            seg.setBackground(new Color(107, 185, 240));
+            seg.setFont(new Font("Verdana", Font.PLAIN, 15));
+            seg.setForeground(Color.white);
+            add(seg);
+            
+            ter = new JButton("Tercer Parcial");
+            ter.setVisible(true);
+            ter.setLayout(null);
+            ter.setOpaque(true);
+            ter.setBorderPainted(false);
+            ter.setLocation(0, prim.getHeight()+seg.getHeight());
+            ter.setSize(botonesw, botonesh);
+            ter.setBackground(new Color(255, 103, 103));
+            ter.setForeground(Color.white);
+            ter.setFont(new Font("Verdana", Font.PLAIN, 15));
+            add(ter);
+            
+            vid = new JButton("Videos");
+            vid.setVisible(true);
+            vid.setLayout(null);
+            vid.setOpaque(true);
+            vid.setBorderPainted(false);
+            vid.setBackground(new Color(90, 255, 126));
+            vid.setForeground(Color.white);
+            vid.setLocation(0, prim.getHeight()+seg.getHeight()+ter.getHeight());
+            vid.setSize(botonesw, botonesh);
+            vid.setFont(new Font("Verdana", Font.PLAIN, 15));
+            add(vid);
         }
         
     }
