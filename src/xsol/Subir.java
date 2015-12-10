@@ -20,6 +20,7 @@ public class Subir extends Ventana{
     public BarraLateral late;
     protected Control cont;
     public Dimension Dim;
+    protected Exames exa;
     public Subir() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         dim = super.getToolkit().getScreenSize();
@@ -28,20 +29,26 @@ public class Subir extends Ventana{
         setLocation(0,0);
         setSize(dim);
         
-        late = new BarraLateral(0,0, (int)dim.getWidth(), (int)dim.getHeight());
+        //late = new BarraLateral(0,0, (int)dim.getWidth(), (int)dim.getHeight());
+        //add(late);
+        late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
         add(late);
+        
+        exa = new Exames(0,0,this.getWidth()/3, this.getHeight());
+        add(exa);
+        
     }
     public class BarraLateral extends JPanel{
     private Exames barra;
     public BarraLateral(int x, int y, int width, int height) {
-        setBackground(Color.red);
+        setBackground(Color.orange);
         setVisible(true);
         setLayout(null);
         setLocation(x,y);
         setSize(width, height);
         
-        barra = new Exames(0,0,this.getWidth()/6, this.getHeight()) ;
-        add(barra); 
+        //barra = new Exames(0,0,this.getWidth()/6, this.getHeight()) ;
+        //add(barra); 
         }
         
     }
@@ -59,7 +66,7 @@ public class Subir extends Ventana{
             setSize(width, height);
             
             int botonesW = this.getWidth();
-            int botonesH = this.getHeight()/4;
+            int botonesH = this.getHeight()/10;
             
             Subido = new JButton("SUBIR\nEXAMEN");
             Subido.setVisible(true);
@@ -76,7 +83,7 @@ public class Subir extends Ventana{
             Modificado.setVisible(true);
             Modificado.setOpaque(true);
             Modificado.setBorderPainted(false);
-            Modificado.setBackground(Color.black);
+            Modificado.setBackground(new Color(107, 185, 240));
             Modificado.setForeground(Color.white);
             Modificado.setLocation(0,Subido.getHeight());
             Modificado.setSize(botonesW, botonesH);
@@ -87,21 +94,22 @@ public class Subir extends Ventana{
             elim.setVisible(true);
             elim.setOpaque(true);
             elim.setBorderPainted(false);
-            elim.setBackground(Color.MAGENTA);
+            elim.setBackground(new Color(255, 103, 103));
             elim.setForeground(Color.white);
             elim.setLocation(0,(Subido.getHeight())*2);
             elim.setSize(botonesW, botonesH);
             elim.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(elim);
             
-            reg = new JButton("REGRESAR");
+            reg = new JButton("Subir Apuntes");
             reg.setVisible(true);
             reg.setOpaque(true);
             reg.setBorderPainted(false);
-            reg.setBackground(Color.pink);
+            reg.setBackground(new Color(90, 255, 126));
             reg.setForeground(Color.white);
             reg.setLocation(0,Subido.getHeight()*3);
             reg.setSize(botonesW, botonesH);
+            reg.addActionListener(cont);
             reg.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(reg);
             

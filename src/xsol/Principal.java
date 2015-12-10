@@ -11,7 +11,7 @@ import java.io.IOException;
  *
  * @author Bugatti
  */
-public class XSol {
+public class Principal {
     /**
      * @param args the command line arguments
      */

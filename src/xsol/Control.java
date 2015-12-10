@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.io.*;
 
 /**
  *
@@ -119,7 +121,18 @@ public class Control implements ActionListener{
                     }
                     else if(e.getActionCommand().equals("Creditos")) {
                         JOptionPane.showMessageDialog(null, "X-SolutYons\n\n-Ochoa Rodriguez Daniel Salvador\n-Reyes Briseño Alberto\n-Martinez Heredia Liam\n-El shavito");
-                    }
+                    }else
+                        if(e.getActionCommand().equals("REGRESAR")){
+                            
+                            sub.dispose();
+                            ini = new VentanaInicion();
+                            try {
+                                ini.VentanaInicions();
+                            } catch (IOException ex) {
+                                Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                        }
     }
 }
     

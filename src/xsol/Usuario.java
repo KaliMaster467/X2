@@ -6,6 +6,8 @@
 package xsol;
 
 import java.io.Serializable;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,6 +18,7 @@ public class Usuario implements Serializable{
     private final String nombre;
     private String clave;
     private String grupo;
+    private Icon img;
     
     public Usuario(String nombre, String clave, String grupo){
         
@@ -24,6 +27,7 @@ public class Usuario implements Serializable{
         this.grupo = grupo;
         
         id += IdSig;
+        
         
     }
     public Usuario(String nombre){

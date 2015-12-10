@@ -8,6 +8,8 @@ package xsol;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +23,7 @@ public class ApuntesAlumno extends Ventana{
     protected Control cont;
     public BarraLateral late;
     public Dimension dim;
+    private Apu barra;
     
     public ApuntesAlumno(){
         
@@ -31,14 +34,39 @@ public class ApuntesAlumno extends Ventana{
         setSize(dim);
         
        
-        late = new BarraLateral(0, 0,(int)dim.getWidth(), (int)dim.getHeight());
+        late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
         
-        add(late);
+        getContentPane().add(late);
         
+        barra = new Apu(0,0,this.getWidth()/3, this.getHeight());
+            
+        add(barra);
+        
+    }
+    public int getPanelWidth(){
+        
+        return (this.getWidth()/3) * 2;
+        
+    }
+    public int getPanelHeight(){
+        
+        return this.getHeight();
+        
+    }
+    public int getPanelX(){
+        
+        return this.getWidth()/3;
+        
+    }
+    public int getPanelY(){
+        
+        return 0;
+       
     }
     public class BarraLateral extends JPanel{
         
         private Apu barra;
+        private LeerFichero leer;
         
         public BarraLateral(int x, int y, int width, int height){
             
@@ -48,10 +76,11 @@ public class ApuntesAlumno extends Ventana{
             setLocation(x,y);
             setSize(width, height);
             
-            barra = new Apu(0,0,this.getWidth()/3, this.getHeight());
+            /*barra = new Apu(0,0,this.getWidth()/3, this.getHeight());
             
-            add(barra);
+            add(barra);*/
         }
+        
     }
     public class Apu extends JPanel{
         
@@ -59,8 +88,12 @@ public class ApuntesAlumno extends Ventana{
         private JButton seg;
         private JButton ter;
         private JButton vid;
+        private JButton eva;
+        private Control cont;
         
         public Apu(int x, int y, int width, int height){
+            
+            cont = new Control();
             
             setBackground(Color.white);
             setVisible(true);
@@ -78,6 +111,7 @@ public class ApuntesAlumno extends Ventana{
             prim.setBackground(Color.lightGray);
             prim.setForeground(Color.white);
             prim.setLocation(0,0);
+            prim.addActionListener(cont);
             prim.setSize(botonesw, botonesh);
             prim.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(prim);
@@ -117,6 +151,19 @@ public class ApuntesAlumno extends Ventana{
             vid.setSize(botonesw, botonesh);
             vid.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(vid);
+            
+            eva = new JButton("Exámenes");
+            eva.setVisible(true);
+            eva.setLayout(null);
+            eva.setOpaque(true);
+            eva.setBorderPainted(false);
+            eva.setBackground(new Color(194, 83, 208));
+            eva.setForeground(Color.white);
+            eva.setFont(new Font("Verdana", Font.PLAIN, 15));
+            eva.setLocation(0, prim.getHeight()+seg.getHeight()+ter.getHeight()+
+                    vid.getHeight());
+            eva.setSize(botonesw, botonesh);
+            add(eva);
         }
         
     }
