@@ -22,7 +22,6 @@ public class XSol {
             cont.Controls();
         
         
-        
     }
     
 }

@@ -27,242 +27,271 @@ import javax.swing.JTextField;
  *
  * @author Bugatti
  */
-public class VentanaGraficadora extends Ventana{
+public class VentanaGraficadora extends Ventana {
+
     TablaRes tab;
     protected Ayuda ayuda;
     protected double width;
     protected double height;
     public static Plano plano;
-    
-    public void VentanaGraficadoras(){
-        
+
+    public void VentanaGraficadoras() {
+
         width = dim.getWidth();
         height = dim.getHeight();
-        int anchoPlano = (int)Math.floor(width*.7);
-        int altoPlano = (int)Math.floor(height*.7);
+        int anchoPlano = (int) Math.floor(width * .7);
+        int altoPlano = (int) Math.floor(height * .7);
         plano = new Plano(anchoPlano, altoPlano);
         this.setResizable(true);
         add(plano);
-        int anchoTabla = (int)Math.floor(width*.3);
+        int anchoTabla = (int) Math.floor(width * .3);
         tab = new TablaRes(anchoTabla, altoPlano, anchoPlano);
-        
+
         add(tab);
-        
+
         int xa = 0;
         int hei = (int) (height - plano.getHeight());
         int ya = plano.getHeight();
         int wi = (int) width;
         ayuda = new Ayuda(xa, ya, wi, hei);
-        
+
         add(ayuda);
-        
+
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-    public class TablaRes extends JPanel implements ItemListener, ActionListener{
-    JLabel X, Y, tabla, xValor, yValor, enteros, x2Valor, y2Valor;
-    JComboBox tipoTabla;
-    private Font fuente;
-    private ImageIcon imagelap;
-    JTextField valorX, valorY, valorEnt, valorX2, valorY2;
-    JButton Grafica;
-    private int tipograf;
-    JButton siguienteTabla, antT;
-    
-    public TablaRes(int anchos, int altos, int ancho) {
-        fuente = new Font("Verdana", Font.BOLD, 15);
-        
-       
-        
-        setBackground(Color.GRAY);
-        setVisible(true);
-        setLayout(null);
-        setLocation((ancho+1), 0);
-        setSize(anchos, altos);
-        //PUSE EL JBUTTON PARA GRAFICAR
-        Grafica = new JButton("Grafica!");
-        //Grafica.setBounds(140, 150, 110, 30);
-        Grafica.setVisible(true);
-        Grafica.setOpaque(true);
-        Grafica.setFont(new Font("Verdana", Font.PLAIN, 20));
-        Grafica.setBorderPainted(false);
-        Grafica.setForeground(Color.white);
-        Grafica.setBackground(Color.orange);
-        Grafica.setBorder(BorderFactory.createLineBorder(Color.red));
-        Grafica.setLocation(0, (this.getHeight()- 60));
-        Grafica.setSize(this.getWidth(), 60);
-        Grafica.addActionListener(this);
-        
-        add(Grafica);
-        //PUSE LOS TEXTFIELD
-        valorX = new JTextField();
-        valorX.setBounds(30, 70, 80, 30);
-        valorX.setText("");
-        valorX.setVisible(false);
-        valorX.setEnabled(false);
-        valorX.addActionListener(this);
-        
-        add(valorX);
-        
-        valorX2 = new JTextField();
-        valorX2.setBounds(30, 100, 80, 30);
-        valorX2.setText("");
-        valorX2.setVisible(false);
-        valorX2.setEnabled(false);
-        valorX2.addActionListener(this);
-        
-        add(valorX2);
-        
-        valorY = new JTextField();
-        valorY.setBounds(140, 70, 80, 30);
-        valorY.setText("");
-        valorY.setEnabled(false);
-        valorY.setVisible(false);
-        valorY.addActionListener(this);
-        
-        add(valorY);
-        
-        valorY2 = new JTextField();
-        valorY2.setBounds(140, 100, 80, 30);
-        valorY2.setText("");
-        valorY2.setEnabled(false);
-        valorY2.setVisible(false);
-        valorY2.addActionListener(this);
-        
-        add(valorY2);
-        
-        valorEnt = new JTextField();
-        valorEnt.setBounds(280, 70, 80, 30);
-        valorEnt.setText("");
-        valorEnt.setVisible(false);
-        valorEnt.setEnabled(false);
-        valorEnt.addActionListener(this);
-        
-        add(valorEnt);
-        
-        tipoTabla = new JComboBox();
-        tipoTabla.addItem("Seleccione un tipo de Grafica.");
-        tipoTabla.addItem("Recta");
-        tipoTabla.addItem("Parabola");
-        tipoTabla.addItem("Elipse");
-        tipoTabla.addItem("Hiperbole");
-        tipoTabla.addItemListener(this);
-        tipoTabla.setBounds(100, 10, 200, 30);
-        //LOS JLABEL DE LOS VALORES
-        enteros = new JLabel();
-        enteros.setText("Entero: ");
-        enteros.setVisible(false);
-        enteros.setLayout(null);
-        enteros.setFont(fuente);
-        enteros.setLocation(220, 70);
-        enteros.setSize(500, 30);
-        enteros.setForeground(Color.WHITE);
-        
-        add(enteros);
-        
-        x2Valor = new JLabel();
-        x2Valor.setText("Y²: ");
-        x2Valor.setVisible(false);
-        x2Valor.setLayout(null);
-        x2Valor.setFont(fuente);
-        x2Valor.setBounds(10, 100, 500, 30);
-        x2Valor.setForeground(Color.WHITE);
-        
-        add(x2Valor);
-        
-        y2Valor = new JLabel();
-        y2Valor.setText("Y²: ");
-        y2Valor.setVisible(false);
-        y2Valor.setLayout(null);
-        y2Valor.setFont(fuente);
-        y2Valor.setBounds(115, 100, 500, 30);
-        y2Valor.setForeground(Color.WHITE);
-        
-        add(y2Valor);
-        
-        yValor = new JLabel();
-        yValor.setText("y: ");
-        yValor.setVisible(false);
-        yValor.setLayout(null);
-        yValor.setFont(fuente);
-        yValor.setLocation(115, 70);
-        yValor.setSize(500, 30);
-        yValor.setForeground(Color.WHITE);
-        
-        add(yValor);
-        
-        xValor = new JLabel();
-        xValor.setText("x: ");
-        xValor.setVisible(false);
-        xValor.setLayout(null);
-        xValor.setFont(fuente);
-        xValor.setLocation(10, 70);
-        xValor.setSize(500, 30);
-        xValor.setForeground(Color.WHITE);
-        
-        add(xValor);
-                
-        add(this.tipoTabla);
-        
-        siguienteTabla = new JButton("►");
-        siguienteTabla.setVisible(true);
-        siguienteTabla.setLayout(null);
-        siguienteTabla.setEnabled(false);
-        siguienteTabla.setBounds(240, 180, 60, 30);
-        
-        add(siguienteTabla);
-        
-        antT = new JButton("◄");
-        antT.setVisible(true);
-        antT.setEnabled(false);
-        antT.setLayout(null);
-        antT.setBounds(60, 180, 60, 30);
-        
-        add(antT);
-        
-        tabla = new JLabel();
-        tabla.setText("|                        TABLA                     |");
-        tabla.setVisible(true);
-        tabla.setLayout(null);
-        tabla.setFont(fuente);
-        tabla.setLocation(30, 180);
-        tabla.setSize(500, 30);
-        tabla.setForeground(Color.WHITE);
-        
-        add(tabla);
-        
-        X = new JLabel();
-        X.setText("|            X            |");
-        X.setVisible(true);
-        X.setLayout(null);
-        X.setFont(fuente);
-        X.setLocation(30, 210);
-        X.setSize(200, 30);
-        X.setForeground(Color.WHITE);
-        
-        add(X);
-        Y = new JLabel();
-        Y.setText("|            Y           |");
-        Y.setVisible(true);
-        Y.setLayout(null);
-        Y.setFont(fuente);
-        Y.setLocation(180, 210);
-        Y.setSize(200, 30);
-        Y.setForeground(Color.WHITE);
-        
-        add(Y);
-        
-        setVisible(true);
-    }
-    public int getWidthTabla(){
-        
-        return this.getWidth();
-        
-    }
 
-    @Override
-    /*public void itemStateChanged(ItemEvent e) {
+    public class TablaRes extends JPanel implements ItemListener, ActionListener {
+
+        JLabel X, Y, tabla, xValor, yValor, enteros, x2Valor, y2Valor;
+        JComboBox tipoTabla;
+        private Font fuente;
+        private ImageIcon imagelap;
+        JTextField valorX, valorY, valorEnt, valorX2, valorY2;
+        JButton Grafica;
+        private int tipograf;
+        JButton siguienteTabla, antT;
+        /*TABULAR*/
+        JLabel[] TY;
+        JLabel[] TX;
+        private int paginaTabulador = 0;
+
+        public TablaRes(int anchos, int altos, int ancho) {
+            fuente = new Font("Verdana", Font.BOLD, 15);
+
+            setBackground(Color.GRAY);
+            setVisible(true);
+            setLayout(null);
+            setLocation((ancho + 1), 0);
+            setSize(anchos, altos);
+            //PUSE EL JBUTTON PARA GRAFICAR
+            Grafica = new JButton("Grafica!");
+            //Grafica.setBounds(140, 150, 110, 30);
+            Grafica.setVisible(true);
+            Grafica.setOpaque(true);
+            Grafica.setFont(new Font("Verdana", Font.PLAIN, 20));
+            Grafica.setBorderPainted(false);
+            Grafica.setForeground(Color.white);
+            Grafica.setBackground(Color.orange);
+            Grafica.setBorder(BorderFactory.createLineBorder(Color.red));
+            Grafica.setLocation(0, (this.getHeight() - 60));
+            Grafica.setSize(this.getWidth(), 60);
+            Grafica.addActionListener(this);
+
+            add(Grafica);
+            //PUSE LOS TEXTFIELD
+            valorX = new JTextField();
+            valorX.setBounds(30, 70, 80, 30);
+            valorX.setText("");
+            valorX.setVisible(false);
+            valorX.setEnabled(false);
+            valorX.addActionListener(this);
+
+            add(valorX);
+
+            valorX2 = new JTextField();
+            valorX2.setBounds(30, 100, 80, 30);
+            valorX2.setText("");
+            valorX2.setVisible(false);
+            valorX2.setEnabled(false);
+            valorX2.addActionListener(this);
+
+            add(valorX2);
+
+            valorY = new JTextField();
+            valorY.setBounds(140, 70, 80, 30);
+            valorY.setText("");
+            valorY.setEnabled(false);
+            valorY.setVisible(false);
+            valorY.addActionListener(this);
+
+            add(valorY);
+
+            valorY2 = new JTextField();
+            valorY2.setBounds(140, 100, 80, 30);
+            valorY2.setText("");
+            valorY2.setEnabled(false);
+            valorY2.setVisible(false);
+            valorY2.addActionListener(this);
+
+            add(valorY2);
+
+            valorEnt = new JTextField();
+            valorEnt.setBounds(280, 70, 80, 30);
+            valorEnt.setText("");
+            valorEnt.setVisible(false);
+            valorEnt.setEnabled(false);
+            valorEnt.addActionListener(this);
+
+            add(valorEnt);
+
+            tipoTabla = new JComboBox();
+            tipoTabla.addItem("Seleccione un tipo de Grafica.");
+            tipoTabla.addItem("Recta");
+            tipoTabla.addItem("Parabola");
+            tipoTabla.addItem("Elipse");
+            tipoTabla.addItem("Hiperbole");
+            tipoTabla.addItemListener(this);
+            tipoTabla.setBounds(100, 10, 200, 30);
+            //LOS JLABEL DE LOS VALORES
+            enteros = new JLabel();
+            enteros.setText("Entero: ");
+            enteros.setVisible(false);
+            enteros.setLayout(null);
+            enteros.setFont(fuente);
+            enteros.setLocation(220, 70);
+            enteros.setSize(500, 30);
+            enteros.setForeground(Color.WHITE);
+
+            add(enteros);
+
+            x2Valor = new JLabel();
+            x2Valor.setText("Y²: ");
+            x2Valor.setVisible(false);
+            x2Valor.setLayout(null);
+            x2Valor.setFont(fuente);
+            x2Valor.setBounds(10, 100, 500, 30);
+            x2Valor.setForeground(Color.WHITE);
+
+            add(x2Valor);
+
+            y2Valor = new JLabel();
+            y2Valor.setText("Y²: ");
+            y2Valor.setVisible(false);
+            y2Valor.setLayout(null);
+            y2Valor.setFont(fuente);
+            y2Valor.setBounds(115, 100, 500, 30);
+            y2Valor.setForeground(Color.WHITE);
+
+            add(y2Valor);
+
+            yValor = new JLabel();
+            yValor.setText("y: ");
+            yValor.setVisible(false);
+            yValor.setLayout(null);
+            yValor.setFont(fuente);
+            yValor.setLocation(115, 70);
+            yValor.setSize(500, 30);
+            yValor.setForeground(Color.WHITE);
+
+            add(yValor);
+
+            xValor = new JLabel();
+            xValor.setText("x: ");
+            xValor.setVisible(false);
+            xValor.setLayout(null);
+            xValor.setFont(fuente);
+            xValor.setLocation(10, 70);
+            xValor.setSize(500, 30);
+            xValor.setForeground(Color.WHITE);
+
+            add(xValor);
+
+            add(this.tipoTabla);
+
+            siguienteTabla = new JButton("►");
+            siguienteTabla.setVisible(true);
+            siguienteTabla.addActionListener(this);
+            siguienteTabla.setLayout(null);
+            siguienteTabla.setEnabled(false);
+            siguienteTabla.setBounds(240, 180, 60, 30);
+
+            add(siguienteTabla);
+
+            antT = new JButton("◄");
+            antT.setVisible(true);
+            antT.addActionListener(this);
+            antT.setEnabled(false);
+            antT.setLayout(null);
+            antT.setBounds(60, 180, 60, 30);
+
+            add(antT);
+
+            tabla = new JLabel();
+            tabla.setText("|                        TABLA                     |");
+            tabla.setVisible(true);
+            tabla.setLayout(null);
+            tabla.setFont(fuente);
+            tabla.setLocation(30, 180);
+            tabla.setSize(500, 30);
+            tabla.setForeground(Color.WHITE);
+
+            add(tabla);
+
+            X = new JLabel();
+            X.setText("|            X            |");
+            X.setVisible(true);
+            X.setLayout(null);
+            X.setFont(fuente);
+            X.setLocation(30, 210);
+            X.setSize(200, 30);
+            X.setForeground(Color.WHITE);
+            add(X);
+            TX = new JLabel[10];
+            TY = new JLabel[10];
+            for (int i = 0; i < 10; i++) {
+                TY[i] = new JLabel();
+                TY[i].setText("           Y=          ");
+                TY[i].setVisible(false);
+                TY[i].setLayout(null);
+                TY[i].setFont(fuente);
+                TY[i].setLocation(180, 240 + (i * 30));
+                TY[i].setSize(200, 30);
+                TY[i].setForeground(Color.WHITE);
+                add(TY[i]);
+                TX[i] = new JLabel();
+                TX[i].setText("           X=          ");
+                TX[i].setVisible(false);
+                TX[i].setLayout(null);
+                TX[i].setFont(fuente);
+                TX[i].setLocation(30, 240 + (i * 30));
+                TX[i].setSize(200, 30);
+                TX[i].setForeground(Color.WHITE);
+                add(TX[i]);
+            }
+
+            Y = new JLabel();
+            Y.setText("|            Y           |");
+            Y.setVisible(true);
+            Y.setLayout(null);
+            Y.setFont(fuente);
+            Y.setLocation(180, 210);
+            Y.setSize(200, 30);
+            Y.setForeground(Color.WHITE);
+
+            add(Y);
+
+            setVisible(true);
+        }
+
+        public int getWidthTabla() {
+
+            return this.getWidth();
+
+        }
+
+        @Override
+        /*public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             if (e.getSource() instanceof JComboBox) {
                 
@@ -442,7 +471,7 @@ public class VentanaGraficadora extends Ventana{
             }
         }
     }*/
-            public void itemStateChanged(ItemEvent e) {
+        public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 if (e.getSource() instanceof JComboBox) {
 
@@ -487,13 +516,13 @@ public class VentanaGraficadora extends Ventana{
                             tipoTabla.setSelectedIndex(0);
                             char verticalXOY = 'z';
                             while (verticalXOY != 'x' && verticalXOY != 'X' && verticalXOY != 'y' && verticalXOY != 'Y') {
-                                verticalXOY = (JOptionPane.showInputDialog(null, "La elipse es paralela en X o en Y? (Teclea X o Y)").charAt(0));
+                                verticalXOY = (JOptionPane.showInputDialog(null, "La parabola es paralela en X o en Y? (Teclea X o Y)").charAt(0));
                                 if (verticalXOY == 'x' || verticalXOY == 'y' || verticalXOY == 'X' || verticalXOY == 'Y') {
-
+                                    JOptionPane.showMessageDialog(null, "Ingresa los valores de H(X del vertice), K(Y del vertice) y P (distancia del vertice al foco)");
                                     tipograf = 2;
                                     enteros.setEnabled(true);
                                     enteros.setVisible(true);
-                                    enteros.setText("Entero");
+                                    enteros.setText("   P: ");
                                     valorY.setEnabled(true);
                                     valorEnt.setEnabled(true);
                                     valorX.setVisible(true);
@@ -501,35 +530,17 @@ public class VentanaGraficadora extends Ventana{
                                     valorY.setVisible(true);
                                     valorEnt.setText("");
                                     valorEnt.setVisible(true);
-                                    valorX2.setText("");
-                                    valorX2.setVisible(true);
+                                    valorX.setEnabled(true);
                                     xValor.setVisible(true);
-                                    xValor.setText("X²: ");
+                                    xValor.setText("H: ");
                                     yValor.setVisible(true);
-                                    yValor.setText("X: ");
+                                    yValor.setText("K: ");
                                     enteros.setVisible(true);
-                                    enteros.setText("Entero: ");
-                                    x2Valor.setVisible(true);
-                                    x2Valor.setText("Y²");
-                                    y2Valor.setVisible(true);
-                                    y2Valor.setEnabled(true);
-                                    y2Valor.setText("Y: ");
-                                    valorY2.setVisible(true);
-                                    valorY2.setText("");
                                     valorX.setText("");
-                                    valorY2.setEnabled(true);
                                     if (verticalXOY == 'x' || verticalXOY == 'X') {
                                         plano.setTipo(21);
-                                        x2Valor.setEnabled(true);
-                                        valorX2.setEnabled(true);
-                                        xValor.setEnabled(false);
-                                        valorX.setEnabled(false);
                                     } else {
                                         plano.setTipo(22);
-                                        xValor.setEnabled(true);
-                                        valorX.setEnabled(true);
-                                        valorX2.setEnabled(false);
-                                        x2Valor.setEnabled(false);
                                     }
 
                                 }
@@ -593,74 +604,74 @@ public class VentanaGraficadora extends Ventana{
                                     plano.setTipo(cual);
                                     tipograf = 4;
                                     if (verticalXOY == 'x' || verticalXOY == 'X') {
-                                       plano.setTipoHiper(41);
-                                       JOptionPane.showMessageDialog(null, "Formula general siendo paralela a X\n(X²/A²)-(Y²/B²)=1");
-                                       JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B (El valor por defecto del entero es 1)");
-                                       xValor.setEnabled(true);
-                                       x2Valor.setEnabled(false);
-                                       yValor.setEnabled(true);
-                                       y2Valor.setEnabled(false);
-                                       xValor.setVisible(true);
-                                       x2Valor.setVisible(false);
-                                       yValor.setVisible(true);
-                                       y2Valor.setVisible(false);
-                                       enteros.setText("");
-                                       enteros.setVisible(false);
-                                       enteros.setEnabled(false);
-                                       xValor.setText("A: ");
-                                       x2Valor.setText("");
-                                       yValor.setText("B: ");
-                                       y2Valor.setText("");
-                                       valorX.setText("");
-                                       valorX2.setText("");
-                                       valorY.setText("");
-                                       valorY2.setText("");
-                                       valorX.setEnabled(true);
-                                       valorX2.setEnabled(false);
-                                       valorY.setEnabled(true);
-                                       valorY2.setEnabled(false);
-                                       valorEnt.setText("");
-                                       valorX.setVisible(true);
-                                       valorX2.setVisible(false);
-                                       valorY.setVisible(true);
-                                       valorY2.setVisible(false);
-                                       valorEnt.setVisible(false);
-                                       valorEnt.setEnabled(false);
-                                        
+                                        plano.setTipoHiper(41);
+                                        JOptionPane.showMessageDialog(null, "Formula general siendo paralela a X\n(X²/A²)-(Y²/B²)=1");
+                                        JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B (El valor por defecto del entero es 1)");
+                                        xValor.setEnabled(true);
+                                        x2Valor.setEnabled(false);
+                                        yValor.setEnabled(true);
+                                        y2Valor.setEnabled(false);
+                                        xValor.setVisible(true);
+                                        x2Valor.setVisible(false);
+                                        yValor.setVisible(true);
+                                        y2Valor.setVisible(false);
+                                        enteros.setText("");
+                                        enteros.setVisible(false);
+                                        enteros.setEnabled(false);
+                                        xValor.setText("A: ");
+                                        x2Valor.setText("");
+                                        yValor.setText("B: ");
+                                        y2Valor.setText("");
+                                        valorX.setText("");
+                                        valorX2.setText("");
+                                        valorY.setText("");
+                                        valorY2.setText("");
+                                        valorX.setEnabled(true);
+                                        valorX2.setEnabled(false);
+                                        valorY.setEnabled(true);
+                                        valorY2.setEnabled(false);
+                                        valorEnt.setText("");
+                                        valorX.setVisible(true);
+                                        valorX2.setVisible(false);
+                                        valorY.setVisible(true);
+                                        valorY2.setVisible(false);
+                                        valorEnt.setVisible(false);
+                                        valorEnt.setEnabled(false);
+
                                     } else {
                                         plano.setTipoHiper(42);
-                                       JOptionPane.showMessageDialog(null, "Formula general siendo paralela a Y\n(Y²/A²)-(X²/B²)=1");
-                                       JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B  (El valor por defecto del entero es 1)");
-                                       xValor.setEnabled(true);
-                                       x2Valor.setEnabled(false);
-                                       yValor.setEnabled(true);
-                                       y2Valor.setEnabled(false);
-                                       xValor.setVisible(true);
-                                       x2Valor.setVisible(false);
-                                       yValor.setVisible(true);
-                                       y2Valor.setVisible(false);
-                                       enteros.setText("");
-                                       enteros.setVisible(false);
-                                       enteros.setEnabled(false);
-                                       xValor.setText("A: ");
-                                       x2Valor.setText("");
-                                       yValor.setText("B: ");
-                                       y2Valor.setText("");
-                                       valorX.setText("");
-                                       valorX2.setText("");
-                                       valorY.setText("");
-                                       valorY2.setText("");
-                                       valorX.setEnabled(true);
-                                       valorX.setVisible(true);
-                                       valorX2.setEnabled(false);
-                                       valorY.setVisible(true);
-                                       valorY.setEnabled(true);
-                                       valorY2.setEnabled(false);
-                                       valorEnt.setText("");
-                                       valorEnt.setVisible(false);
-                                       valorEnt.setEnabled(false);
+                                        JOptionPane.showMessageDialog(null, "Formula general siendo paralela a Y\n(Y²/A²)-(X²/B²)=1");
+                                        JOptionPane.showMessageDialog(null, "Ingrese los valores de A & B  (El valor por defecto del entero es 1)");
+                                        xValor.setEnabled(true);
+                                        x2Valor.setEnabled(false);
+                                        yValor.setEnabled(true);
+                                        y2Valor.setEnabled(false);
+                                        xValor.setVisible(true);
+                                        x2Valor.setVisible(false);
+                                        yValor.setVisible(true);
+                                        y2Valor.setVisible(false);
+                                        enteros.setText("");
+                                        enteros.setVisible(false);
+                                        enteros.setEnabled(false);
+                                        xValor.setText("A: ");
+                                        x2Valor.setText("");
+                                        yValor.setText("B: ");
+                                        y2Valor.setText("");
+                                        valorX.setText("");
+                                        valorX2.setText("");
+                                        valorY.setText("");
+                                        valorY2.setText("");
+                                        valorX.setEnabled(true);
+                                        valorX.setVisible(true);
+                                        valorX2.setEnabled(false);
+                                        valorY.setVisible(true);
+                                        valorY.setEnabled(true);
+                                        valorY2.setEnabled(false);
+                                        valorEnt.setText("");
+                                        valorEnt.setVisible(false);
+                                        valorEnt.setEnabled(false);
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -669,16 +680,17 @@ public class VentanaGraficadora extends Ventana{
                 }
             }
         }
-    public void paint(Graphics g){
-            
+
+        public void paint(Graphics g) {
+
             Dimension tam = getSize();
-            imagelap = new ImageIcon(getClass().getResource("bgtab.jpg"));           
-            
+            imagelap = new ImageIcon(getClass().getResource("bgtab.jpg"));
+
             g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
             setOpaque(false);
             super.paint(g);
-                  
-        } 
+
+        }
 
         /*@Override
         public void actionPerformed(ActionEvent e) {
@@ -745,36 +757,188 @@ public class VentanaGraficadora extends Ventana{
             }
             
         }*/
-            @Override
+        @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Grafica!")) {
+            if (e.getActionCommand().equals("►")) {
+                paginaTabulador++;
+                System.out.println(paginaTabulador);
+                if (plano.getTipo() == 1) {
+
+                    if (paginaTabulador == 3) {
+                        siguienteTabla.setEnabled(false);
+                    }
+                    if (paginaTabulador != 0) {
+                        antT.setEnabled(true);
+                    }
+
+                    for (int i = 0; i < 10; i++) {
+                        TX[i].setVisible(true);
+                        String Xs = String.format("         X=%d", (20 - i - (paginaTabulador * 10)));
+                        System.out.println(Xs);
+                        TX[i].setText(Xs);
+                        TY[i].setVisible(true);
+                        String Ys = String.format("         Y=%.2f", (((-Double.parseDouble(valorX.getText()) * (20 - i - (paginaTabulador * 10))) - (Double.parseDouble(valorEnt.getText())))) / Double.parseDouble(valorY.getText()));
+                        TY[i].setText(Ys);
+
+                    }
+                } else if (plano.getTipo() < 20 && plano.getTipo() > 25) {
+
+                }
+            }
+            if (e.getActionCommand().equals("◄")) {
+                paginaTabulador--;
+                System.out.println(paginaTabulador);
+                if (plano.getTipo() == 1) {
+
+                    if (paginaTabulador == 0) {
+                        antT.setEnabled(false);
+                    }
+                    if (paginaTabulador != 3) {
+                        siguienteTabla.setEnabled(true);
+                    }
+                    for (int i = 0; i < 10; i++) {
+                        TX[i].setVisible(true);
+                        String Xs = String.format("         X=%d", (20 - i - (paginaTabulador * 10)));
+                        System.out.println(Xs);
+                        TX[i].setText(Xs);
+                        TY[i].setVisible(true);
+                        String Ys = String.format("         Y=%.2f", (((-Double.parseDouble(valorX.getText()) * (20 - i - (paginaTabulador * 10))) - (Double.parseDouble(valorEnt.getText())))) / Double.parseDouble(valorY.getText()));
+                        TY[i].setText(Ys);
+
+                    }
+                }
+            } else if (e.getActionCommand().equals("Grafica!")) {
                 //AQUI SE PASA EL VALOR DE X Y EL ENTERO Y SE HACE EL REPAINT
 
-                if (tipograf == 1) {
+                if (plano.getTipo() == 1) {
+
                     plano.setX1(Double.parseDouble(valorX.getText()));
                     plano.setY1(Double.parseDouble(valorY.getText()));
                     plano.setEnt(Double.parseDouble(valorEnt.getText()));
                     siguienteTabla.setEnabled(true);
                     String formula = String.format("| Y= (+(%sX)+(%s))/%s |", (-(Integer.parseInt(valorX.getText()))), (-(Integer.parseInt(valorEnt.getText()))), valorY.getText());
                     JOptionPane.showMessageDialog(null, formula);
+                    //TABULAR
+                    for (int i = 0; i < 10; i++) {
+                        TX[i].setVisible(true);
+                        String Xs = String.format("         X=%d", (20 - i));
+                        TX[i].setText(Xs);
+                        TY[i].setVisible(true);
+                        String Ys = String.format("         Y=%.2f", (((-Double.parseDouble(valorX.getText()) * (20 - i)) - (Double.parseDouble(valorEnt.getText())))) / Double.parseDouble(valorY.getText()));
+                        TY[i].setText(Ys);
+                        
+
+                    }
+                    paginaTabulador = 0;
+                    //FIN TABULAR
                 } else if (plano.getTipo() > 20 && plano.getTipo() < 25) {
+                    plano.setKP1(Double.parseDouble(valorY.getText()));
+                    plano.setHP1(Double.parseDouble(valorX.getText()));
+                    plano.setPP1(Double.parseDouble(valorEnt.getText()));
+                    siguienteTabla.setEnabled(true);
                     if (plano.getTipo() == 21) {
-                        plano.setY1(Double.parseDouble(valorY.getText()));
-                        plano.setY2(Double.parseDouble(valorY2.getText()));
-                        //valorX2 equivale a Y al cuadrado y valor Y2 equivale a Y normal X1 equivale a X2 y X2 a X
-                        plano.setX2(Double.parseDouble(valorX2.getText()));
-                        plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                        siguienteTabla.setEnabled(true);
-                        String formula = String.format("| X= ((%sY²)+(%sY)+(%s)/%s  |", valorX2.getText(), valorY2.getText(), valorEnt.getText(), valorY.getText());
-                        JOptionPane.showMessageDialog(null, formula);
+                        String formula = String.format("| X=  |", valorX2.getText(), valorY2.getText(), valorEnt.getText(), valorY.getText());
+                        //TABULAR
+                        int cuantos = 0;
+                        int x1 = 0;
+                        int cuantosBorrar = 10;
+                        if (plano.getPP1() > 0) {
+                            x1 = 20;
+                            if(plano.getHP1()>10) {
+                                cuantos = 20-(int)plano.getHP1();
+                                siguienteTabla.setEnabled(false);
+                                cuantosBorrar = cuantos;
+                            } else {
+                                cuantos = 9;
+                                
+                            }
+                            
+                        }else if(plano.getPP1()<0) {
+                            x1 = -20;
+                            if(plano.getHP1()<(-10)) {
+                                cuantos = 20+(int)plano.getHP1();
+                                siguienteTabla.setEnabled(false);
+                                cuantosBorrar = cuantos;
+                            } else {
+                                cuantos = 9;
+                            }
+                        }
+                        
+                        for (int i = 0; i <= cuantos; i++) {
+                            TX[i].setVisible(true);
+                            double Xss = ((Math.sqrt(4 * plano.getPP1() * (x1 - plano.getHP1())))+plano.getKP1());
+                            String Xs = String.format("         X=%d", x1);
+                            TX[i].setText(Xs);
+                            TY[i].setVisible(true);
+                            String Ys = String.format("         Y=%.2f, %.2f", Xss, (-Xss+(plano.getKP1()*2)));
+                            TY[i].setText(Ys);
+                            if(plano.getPP1()>0) {
+                                x1--;
+                            } else {
+                                x1++;
+                            }
+                           
+                            
+
+                        }
+                        for (int i=9;i >cuantosBorrar;i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
+                        paginaTabulador = 0;
+                        //FIN TABULAR
                     } else {
-                        plano.setX1(Double.parseDouble(valorX.getText()));
-                        plano.setY1(Double.parseDouble(valorY.getText()));
-                        plano.setEnt(Double.parseDouble(valorEnt.getText()));
-                        plano.setY2(Double.parseDouble(valorY2.getText()));
-                        siguienteTabla.setEnabled(true);
-                        String formula = String.format("| Y= ((%sX²)+(%sX)+(%s))/%s  |", valorX.getText(), valorY.getText(), valorEnt.getText(), valorY2.getText());
-                        JOptionPane.showMessageDialog(null, formula);
+                        String formula = String.format("| X=   |", valorX.getText(), valorEnt.getText(), valorY.getText());
+                        //TABULAR
+                        int cuantos = 0;
+                        int y1 = 0;
+                        int cuantosBorrar = 10;
+                        if (plano.getPP1() > 0) {
+                            y1 = 20;
+                            if(plano.getKP1()>10) {
+                                cuantos = 20-(int)plano.getKP1();
+                                siguienteTabla.setEnabled(false);
+                                cuantosBorrar = cuantos;
+                            } else {
+                                cuantos = 9;
+                                
+                            }
+                            
+                        }else if(plano.getPP1()<0) {
+                            y1 = -20;
+                            if(plano.getKP1()<(-10)) {
+                                cuantos = 20+(int)plano.getKP1();
+                                siguienteTabla.setEnabled(false);
+                                cuantosBorrar = cuantos;
+                            } else {
+                                cuantos = 9;
+                            }
+                        }
+                        
+                        for (int i = 0; i <= cuantos; i++) {
+                            TX[i].setVisible(true);
+                            double Xss = ((Math.sqrt(4 * plano.getPP1() * (y1 - plano.getKP1())))+plano.getHP1());
+                            String Xs = String.format("         Y=%d", y1);
+                            String Ys = String.format("         X=%.2f, %.2f", Xss, (-Xss+(plano.getHP1()*2)));
+                            TX[i].setText(Ys);
+                            TY[i].setVisible(true);
+                            
+                            TY[i].setText(Xs);
+                            if(plano.getPP1()>0) {
+                                y1--;
+                            } else {
+                                y1++;
+                            }
+                           
+                            
+
+                        }
+                        for (int i=9;i >cuantosBorrar;i--) {
+                            TX[i].setVisible(false);
+                            TY[i].setVisible(false);
+                        }
+                        paginaTabulador = 0;
+                        //FIN TABULAR
                     }
                 } else if (plano.getTipo() == 3) {
                     //X1 = X cuadrada, X2 = Y cuadrada, Y1 = X, Y2 = Y, Ent = entero; ecuacion es AX²+CY²+DX+EY+F=0  
@@ -784,54 +948,64 @@ public class VentanaGraficadora extends Ventana{
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
+                        //TABULAR
+
+                        //FIN TABULAR
                     } else {
                         JOptionPane.showMessageDialog(null, "A debe ser mayor que C");
 
                     }
 
                 } else if (plano.getTipo() == 4) {
-                    if(plano.getTipoHiper()==41) {
+                    if (plano.getTipoHiper() == 41) {
                         plano.setAH(Double.parseDouble(valorX.getText()));
                         plano.setBH(Double.parseDouble(valorY.getText()));
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
+                        //TABULAR
+
+                        //FIN TABULAR
                     } else {
                         plano.setBH(Double.parseDouble(valorY.getText()));
                         plano.setAH(Double.parseDouble(valorX.getText()));
                         siguienteTabla.setEnabled(true);
                         String formula = String.format("| ");
                         Y.setText(formula);
+                        //TABULAR
+
+                        //FIN TABULAR
                     }
                 }
-                
+
                 plano.repaint();
 
             }
 
         }
     }
-    public class Ayuda extends JPanel implements ActionListener{
-        
+
+    public class Ayuda extends JPanel implements ActionListener {
+
         private ImageIcon imagelap;
         private JButton apuntes;
         private JButton vectores;
         private JButton tab;
         private BarraUsuario us;
         private Control cont;
-        
-        public Ayuda(int x, int y, int width, int height){
-            
+
+        public Ayuda(int x, int y, int width, int height) {
+
             cont = new Control();
-            
+
             setVisible(true);
             setLocation(x, y);
             setSize(width, height);
             setLayout(null);
-            
+
             apuntes = new JButton("Aula");
             apuntes.setVisible(true);
-            apuntes.setLocation(0,0);
+            apuntes.setLocation(0, 0);
             apuntes.setSize(100, this.getHeight());
             apuntes.setBackground(Color.black);
             apuntes.setOpaque(true);
@@ -839,7 +1013,7 @@ public class VentanaGraficadora extends Ventana{
             apuntes.setForeground(Color.white);
             apuntes.setBorderPainted(false);
             add(apuntes);
-            
+
             vectores = new JButton("Vectores");
             vectores.setVisible(true);
             vectores.setOpaque(true);
@@ -849,65 +1023,68 @@ public class VentanaGraficadora extends Ventana{
             vectores.setSize(100, this.getHeight());
             vectores.setBorderPainted(false);
             add(vectores);
-            
+
             tab = new JButton("Elementos");
             tab.setVisible(true);
             tab.setLayout(null);
             tab.setOpaque(true);
             tab.setBorderPainted(false);
             tab.setBackground(new Color(166, 0, 138));
-            tab.setLocation(apuntes.getWidth()+vectores.getWidth(),0);
+            tab.setLocation(apuntes.getWidth() + vectores.getWidth(), 0);
             tab.setSize(100, this.getHeight());
             tab.addActionListener(this);
             tab.setForeground(Color.white);
             add(tab);
-            
-            us = new BarraUsuario((int)Math.floor(width*.7)+1, 0, (int)Math.floor(width*.3), this.getHeight());
-            
+
+            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight());
+
             add(us);
-            
+
         }
-        public void paint(Graphics g){
-            
+
+        public void paint(Graphics g) {
+
             Dimension tam = getSize();
-            imagelap = new ImageIcon(getClass().getResource("default.jpg"));           
-            
+            imagelap = new ImageIcon(getClass().getResource("default.jpg"));
+
             g.drawImage(imagelap.getImage(), 0, 0, tam.width, tam.height, null);
             setOpaque(false);
             super.paint(g);
-                 
-        }   
+
+        }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            
-            if(e.getActionCommand().equals("Elementos")){
-                
+
+            if (e.getActionCommand().equals("Elementos")) {
+
                 TablaPeriodica ped = new TablaPeriodica();
-                
+
             }
-            
+
         }
     }
-    public class BarraUsuario extends JPanel{
-        
+
+    public class BarraUsuario extends JPanel {
+
         private JButton ce;
         private JButton con;
         private JButton ay;
         private Control cont;
-        
-        public BarraUsuario(int x, int y, double width, double height){
-            
+
+        public BarraUsuario(int x, int y, double width, double height) {
+
             double w = width;
             double h = height;
-            
+
             cont = new Control();
-            
+
             setBackground(new Color(75, 148, 242));
             setVisible(true);
             setLayout(null);
-            setSize((int)width, (int)height);
+            setSize((int) width, (int) height);
             setLocation(x, y);
-            
+
             ce = new JButton("Cerrar");
             ce.setVisible(true);
             ce.setLayout(null);
@@ -917,10 +1094,10 @@ public class VentanaGraficadora extends Ventana{
             ce.setForeground(Color.white);
             ce.addActionListener(cont);
             ce.setFont(new Font("Verdana", Font.PLAIN, 18));
-            ce.setLocation(this.getWidth()/2, 0);
-            ce.setSize(this.getWidth()/2,this.getHeight() / 2);
+            ce.setLocation(this.getWidth() / 2, 0);
+            ce.setSize(this.getWidth() / 2, this.getHeight() / 2);
             add(ce);
-            
+
             con = new JButton("Configuración");
             con.setVisible(true);
             con.setLayout(null);
@@ -929,10 +1106,9 @@ public class VentanaGraficadora extends Ventana{
             con.setBackground(Color.gray);
             con.setForeground(Color.white);
             con.setFont(new Font("Verdana", Font.PLAIN, 18));
-            con.setLocation(this.getWidth()/2, ce.getHeight());
-            con.setSize(this.getWidth()/2, this.getHeight() / 2);
-            add(con);     
+            con.setLocation(this.getWidth() / 2, ce.getHeight());
+            con.setSize(this.getWidth() / 2, this.getHeight() / 2);
+            add(con);
         }
     }
 }
-

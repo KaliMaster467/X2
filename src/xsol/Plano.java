@@ -18,13 +18,38 @@ public class Plano extends JPanel {
 
     int ancho = 0;
     int alto = 0;
+
+    public double getHP1() {
+        return HP1;
+    }
+
+    public void setHP1(double HP1) {
+        this.HP1 = HP1;
+    }
+
+    public double getKP1() {
+        return KP1;
+    }
+
+    public void setKP1(double KP1) {
+        this.KP1 = KP1;
+    }
+
+    public double getPP1() {
+        return PP1;
+    }
+
+    public void setPP1(double PP1) {
+        this.PP1 = PP1;
+    }
     double X1, Y1, Ent;
     double X2, Y2;
+    double HP1, KP1, PP1;
     double YR1, YR2, YP1, YP2, XP1, XP2;//
     double YE1, YE2, XE1, XE2;
     int tipoElipse = 0;
     double AX, CX;
-        int tipoHiper = 0;
+    int tipoHiper = 0;
     double YH1, YH2, XH1, XH2;
 
     public double getXH() {
@@ -218,10 +243,109 @@ public class Plano extends JPanel {
 
             } //PARABOLA
             else if (this.tipo > 20) {
-                double x1 = 80;//Tambien sirven como ys
-                double x2 = 79.875;
+                int cuantas = 0;
+                double x1, x2, y1, y2;
                 g.setColor(new Color(186, 24, 74));
-                for (int z = 0; z < 2560; z++) {
+                if (this.tipo == 21) {
+                    
+                    for (int Y = 0; Y < 2; Y++) {
+                        
+                        if (this.PP1 > 0) {
+                            cuantas = (int) ((20 - HP1) * 10);
+                            x1 = HP1;
+                            x2 = HP1 + .125;
+                        } else {
+                            cuantas = (int) ((20 + HP1) * 10);
+                            x1 = HP1;
+                            x2 = HP1 -.125;
+                        }
+
+                        for (int z = 0; z < cuantas; z++) {
+                            double raiz1 = 4 * PP1 * (x1 - HP1);
+                            double raiz2 = 4 * PP1 * (x2 - HP1);
+                            double yValue = (Math.sqrt(raiz1)) + KP1;
+                            double yValue2 = (Math.sqrt(raiz2)) + KP1;
+                            if (Y==0) {
+                                this.YP1 = (yValue);
+                                this.YP2 = (yValue2);
+                            }else {
+                                this.YP1 = -(yValue);
+                                this.YP2 = -(yValue2);
+                            }
+                            int y1graf, y2graf, x1graf, x2graf;
+                            if(Y==0) {
+                                y1graf = (int) Math.floor((this.getHeight() / 2) - (YP1 * (getHeight() * .025)));
+                                y2graf = (int) Math.floor((this.getHeight() / 2) - (YP2 * (getHeight() * .025)));
+                            }else {
+                                y1graf = (int) Math.floor((this.getHeight() / 2) - ((YP1+(KP1*2)) * (getHeight() * .025)));
+                                y2graf = (int) Math.floor((this.getHeight() / 2) - ((YP2+(KP1*2)) * (getHeight() * .025)));
+                            }
+                            x1graf = (int) Math.floor((this.getWidth() / 2) + (x1 * (getWidth() * 0.025)));
+                            x2graf = (int) Math.floor((this.getWidth() / 2) + (x2 * (getWidth() * 0.025)));
+                            if (this.PP1 > 0) {
+                                x1 = x2;
+                                x2 = x2 + .125;
+                            } else {
+                                x1 = x2;
+                                x2 = x2 - .125;
+                            }
+                            g.drawLine(x1graf, y1graf, x2graf, y2graf);
+
+                        }
+                    }
+                    
+                    
+                } else {
+                    for (int Y = 0; Y < 2; Y++) {
+                        
+                        if (this.PP1 > 0) {
+                            cuantas = (int) ((20 - KP1) * 8);
+                            y1 = KP1;
+                            y2 = KP1 + .125;
+                        } else {
+                            cuantas = (int) ((20 + KP1) * 8);
+                            y1 = KP1;
+                            y2 = KP1 -.125;
+                        }
+
+                        for (int z = 0; z < cuantas; z++) {
+                            double raiz1 = 4 * PP1 * (y1 - KP1);
+                            double raiz2 = 4 * PP1 * (y2 - KP1);
+                            double yValue = (Math.sqrt(raiz1)) + HP1;
+                            double yValue2 = (Math.sqrt(raiz2)) + HP1;
+                            if (Y==0) {
+                                this.XP1 = (yValue);
+                                this.XP2 = (yValue2);
+                            }else {
+                                this.XP1 = -(yValue);
+                                this.XP2 = -(yValue2);
+                            }
+                            int y1graf, y2graf, x1graf, x2graf;
+                            if(Y==0) {
+                                x1graf = (int) Math.floor((this.getWidth() / 2) + (XP1 * (getWidth() * 0.025)));
+                                x2graf = (int) Math.floor((this.getWidth() / 2) + (XP2 * (getWidth() * 0.025)));
+                                
+                            }else {
+                                x1graf = (int) Math.floor((this.getWidth() / 2) + ((XP1+(HP1 *2)) * (getWidth() * 0.025)));
+                                x2graf = (int) Math.floor((this.getWidth() / 2) + ((XP2+(HP1*2)) * (getWidth() * 0.025)));
+                            }
+                                y1graf = (int) Math.floor((this.getHeight() / 2) - (y1 * (getHeight() * .025)));
+                                y2graf = (int) Math.floor((this.getHeight() / 2) - (y2 * (getHeight() * .025)));
+                            
+                            if (this.PP1 > 0) {
+                                y1 = y2;
+                                y2 = y2 + .125;
+                            } else {
+                                y1 = y2;
+                                y2 = y2 - .125;
+                            }
+                            g.drawLine(x1graf, y1graf, x2graf, y2graf);
+
+                        }
+                    }
+                }
+
+            } /*for (int z = 0; z < 2560; z++) {
                     if (this.tipo == 21) {
                         double Elevada = X2 * x1;
                         double Elevada1 = X2 * x2;
@@ -249,24 +373,22 @@ public class Plano extends JPanel {
                         x2 = x2 - .125;
                         g.drawLine(x1graf, y1graf, x2graf, y2graf);
                     }
-                }
-
-            } else if (this.tipo == 3) {
-                double b2=(AX*AX)-(CX*CX);
-                    double b = Math.sqrt(b2);
+                }*/ else if (this.tipo
+                    == 3) {
+                double b2 = (AX * AX) - (CX * CX);
+                double b = Math.sqrt(b2);
                 g.setColor(new Color(170, 140, 7));
                 if (this.tipoElipse == 31) {//PARALELA X
-                    
-                    
-                    for(int i = 0; i<2;i++) {
+
+                    for (int i = 0; i < 2; i++) {
                         double x1 = AX;
                         double x2 = AX - .125;
                         for (int z = 0; z < ((AX * 2) * 8); z++) {
-                            double raiz1 = (1 - ((x1 * x1) / (AX*AX))) * b2;
-                            double raiz2 = (1 - ((x2 * x2) / (AX*AX))) * b2;
+                            double raiz1 = (1 - ((x1 * x1) / (AX * AX))) * b2;
+                            double raiz2 = (1 - ((x2 * x2) / (AX * AX))) * b2;
                             double YValue = Math.sqrt(raiz1);
                             double YValue2 = Math.sqrt(raiz2);
-                            if(i ==0) {
+                            if (i == 0) {
                                 YE1 = YValue;
                                 YE2 = YValue2;
                             } else {
@@ -277,33 +399,33 @@ public class Plano extends JPanel {
                             int x2graf = (int) Math.floor((this.getWidth() / 2) + (x2 * (getWidth() * 0.025)));
                             int y1graf, y2graf;
 
-                                y1graf = (int) Math.floor((this.getHeight() / 2) - (YE1 * (getHeight() * 0.025)));
-                                y2graf = (int) Math.floor((this.getHeight() / 2) - (YE2 * (getHeight() * 0.025)));
-                            
+                            y1graf = (int) Math.floor((this.getHeight() / 2) - (YE1 * (getHeight() * 0.025)));
+                            y2graf = (int) Math.floor((this.getHeight() / 2) - (YE2 * (getHeight() * 0.025)));
+
                             x1 = x2;
                             x2 = x2 - .125;
                             g.drawLine(x1graf, y1graf, x2graf, y2graf);
                         }
                     }
-                    g.setColor(new Color(25,200,45));
-                    int x1s=(int)Math.floor((this.getWidth()/2)+(CX*(getWidth()*.025)));
-                    int x2s=(int)Math.floor((this.getWidth()/2)-(CX*(getWidth()*.025)));
-                    int y1s=(int)Math.floor(this.getHeight()/2);
-                    g.fillOval((x1s-4), (y1s-4), 9, 9);
-                    g.fillOval((x2s-4), (y1s-4), 9, 9);
+                    g.setColor(new Color(25, 200, 45));
+                    int x1s = (int) Math.floor((this.getWidth() / 2) + (CX * (getWidth() * .025)));
+                    int x2s = (int) Math.floor((this.getWidth() / 2) - (CX * (getWidth() * .025)));
+                    int y1s = (int) Math.floor(this.getHeight() / 2);
+                    g.fillOval((x1s - 4), (y1s - 4), 9, 9);
+                    g.fillOval((x2s - 4), (y1s - 4), 9, 9);
                     g.setColor(Color.CYAN);
-                        
+
                 }
                 if (this.tipoElipse == 32) {//PARALELA Y
-                    for(int i = 0; i<2;i++) {
+                    for (int i = 0; i < 2; i++) {
                         double x1 = AX;
                         double x2 = AX - .125;
                         for (int z = 0; z < ((AX * 2) * 8); z++) {
-                            double raiz1 = (1 - ((x1 * x1) / (AX*AX))) * b2;
-                            double raiz2 = (1 - ((x2 * x2) / (AX*AX))) * b2;
+                            double raiz1 = (1 - ((x1 * x1) / (AX * AX))) * b2;
+                            double raiz2 = (1 - ((x2 * x2) / (AX * AX))) * b2;
                             double YValue = Math.sqrt(raiz1);
                             double YValue2 = Math.sqrt(raiz2);
-                            if(i ==0) {
+                            if (i == 0) {
                                 YE1 = YValue;
                                 YE2 = YValue2;
                             } else {
@@ -314,18 +436,17 @@ public class Plano extends JPanel {
                             int y2graf = (int) Math.floor((this.getHeight() / 2) + (x2 * (getHeight() * 0.025)));
                             int x1graf, x2graf;
 
-                                x1graf = (int) Math.floor((this.getWidth() / 2) - (YE1 * (getWidth() * 0.025)));
-                                x2graf = (int) Math.floor((this.getWidth() / 2) - (YE2 * (getWidth() * 0.025)));
-                            
+                            x1graf = (int) Math.floor((this.getWidth() / 2) - (YE1 * (getWidth() * 0.025)));
+                            x2graf = (int) Math.floor((this.getWidth() / 2) - (YE2 * (getWidth() * 0.025)));
+
                             x1 = x2;
                             x2 = x2 - .125;
                             g.drawLine(x1graf, y1graf, x2graf, y2graf);
                         }
                     }
                 }
-                this.tipoElipse = 0;
-            }
-                        else if (this.tipo == 4) {
+            } else if (this.tipo
+                    == 4) {
                 //setcolor
                 g.setColor(new Color(140, 15, 200));
                 if (this.tipoHiper == 41) {
@@ -401,16 +522,18 @@ public class Plano extends JPanel {
                     }
 
                 }
-                
 
-            //AQUI HAZ LAS OTRAS PINSHES TIPOS DE GRAFICAS
+                //AQUI HAZ LAS OTRAS PINSHES TIPOS DE GRAFICAS
+            }
         }
-            tipoHiper = 0;
-    }
+
         g.setColor(Color.red);
+
         g.drawLine(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2);
         g.drawLine(this.getWidth() / 2, 0, this.getWidth() / 2, this.getHeight());
-}
+
+    }
+
     public void paintSQRFunc(Graphics g, double x2mult, double x1mult, double cons,
             double x1, double x2) {
 
