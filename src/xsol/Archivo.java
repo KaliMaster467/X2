@@ -23,7 +23,7 @@ public class Archivo{
     public ArrayList<Usuario> leer(){
         
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("pepe.dat"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Usuarios.dat"));
             users = (ArrayList<Usuario>)in.readObject();
             
         }catch(Exception e){
@@ -34,7 +34,7 @@ public class Archivo{
     public void Serializar(ArrayList<Usuario> user){
         
         try{
-            FileOutputStream out = new FileOutputStream("pepe.dat");
+            FileOutputStream out = new FileOutputStream("Usuarios.dat");
             ObjectOutputStream objOut = new ObjectOutputStream(out);
             objOut.writeObject(user);
             objOut.close();
