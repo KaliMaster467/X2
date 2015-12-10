@@ -24,10 +24,11 @@ public class Control implements ActionListener{
     protected static VentanaGraficadora graf;
     protected Registro reg;
     protected ListaUsuario users;
+    protected Subir sub;
     private Archivo archivo = new Archivo();
     private Manejador man;
     private ApuntesAlumno al;
-    protected VentanaProfesor pro;
+    protected static VentanaProfesor pro;
     
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
     
@@ -109,6 +110,8 @@ public class Control implements ActionListener{
                                 pro.getUnica().equals("hola")){
                             
                             JOptionPane.showMessageDialog(null, "Bienvenido Profesor");
+                            sub = new Subir();
+                            ini.dispose();
                             pro.dispose();  
                         }else
                             JOptionPane.showMessageDialog(null, "Acceso Denegado");

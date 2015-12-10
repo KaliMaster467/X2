@@ -138,7 +138,7 @@ public class VentanaProfesor extends Ventana{
         private JLabel uni;
         private JTextField Nombre;
         private JPasswordField clave;
-        private JTextField unica; 
+        private JPasswordField unica; 
         private JButton bot;
         private Control cont;
         private String usuario;
@@ -172,9 +172,7 @@ public class VentanaProfesor extends Ventana{
             Nombre.setLocation(250, 50);
             Nombre.setSize(200, 30);
             add(Nombre);
-            
-            usuario = nombre.getText();
-            
+                    
             clav = new JLabel();
             clav.setVisible(true);
             clav.setLayout(null);
@@ -192,7 +190,6 @@ public class VentanaProfesor extends Ventana{
             clave.setSize(200, 30);
             add(clave);
             
-            contra = clave.getText();
             
             uni = new JLabel();
             uni.setVisible(true);
@@ -204,14 +201,13 @@ public class VentanaProfesor extends Ventana{
             uni.setFont(fu);
             add(uni);
             
-            unica = new JTextField();
+            unica = new JPasswordField();
             unica.setVisible(true);
             unica.setLayout(null);
             unica.setLocation(250, 190);
             unica.setSize(200, 30);
             add(unica);
             
-            conun = unica.getText();
             
             bot = new JButton("Entrar");
             bot.setVisible(true);
@@ -227,17 +223,17 @@ public class VentanaProfesor extends Ventana{
             add(bot);
         }
         public String getUsuario(){
-            
+            usuario= Nombre.getText();
             return usuario;
             
         }
         public String getContraseña(){
-            
+            contra= clave.getText();
             return contra;
             
         }
         public String getClaveUnica(){
-            
+            conun = unica.getText();
             return conun;
             
         }

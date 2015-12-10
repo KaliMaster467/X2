@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class Archivo{
     
     private ArrayList <Usuario> users = new ArrayList<>();
+    private ArrayList<Examenes> exam = new ArrayList<>();
     
     public ArrayList<Usuario> leer(){
         
@@ -38,6 +39,32 @@ public class Archivo{
             ObjectOutputStream objOut = new ObjectOutputStream(out);
             objOut.writeObject(user);
             objOut.close();
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            
+        }
+        
+    }
+    
+    public ArrayList<Examenes> leerExamenes(){
+        
+        try{
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Examenes.dat"));
+            exam = (ArrayList<Examenes>)in.readObject();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return exam;
+    }
+    public void SerializarExamenes(ArrayList<Examenes> examenes){
+        
+        try{
+            FileOutputStream exout = new FileOutputStream("Examenes.dat");
+            ObjectOutputStream objexout = new ObjectOutputStream(exout);
+            objexout.writeObject(examenes);
+            objexout.close();
         }catch(Exception e){
             
             e.printStackTrace();
