@@ -7,6 +7,8 @@ package xsol;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -20,13 +22,14 @@ import java.io.*;
  *
  * @author Bugatti
  */
-public class Control implements ActionListener{
+public class Control implements ActionListener, KeyListener{
     
     protected static VentanaInicion ini;
     protected static VentanaGraficadora graf;
+    private static VentanaVectores vec;
     protected Registro reg;
     protected ListaUsuario users;
-    protected Subir sub;
+    protected static Subir sub;
     private Archivo archivo = new Archivo();
     private Manejador man;
     private ApuntesAlumno al;
@@ -113,26 +116,48 @@ public class Control implements ActionListener{
                             
                             JOptionPane.showMessageDialog(null, "Bienvenido Profesor");
                             sub = new Subir();
+                            sub.SubirIn();
                             ini.dispose();
                             pro.dispose();  
                         }else
                             JOptionPane.showMessageDialog(null, "Acceso Denegado");
                         
+                    }else if(e.getActionCommand().equals("Vectores")){
+                        
+                        vec = new VentanaVectores();
+                        
                     }
                     else if(e.getActionCommand().equals("Creditos")) {
                         JOptionPane.showMessageDialog(null, "X-SolutYons\n\n-Ochoa Rodriguez Daniel Salvador\n-Reyes Briseño Alberto\n-Martinez Heredia Liam\n-El shavito");
                     }else
-                        if(e.getActionCommand().equals("REGRESAR")){
+                        if(e.getActionCommand().equals("Regresar")){
                             
                             sub.dispose();
                             ini = new VentanaInicion();
                             try {
-                                ini.VentanaInicions();
+                            ini.VentanaInicions();
                             } catch (IOException ex) {
                                 Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             
-                        }
+                        }                
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+        
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
     

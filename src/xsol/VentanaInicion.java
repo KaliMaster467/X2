@@ -153,6 +153,7 @@ public class VentanaInicion extends Ventana implements ActionListener{
         iniciar.setText("Iniciar");
         iniciar.setOpaque(true);
         iniciar.setFont(fu);
+        iniciar.addKeyListener(control);
         iniciar.setForeground(Color.white);
         iniciar.setBorderPainted(false);
         iniciar.setBackground(new Color(75, 157, 68));

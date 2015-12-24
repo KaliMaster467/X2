@@ -1578,6 +1578,7 @@ public class VentanaGraficadora extends Ventana {
             vectores.setBackground(new Color(255, 61, 61));
             vectores.setLocation(apuntes.getWidth(), 0);
             vectores.setSize(100, this.getHeight());
+            vectores.addActionListener(cont);
             vectores.setBorderPainted(false);
             add(vectores);
 

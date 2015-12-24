@@ -29,6 +29,21 @@ public class ListaUsuario {
         use.add(user);
         
     }
+    public void eliminarUsualrio(String nombre){
+        
+        boolean encontrado = false;
+        
+        for(int i = 0; i<use.size();i++){
+            
+            if(nombre.equals(use.get(i).getNombre())){
+                
+                
+                
+            }
+            
+        }
+        
+    }
     public void setNombre(String nombre){
         
         this.nombre = nombre;

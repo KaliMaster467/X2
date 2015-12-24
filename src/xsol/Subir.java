@@ -8,9 +8,16 @@ package xsol;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -22,12 +29,19 @@ public class Subir extends Ventana{
     public Dimension Dim;
     protected Exames exa;
     public Subir() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
+        
+    }
+    public void SubirIn(){
+        
         dim = super.getToolkit().getScreenSize();
         
         setVisible(true);
         setLocation(0,0);
         setSize(dim);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //late = new BarraLateral(0,0, (int)dim.getWidth(), (int)dim.getHeight());
         //add(late);
@@ -52,11 +66,13 @@ public class Subir extends Ventana{
         }
         
     }
-    public class Exames extends JPanel{
+    public class Exames extends JPanel implements ActionListener{
         private JButton Subido;
         private JButton Modificado;
         private JButton elim;
         private JButton reg;
+        private Control cont;
+        private JButton back;
         
         public Exames(int x, int y, int width, int height) {
             setBackground(Color.white);
@@ -65,10 +81,12 @@ public class Subir extends Ventana{
             setLocation(x,y);
             setSize(width, height);
             
+            cont = new Control();
+            
             int botonesW = this.getWidth();
             int botonesH = this.getHeight()/10;
             
-            Subido = new JButton("SUBIR\nEXAMEN");
+            Subido = new JButton("SUBIR EXAMEN");
             Subido.setVisible(true);
             Subido.setOpaque(true);
             Subido.setBorderPainted(false);
@@ -76,6 +94,7 @@ public class Subir extends Ventana{
             Subido.setForeground(Color.white);
             Subido.setLocation(0,0);
             Subido.setSize(botonesW, botonesH);
+            Subido.addActionListener(this);
             Subido.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(Subido);
             
@@ -113,6 +132,63 @@ public class Subir extends Ventana{
             reg.setFont(new Font("Verdana", Font.PLAIN, 15));
             add(reg);
             
+            back = new JButton("Regresar");
+            back.setVisible(true);
+            back.setLayout(null);
+            back.setOpaque(true);
+            back.setBorderPainted(false);
+            back.setBackground(Color.yellow);
+            back.addActionListener(cont);
+            back.setSize(botonesW /2, botonesH);
+            back.setLocation(0, botonesH*7);
+            add(back);
+            
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getActionCommand().equals("SUBIR EXAMEN")){
+                
+                FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.MP4", "mp4", "*.PNG", "png");
+                FileNameExtensionFilter fil = new FileNameExtensionFilter("*.MP4", "mp4");
+                FileNameExtensionFilter fe = new FileNameExtensionFilter("*.DOCX", "docx");
+                
+                JFileChooser fc = new JFileChooser();
+                fc.setFileFilter(filtro);
+                fc.setFileFilter(fil);
+                fc.setFileFilter(fe);
+                int seleccion = fc.showOpenDialog(this);
+                
+                if(seleccion==JFileChooser.APPROVE_OPTION){
+                    
+                    File ficher = fc.getSelectedFile();
+                    
+                    try(FileReader fr = new FileReader(ficher)){
+                        
+                        String cadena = "";
+                        int valor = fr.read();
+                        while(valor!=-1){
+                            
+                            cadena = cadena+(char)valor;
+                            valor=fr.read();
+                            
+                        }
+                        //Aqui se trata el archivo Dan.
+                        
+                    }catch(IOException ex){
+                        
+                        ex.printStackTrace();
+                        
+                    }
+                    
+                }
+                
+            }else if(e.getActionCommand().equals("Subir Apuntes")){
+                
+                
+                
+            }
             
         }
     }
