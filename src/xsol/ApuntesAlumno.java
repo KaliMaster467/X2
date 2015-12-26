@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 
 /**
  *
@@ -24,6 +25,7 @@ public class ApuntesAlumno extends Ventana{
     public BarraLateral late;
     public Dimension dim;
     private Apu barra;
+    private JScrollBar bar;
     
     public ApuntesAlumno(){
         
@@ -34,12 +36,17 @@ public class ApuntesAlumno extends Ventana{
         setSize(dim);
         
        
-        late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
+        //late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
         
-        getContentPane().add(late);
+        //getContentPane().add(late);
         
         barra = new Apu(0,0,this.getWidth()/3, this.getHeight());
             
+        //add(barra);
+        
+        bar = new JScrollBar();
+        
+        barra.add(bar);
         add(barra);
         
     }
@@ -89,6 +96,7 @@ public class ApuntesAlumno extends Ventana{
         private JButton ter;
         private JButton vid;
         private JButton eva;
+        private JButton reg;
         private Control cont;
         
         public Apu(int x, int y, int width, int height){
@@ -164,6 +172,19 @@ public class ApuntesAlumno extends Ventana{
                     vid.getHeight());
             eva.setSize(botonesw, botonesh);
             add(eva);
+            
+            reg = new JButton("Atras");
+            reg.setVisible(true);
+            reg.setLayout(null);
+            reg.setOpaque(true);
+            reg.setBorderPainted(false);
+            reg.addActionListener(cont);
+            reg.setLocation(0, botonesh*8);
+            reg.setSize(botonesw/2, botonesh);
+            reg.setBackground(Color.YELLOW);
+            reg.setFont(new Font("Verdana", Font.PLAIN, 15));
+            reg.setForeground(Color.black);
+            add(reg);
         }
         
     }

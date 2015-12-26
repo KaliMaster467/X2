@@ -34,8 +34,9 @@ public class VentanaGraficadora extends Ventana {
     protected double width;
     protected double height;
     public static Plano plano;
+    private Archivo base;
 
-    public void VentanaGraficadoras() {
+    public void VentanaGraficadoras(String nombre) {
 
         width = dim.getWidth();
         height = dim.getHeight();
@@ -53,7 +54,7 @@ public class VentanaGraficadora extends Ventana {
         int hei = (int) (height - plano.getHeight());
         int ya = plano.getHeight();
         int wi = (int) width;
-        ayuda = new Ayuda(xa, ya, wi, hei);
+        ayuda = new Ayuda(xa, ya, wi, hei, nombre);
 
         add(ayuda);
 
@@ -1551,7 +1552,7 @@ public class VentanaGraficadora extends Ventana {
         private BarraUsuario us;
         private Control cont;
 
-        public Ayuda(int x, int y, int width, int height) {
+        public Ayuda(int x, int y, int width, int height, String nombre) {
 
             cont = new Control();
 
@@ -1594,7 +1595,7 @@ public class VentanaGraficadora extends Ventana {
             tab.setForeground(Color.white);
             add(tab);
 
-            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight());
+            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight(), nombre);
 
             add(us);
 
@@ -1629,8 +1630,10 @@ public class VentanaGraficadora extends Ventana {
         private JButton con;
         private JButton ay;
         private Control cont;
+        private JLabel nombre;
+        private Archivo base;
 
-        public BarraUsuario(int x, int y, double width, double height) {
+        public BarraUsuario(int x, int y, double width, double height, String nombreu) {
 
             double w = width;
             double h = height;
@@ -1642,6 +1645,18 @@ public class VentanaGraficadora extends Ventana {
             setLayout(null);
             setSize((int) width, (int) height);
             setLocation(x, y);
+            
+            nombre = new JLabel();
+            nombre.setText(nombreu);
+            nombre.setVisible(true);
+            nombre.setOpaque(true);
+            nombre.setBackground(Color.white);
+            nombre.setForeground(Color.black);
+            nombre.setFont(new Font("Verdana", Font.PLAIN, 20));
+            nombre.setLocation(0,0);
+            nombre.setSize(this.getWidth()/2,this.getHeight()/6);
+            nombre.setLayout(null);
+            add(nombre);
 
             ce = new JButton("Cerrar");
             ce.setVisible(true);

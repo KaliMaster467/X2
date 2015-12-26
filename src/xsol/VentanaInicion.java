@@ -282,7 +282,7 @@ public class VentanaInicion extends Ventana implements ActionListener{
             des.setSize(width, 200);
             des.setFont(new Font("Verdana", Font.PLAIN, 30));
             des.setForeground(Color.WHITE);
-            des.setText("La mejor Graficadora de este mundo.");
+            des.setText("La mejor plataforma para aprender.");
             
             add(des);
             

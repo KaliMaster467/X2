@@ -32,8 +32,10 @@ public class Control implements ActionListener, KeyListener{
     protected static Subir sub;
     private Archivo archivo = new Archivo();
     private Manejador man;
-    private ApuntesAlumno al;
+    private static ApuntesAlumno al;
     protected static VentanaProfesor pro;
+    protected static int id;
+    protected String nombre;
     
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
     
@@ -62,6 +64,16 @@ public class Control implements ActionListener, KeyListener{
         ventana.dispose();
         
     }
+    public int getId(){
+        
+        return id;
+        
+    }
+    public String getNombre(){
+        
+        return nombre;
+        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,15 +83,18 @@ public class Control implements ActionListener, KeyListener{
                 if(Usuarios.get(i).getNombre().equals(ini.getUserReturn())) {
                     
                     if(Usuarios.get(i).getClave().equals(ini.getPassReturn())) {
+                        id = Usuarios.get(i).getId();
+                        nombre = Usuarios.get(i).getNombre();
                         JOptionPane.showMessageDialog(null, "Bienvenido "+Usuarios.get(i).getNombre());
                         graf = new VentanaGraficadora();
-                        graf.VentanaGraficadoras();
+                        graf.VentanaGraficadoras(this.getNombre());
                         ini.dispose();
                         encontrado = 1;
+                        
                         break;
                     }
                 }
-                
+               
             }
             if(encontrado ==0)
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
@@ -139,6 +154,12 @@ public class Control implements ActionListener, KeyListener{
                             } catch (IOException ex) {
                                 Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
+                        }else if(e.getActionCommand().equals("Atras")){
+                            
+                            
+                            al.dispose();
+                            
                             
                         }                
     }

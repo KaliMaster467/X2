@@ -45,8 +45,8 @@ public class Subir extends Ventana{
         
         //late = new BarraLateral(0,0, (int)dim.getWidth(), (int)dim.getHeight());
         //add(late);
-        late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
-        add(late);
+        //late = new BarraLateral(this.getWidth()/3, 0,/*(int)dim.getWidth()*/(this.getWidth()/3)*2, (int)dim.getHeight());
+        //add(late);
         
         exa = new Exames(0,0,this.getWidth()/3, this.getHeight());
         add(exa);
@@ -150,21 +150,22 @@ public class Subir extends Ventana{
             
             if(e.getActionCommand().equals("SUBIR EXAMEN")){
                 
-                FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.MP4", "mp4", "*.PNG", "png");
-                FileNameExtensionFilter fil = new FileNameExtensionFilter("*.MP4", "mp4");
-                FileNameExtensionFilter fe = new FileNameExtensionFilter("*.DOCX", "docx");
+                FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.MP4", "mp4");
                 
                 JFileChooser fc = new JFileChooser();
                 fc.setFileFilter(filtro);
-                fc.setFileFilter(fil);
-                fc.setFileFilter(fe);
                 int seleccion = fc.showOpenDialog(this);
                 
                 if(seleccion==JFileChooser.APPROVE_OPTION){
                     
-                    File ficher = fc.getSelectedFile();
+                    //Se cambiara para que el video se muestre en bytes 
+                    //y se almacene en una archivo.
                     
-                    try(FileReader fr = new FileReader(ficher)){
+                    String ul = fc.getSelectedFile().getAbsolutePath();
+                    
+                    //File ficher = fc.getSelectedFile();
+                    
+                    /*try(FileReader fr = new FileReader(ficher)){
                         
                         String cadena = "";
                         int valor = fr.read();
@@ -180,7 +181,7 @@ public class Subir extends Ventana{
                         
                         ex.printStackTrace();
                         
-                    }
+                    }*/
                     
                 }
                 
