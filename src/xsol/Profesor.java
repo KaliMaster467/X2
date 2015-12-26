@@ -5,13 +5,15 @@
  */
 package xsol;
 
+import java.io.IOException;
+
 /**
  *
  * @author Bugatti
  */
 public class Profesor extends Usuario{
 
-    public Profesor(String nombre, String clave, String grupo) {
+    public Profesor(String nombre, String clave, String grupo) throws IOException {
         super(nombre, clave, grupo);
     }
 }

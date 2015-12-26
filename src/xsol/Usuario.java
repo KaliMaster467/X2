@@ -5,7 +5,10 @@
  */
 package xsol;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -18,13 +21,17 @@ public class Usuario implements Serializable{
     private final String nombre;
     private String clave;
     private String grupo;
-    private Icon img;
+    private ImageIcon img;
     
-    public Usuario(String nombre, String clave, String grupo){
+    public Usuario(String nombre, String clave, String grupo) throws IOException{
         
         this.nombre = nombre;
         this.clave = clave;
         this.grupo = grupo;
+        
+        BufferedImage im = ImageIO.read(this.getClass().getResource("usuario.png"));
+        
+        img = new ImageIcon(im);
         
         id += IdSig;
         
@@ -33,6 +40,11 @@ public class Usuario implements Serializable{
     public Usuario(String nombre){
         
         this.nombre = nombre;
+        
+    }
+    public ImageIcon getImage(){
+        
+        return img;
         
     }
     public int getId(){
@@ -48,6 +60,11 @@ public class Usuario implements Serializable{
     public void setGrupo(){
         
         this.grupo = grupo;
+        
+    }
+    public void setImage(ImageIcon perfil){
+        
+        perfil = img;
         
     }
     public String getNombre(){

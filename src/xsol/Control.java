@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -36,6 +37,8 @@ public class Control implements ActionListener, KeyListener{
     protected static VentanaProfesor pro;
     protected static int id;
     protected String nombre;
+    protected ImageIcon img;
+    protected static VentanaConfiguracion config;
     
     public static ArrayList<Usuario> Usuarios = new ArrayList<>();
     
@@ -74,6 +77,16 @@ public class Control implements ActionListener, KeyListener{
         return nombre;
         
     }
+    public ImageIcon getImage(){
+        
+        return img;
+        
+    }
+    public String getUsuario(String usuario){
+        
+        return usuario;
+        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -85,9 +98,10 @@ public class Control implements ActionListener, KeyListener{
                     if(Usuarios.get(i).getClave().equals(ini.getPassReturn())) {
                         id = Usuarios.get(i).getId();
                         nombre = Usuarios.get(i).getNombre();
+                        img = Usuarios.get(i).getImage();
                         JOptionPane.showMessageDialog(null, "Bienvenido "+Usuarios.get(i).getNombre());
                         graf = new VentanaGraficadora();
-                        graf.VentanaGraficadoras(this.getNombre());
+                        graf.VentanaGraficadoras(this.getNombre(), this.getImage());
                         ini.dispose();
                         encontrado = 1;
                         
@@ -160,6 +174,19 @@ public class Control implements ActionListener, KeyListener{
                             
                             al.dispose();
                             
+                            
+                        }else if(e.getActionCommand().equals("Configuración")){
+                            
+                                try {
+                                    config = new VentanaConfiguracion();
+                                } catch (IOException ex) {
+                                     Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            
+                        }else if(e.getActionCommand().equals("Subir nueva foto")){
+                            
+                            JFileChooser cho = new JFileChooser();
+                            int seleccion = cho.showOpenDialog(new JFrame());
                             
                         }                
     }

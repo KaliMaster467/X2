@@ -5,7 +5,9 @@
  */
 package xsol;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,13 +19,14 @@ public class ListaUsuario {
     private String nombre;
     private String clave;
     private String grupo;
+    private ImageIcon imagen;
     
     public ListaUsuario(){
         
         use = ar.leer();
         
     }
-    public void agregarUsuario(){
+    public void agregarUsuario() throws IOException{
             
         Usuario user = new Usuario(nombre, clave, grupo);
         use.add(user);
@@ -59,6 +62,11 @@ public class ListaUsuario {
         this.grupo = grupo;
         
     }
+    public void setPerfil(ImageIcon imagen){
+        
+        this.imagen = imagen;
+        
+    }
     public String getNombre(){
         
         return nombre;
@@ -75,6 +83,11 @@ public class ListaUsuario {
         
     } 
     public void encontrarUsuario(){
+        
+    }
+    public void setImage(ImageIcon imagen){
+        
+        
         
     }
     public void cerrarArchivo(){

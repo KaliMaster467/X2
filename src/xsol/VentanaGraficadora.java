@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -36,10 +38,11 @@ public class VentanaGraficadora extends Ventana {
     public static Plano plano;
     private Archivo base;
 
-    public void VentanaGraficadoras(String nombre) {
+    public void VentanaGraficadoras(String nombre, ImageIcon imagen) {
 
         width = dim.getWidth();
         height = dim.getHeight();
+
         int anchoPlano = (int) Math.floor(width * .7);
         int altoPlano = (int) Math.floor(height * .7);
         plano = new Plano(anchoPlano, altoPlano);
@@ -54,7 +57,7 @@ public class VentanaGraficadora extends Ventana {
         int hei = (int) (height - plano.getHeight());
         int ya = plano.getHeight();
         int wi = (int) width;
-        ayuda = new Ayuda(xa, ya, wi, hei, nombre);
+        ayuda = new Ayuda(xa, ya, wi, hei, nombre, imagen);
 
         add(ayuda);
 
@@ -1552,7 +1555,7 @@ public class VentanaGraficadora extends Ventana {
         private BarraUsuario us;
         private Control cont;
 
-        public Ayuda(int x, int y, int width, int height, String nombre) {
+        public Ayuda(int x, int y, int width, int height, String nombre, ImageIcon imagen) {
 
             cont = new Control();
 
@@ -1595,7 +1598,7 @@ public class VentanaGraficadora extends Ventana {
             tab.setForeground(Color.white);
             add(tab);
 
-            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight(), nombre);
+            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight(), nombre, imagen);
 
             add(us);
 
@@ -1631,15 +1634,19 @@ public class VentanaGraficadora extends Ventana {
         private JButton ay;
         private Control cont;
         private JLabel nombre;
+        private JLabel fotper;
         private Archivo base;
+        private Localizar lco;
 
-        public BarraUsuario(int x, int y, double width, double height, String nombreu) {
+        public BarraUsuario(int x, int y, double width, double height, String nombreu, ImageIcon image) {
 
             double w = width;
             double h = height;
 
             cont = new Control();
-
+            
+            lco = new Localizar(nombreu);
+            
             setBackground(new Color(75, 148, 242));
             setVisible(true);
             setLayout(null);
@@ -1657,6 +1664,13 @@ public class VentanaGraficadora extends Ventana {
             nombre.setSize(this.getWidth()/2,this.getHeight()/6);
             nombre.setLayout(null);
             add(nombre);
+                    
+            fotper = new JLabel(image);
+            fotper.setVisible(true);
+            fotper.setLayout(null);
+            fotper.setLocation(0, nombre.getHeight());
+            fotper.setSize(this.getWidth()/2,this.getHeight()-nombre.getHeight());
+            add(fotper);
 
             ce = new JButton("Cerrar");
             ce.setVisible(true);
@@ -1678,6 +1692,7 @@ public class VentanaGraficadora extends Ventana {
             con.setBorderPainted(false);
             con.setBackground(Color.gray);
             con.setForeground(Color.white);
+            con.addActionListener(cont);
             con.setFont(new Font("Verdana", Font.PLAIN, 18));
             con.setLocation(this.getWidth() / 2, ce.getHeight());
             con.setSize(this.getWidth() / 2, this.getHeight() / 2);

@@ -12,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -94,8 +96,9 @@ public class Registro extends Ventana {
             registrarse.addActionListener(this);
             registrarse.setOpaque(true);
             registrarse.setFont(new Font("Verdana", Font.PLAIN, 20));
+            registrarse.setForeground(Color.white);
             registrarse.setBorderPainted(false);
-            registrarse.setBackground(Color.orange);
+            registrarse.setBackground(new Color(166, 0, 138));
             registrarse.setVisible(true);
             add(registrarse);
 
@@ -165,7 +168,11 @@ public class Registro extends Ventana {
                         JOptionPane.showMessageDialog(null, "Usuario invalido");
                     } else if (Control.Usuarios.size() == 0) {
                         System.out.println("ggg");
-                        user = new Usuario(nombreTx.getText(), contra1PW.getText(), grupo.getText());
+                        try {
+                            user = new Usuario(nombreTx.getText(), contra1PW.getText(), grupo.getText());
+                        } catch (IOException ex) {
+                            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         Control.Usuarios.add(user);
                         archivos = new Archivo();
                         archivos.Serializar(Control.Usuarios);
@@ -184,7 +191,11 @@ public class Registro extends Ventana {
                             } 
                         }
                         if(encontrado==false) {
+                            try {
                                 user = new Usuario(nombreTx.getText(), contra1PW.getText(), grupo.getText());
+                            } catch (IOException ex) {
+                                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                                 Control.Usuarios.add(user);
                                 archivos = new Archivo();
                                 archivos.Serializar(Control.Usuarios);
