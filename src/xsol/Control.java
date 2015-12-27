@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -87,10 +88,8 @@ public class Control implements ActionListener, KeyListener{
         return usuario;
         
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Iniciar")) {
+    public void Iniciar(){
+        
             int encontrado = 0;
             for(int i=0;i<Usuarios.size();i++) {
                 if(Usuarios.get(i).getNombre().equals(ini.getUserReturn())) {
@@ -111,7 +110,17 @@ public class Control implements ActionListener, KeyListener{
                
             }
             if(encontrado ==0)
-                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");        
+        
+    }
+    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Iniciar")) {
+            
+            this.Iniciar();
+            
         }
         else if(e.getActionCommand().equals("Registro")) {
             Registro reg = new Registro();
@@ -193,7 +202,6 @@ public class Control implements ActionListener, KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
         
         
     }

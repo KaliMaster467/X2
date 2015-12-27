@@ -62,9 +62,10 @@ public class VentanaInicion extends Ventana implements ActionListener{
     }
     
     public class BarraArriba extends JPanel implements ActionListener{
-    public Control control = new Control();
+    
     public  JTextField userReturned;
     public JPasswordField passReturned;
+    private Control control;
     private JLabel usuario;
     private JLabel contraseña;
     private JLabel imag;
@@ -79,6 +80,8 @@ public class VentanaInicion extends Ventana implements ActionListener{
     private JButton cred;
     
     public BarraArriba(int width, int height) throws IOException {
+        
+        control = new Control();
         
         mane = new Manejador();
         
