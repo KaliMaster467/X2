@@ -19,6 +19,7 @@ public class ListaUsuario {
     private String nombre;
     private String clave;
     private String grupo;
+    private Usuario usm;
     private ImageIcon imagen;
     
     public ListaUsuario(){
@@ -82,13 +83,26 @@ public class ListaUsuario {
         return grupo;
         
     } 
-    public void encontrarUsuario(){
+    public void encontrarUsuario(Usuario usuario){
+        
+        
         
     }
-    public void setImage(ImageIcon imagen){
+    public void addImage(Usuario usuario, ImageIcon imagen){
         
+        for(int i = 0; i<use.size(); i++){
+            
+            if(usuario.equals(use.get(i))){
+                
+                use.get(i).setImage(imagen);
+                
+                break;
+                
+            }
+            
+        }
         
-        
+        ar.Serializar(use);
     }
     public void cerrarArchivo(){
         ar.Serializar(use);

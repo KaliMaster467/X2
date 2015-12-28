@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -31,6 +33,7 @@ public class Control implements ActionListener, KeyListener{
     private static VentanaVectores vec;
     protected Registro reg;
     protected ListaUsuario users;
+    protected Usuario ud;
     protected static Subir sub;
     private Archivo archivo = new Archivo();
     private Manejador man;
@@ -95,12 +98,13 @@ public class Control implements ActionListener, KeyListener{
                 if(Usuarios.get(i).getNombre().equals(ini.getUserReturn())) {
                     
                     if(Usuarios.get(i).getClave().equals(ini.getPassReturn())) {
-                        id = Usuarios.get(i).getId();
+                        /*id = Usuarios.get(i).getId();
                         nombre = Usuarios.get(i).getNombre();
-                        img = Usuarios.get(i).getImage();
+                        img = Usuarios.get(i).getImage();*/
+                        ud = Usuarios.get(i);
                         JOptionPane.showMessageDialog(null, "Bienvenido "+Usuarios.get(i).getNombre());
                         graf = new VentanaGraficadora();
-                        graf.VentanaGraficadoras(this.getNombre(), this.getImage());
+                        graf.VentanaGraficadoras(ud);
                         ini.dispose();
                         encontrado = 1;
                         
@@ -193,9 +197,38 @@ public class Control implements ActionListener, KeyListener{
                                 }
                             
                         }else if(e.getActionCommand().equals("Subir nueva foto")){
+
+                            ImageIcon imagen;
                             
                             JFileChooser cho = new JFileChooser();
                             int seleccion = cho.showOpenDialog(new JFrame());
+                            if(seleccion == JFileChooser.APPROVE_OPTION){
+                                
+                                File fich = cho.getSelectedFile();
+                                
+                                try{
+                        
+                                    /*String cadena = "";
+                                    int valor = fr.read();
+                                    while(valor!=-1){
+                            
+                                        cadena = cadena+(char)valor;
+                                        valor=fr.read();*/
+                                    BufferedImage img = ImageIO.read(fich);
+                                        
+                                    //users.addImage(graf.getUsuario(), (ImageIcon)img);
+                                    
+                                    //Aqui se trata el archivo Dan.
+                                    
+                                    
+                        
+                                }catch(IOException ex){
+                        
+                                    ex.printStackTrace();
+                        
+                                }
+                                
+                            }
                             
                         }                
     }

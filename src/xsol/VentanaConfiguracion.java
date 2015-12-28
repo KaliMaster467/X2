@@ -133,8 +133,7 @@ public class VentanaConfiguracion extends Ventana{
         private JButton sub;
         private Control cont;
         
-        public Otr(int x, int y, int width, int height){
-            
+        public Otr(int x, int y, int width, int height){ 
             
             cont = new Control();
             
@@ -149,7 +148,6 @@ public class VentanaConfiguracion extends Ventana{
             sub.setSize(100, 50);
             sub.addActionListener(cont);
             add(sub);
-            
             
         }
         

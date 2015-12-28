@@ -37,9 +37,12 @@ public class VentanaGraficadora extends Ventana {
     protected double height;
     public static Plano plano;
     private Archivo base;
+    private Usuario us;
 
-    public void VentanaGraficadoras(String nombre, ImageIcon imagen) {
-
+    public void VentanaGraficadoras(Usuario usuario) {
+        
+        us = usuario;
+        
         width = dim.getWidth();
         height = dim.getHeight();
 
@@ -57,12 +60,17 @@ public class VentanaGraficadora extends Ventana {
         int hei = (int) (height - plano.getHeight());
         int ya = plano.getHeight();
         int wi = (int) width;
-        ayuda = new Ayuda(xa, ya, wi, hei, nombre, imagen);
+        ayuda = new Ayuda(xa, ya, wi, hei, usuario);
 
         add(ayuda);
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public Usuario getUsuario(){
+        
+        return us;
+        
     }
 
     public class TablaRes extends JPanel implements ItemListener, ActionListener {
@@ -294,7 +302,7 @@ public class VentanaGraficadora extends Ventana {
 
         }
 
-        @Override
+        //@Override
         /*public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             if (e.getSource() instanceof JComboBox) {
@@ -1555,7 +1563,7 @@ public class VentanaGraficadora extends Ventana {
         private BarraUsuario us;
         private Control cont;
 
-        public Ayuda(int x, int y, int width, int height, String nombre, ImageIcon imagen) {
+        public Ayuda(int x, int y, int width, int height, Usuario usuario) {
 
             cont = new Control();
 
@@ -1598,7 +1606,7 @@ public class VentanaGraficadora extends Ventana {
             tab.setForeground(Color.white);
             add(tab);
 
-            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight(), nombre, imagen);
+            us = new BarraUsuario((int) Math.floor(width * .7) + 1, 0, (int) Math.floor(width * .3), this.getHeight(), usuario);
 
             add(us);
 
@@ -1638,14 +1646,14 @@ public class VentanaGraficadora extends Ventana {
         private Archivo base;
         private Localizar lco;
 
-        public BarraUsuario(int x, int y, double width, double height, String nombreu, ImageIcon image) {
+        public BarraUsuario(int x, int y, double width, double height, Usuario usuario) {
 
             double w = width;
             double h = height;
 
             cont = new Control();
             
-            lco = new Localizar(nombreu);
+            lco = new Localizar(usuario.getNombre());
             
             setBackground(new Color(75, 148, 242));
             setVisible(true);
@@ -1654,22 +1662,22 @@ public class VentanaGraficadora extends Ventana {
             setLocation(x, y);
             
             nombre = new JLabel();
-            nombre.setText(nombreu);
+            nombre.setText("  Bienvenido "+ usuario.getNombre());
             nombre.setVisible(true);
             nombre.setOpaque(true);
-            nombre.setBackground(Color.white);
-            nombre.setForeground(Color.black);
+            nombre.setBackground(new Color(97, 210, 121));
+            nombre.setForeground(Color.white);
             nombre.setFont(new Font("Verdana", Font.PLAIN, 20));
-            nombre.setLocation(0,0);
-            nombre.setSize(this.getWidth()/2,this.getHeight()/6);
+            nombre.setLocation(this.getWidth()/2,0);
+            nombre.setSize(this.getWidth()/2,this.getHeight()/5);
             nombre.setLayout(null);
             add(nombre);
                     
-            fotper = new JLabel(image);
+            fotper = new JLabel(usuario.getImage());
             fotper.setVisible(true);
             fotper.setLayout(null);
-            fotper.setLocation(0, nombre.getHeight());
-            fotper.setSize(this.getWidth()/2,this.getHeight()-nombre.getHeight());
+            fotper.setLocation(0, 0);
+            fotper.setSize(this.getWidth()/2,this.getHeight());
             add(fotper);
 
             ce = new JButton("Cerrar");
@@ -1681,8 +1689,8 @@ public class VentanaGraficadora extends Ventana {
             ce.setForeground(Color.white);
             ce.addActionListener(cont);
             ce.setFont(new Font("Verdana", Font.PLAIN, 18));
-            ce.setLocation(this.getWidth() / 2, 0);
-            ce.setSize(this.getWidth() / 2, this.getHeight() / 2);
+            ce.setLocation(this.getWidth() / 2, nombre.getHeight());
+            ce.setSize(this.getWidth() / 2, this.getHeight() / 5);
             add(ce);
 
             con = new JButton("Configuración");
@@ -1694,8 +1702,8 @@ public class VentanaGraficadora extends Ventana {
             con.setForeground(Color.white);
             con.addActionListener(cont);
             con.setFont(new Font("Verdana", Font.PLAIN, 18));
-            con.setLocation(this.getWidth() / 2, ce.getHeight());
-            con.setSize(this.getWidth() / 2, this.getHeight() / 2);
+            con.setLocation(this.getWidth() / 2, ce.getHeight() + nombre.getHeight());
+            con.setSize(this.getWidth() / 2, this.getHeight() / 5);
             add(con);
         }
     }
